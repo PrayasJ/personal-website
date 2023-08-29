@@ -1,3 +1,141 @@
-.main_container {
-    color: red;
+.human_container {
+ 
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background: radial-gradient(600px at 0px 0px, rgba(29, 78, 216, 0.15), transparent 80%);
+    
+    .about_section {
+        
+        .profile_detail {
+
+            .name {
+                color: rgb(201, 215, 227);
+            }
+    
+            .byline {
+    
+            }
+    
+            .about {
+    
+            }
+        }
+
+        .section_controller {
+
+            .controller {
+    
+                .highlighter {
+    
+                }
+    
+                .title {
+    
+                }
+    
+                &.active {
+    
+                    .highlighter {
+    
+                    }
+        
+                    .title {
+        
+                    }
+                }
+
+                &:hover {
+
+                    .highlighter {
+    
+                    }
+        
+                    .title {
+        
+                    }
+                }
+            } 
+        }
+
+        .social_section {
+
+           .social_btn {
+
+
+            &:hover {
+
+            }
+           } 
+        }
+    }
+
+    .main_section {
+        .description {
+
+        }
+
+        .experience_section {
+
+            .experience {
+                
+                &:hover {
+
+                }
+
+                .timeline {
+
+                }
+
+                .experience_detail {
+
+                    .title {
+
+                        &:hover {
+
+                        }
+                    }
+
+                    .title_full {
+
+                    }
+
+                    .description {
+
+                    }
+
+                    .link_container {
+
+                        .link {
+
+                            &:hover {
+                            
+                            }
+                        }
+                    }
+
+                    .skill_container {
+
+                        .skill {
+
+                        }
+                    }
+                }
+            }
+
+            &:hover {
+                .experience:not(:hover) {
+                
+                }
+            }
+        }
+
+        .project_section {
+
+        }
+
+        .blog_section {
+
+        }
+    }
 }
