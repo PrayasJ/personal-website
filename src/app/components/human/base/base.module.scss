@@ -5,6 +5,7 @@
     justify-content: space-between;
     background: radial-gradient(600px at 0px 0px, rgba(29, 78, 216, 0.15), transparent 80%);
     background-color: #0f172a;
+    overflow-x: hidden;
 
     padding-left: 6rem;
     padding-right: 6rem;
@@ -207,11 +208,6 @@
             width: 100%;
             padding-top: 3rem;
         }
-    
-        @media (max-width: 480px) {  // Media query for mobile devices
-            padding-left: 1rem;
-            padding-right: 1rem;
-        }
 
         .section_title {
             display: none;
@@ -256,6 +252,11 @@
                 cursor: pointer;
                 padding: 1.5rem;
 
+                @media (max-width: 768px) {  // Media query for tablets and smaller devices
+                    gap: 24px;
+                    padding: 0.75rem;
+                }
+
                 &:hover {
                     transition-property: all;
                     transition-timing-function: cubic-bezier(.4,0,.2,1);
@@ -284,6 +285,11 @@
                     margin-bottom: 0.5rem;
                     white-space: nowrap;
                     width: 12rem;
+
+                    @media (max-width: 768px) {  // Media query for tablets and smaller devices
+                        width: 8rem;
+                        white-space: inherit;
+                    }
                 }
 
                 .experience_detail {
@@ -465,6 +471,11 @@
                 cursor: pointer;
                 padding: 1.5rem;
 
+                @media (max-width: 768px) {  // Media query for tablets and smaller devices
+                    gap: 24px;
+                    padding: 0.75rem;
+                }
+
                 &:hover {
                     transition-property: all;
                     transition-timing-function: cubic-bezier(.4,0,.2,1);
@@ -493,6 +504,11 @@
                     margin-bottom: 0.5rem;
                     white-space: nowrap;
                     width: 12rem;
+
+                    @media (max-width: 768px) {  // Media query for tablets and smaller devices
+                        width: 4rem;
+                        white-space: inherit;
+                    }
                 }
 
                 .project_detail {
