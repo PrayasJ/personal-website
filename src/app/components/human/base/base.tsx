@@ -1,5 +1,6 @@
 "use client";
 import Image from "next/image";
+import Link from 'next/link'
 import styles from "./base.module.scss";
 
 import {
@@ -12,6 +13,9 @@ import {
   sortExperienceData,
   sortProjectData,
 } from "../../../../../data.config.tsx";
+
+import useMousePosition from "../../../../../utils/useMousePosition.js"
+
 import { RefObject, useEffect, useRef, useState } from "react";
 
 export default function Base() {
@@ -41,6 +45,8 @@ export default function Base() {
     },
   };
 
+  const observationContainerRef: RefObject<HTMLDivElement> = useRef<HTMLDivElement>(null);
+
   const scrollTo = (ref: RefObject<HTMLDivElement>) => {
     if (ref.current) {
       ref.current.scrollIntoView({ behavior: "smooth" });
@@ -60,37 +66,43 @@ export default function Base() {
   };
 
   const [activeSection, setActiveSection] = useState<string | null>(null); // State to track the active section
+  const mousePosition = useMousePosition({includeTouch: true});
 
   useEffect(() => {
-    const observerOptions = {
-      rootMargin: "25% 0px 25% 0px", // Adjust this margin as needed
-      threshold: 0,
-    };
-
-    const sectionObserver = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          setActiveSection(entry.target.id); // Set active section when it's in view
+    const handleScroll = () => {
+      const sectionOffsets = Object.keys(section_list).map((section_key) => {
+        const sectionRef = section_list[section_key].sectionRef;
+        if (sectionRef && sectionRef.current) {
+          const rect = sectionRef.current.getBoundingClientRect();
+          return {
+            id: section_key,
+            top: rect.top,
+          };
         }
+        return null;
       });
-    }, observerOptions);
-
-    // Observe each section's ref
-    Object.keys(section_list).forEach((section_key) => {
-      const sectionRef = section_list[section_key].sectionRef;
-      if (sectionRef.current) {
-        sectionObserver.observe(sectionRef.current);
+  
+      const visibleSections = sectionOffsets.filter((offset) => offset && offset.top <= 96);
+      if (visibleSections.length > 0) {
+        const activeSectionId = visibleSections[visibleSections.length - 1]?.id;
+        setActiveSection(activeSectionId || null);
       }
-    });
-
-    // Clean up the observer
-    return () => {
-      sectionObserver.disconnect();
     };
-  }, []); // Empty dependency array to run once on mount
+  
+    window.addEventListener("scroll", handleScroll);
+    handleScroll(); // Initial call to set the active section on mount
+  
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   return (
     <div className={styles.human_container}>
+      <div 
+        className={styles.cursor_follower} 
+        style={{left: `${mousePosition.x || 0}px`, top: `${mousePosition.y || 0}px`}}
+      ></div>
       <div className={styles.about_section}>
         <div className={styles.profile_detail}>
           <div className={styles.name}>{AboutData.name}</div>
@@ -141,7 +153,7 @@ export default function Base() {
         </div>
       </div>
 
-      <div className={styles.main_section}>
+      <div className={styles.main_section} ref={observationContainerRef}>
         <div className={styles.section_title}>About</div>
         <div
           className={styles.description}
@@ -158,7 +170,14 @@ export default function Base() {
           id="experience"
         >
           {sortExperienceData(experienceData).map((experience, index) => (
-            <div key={index} className={styles.experience}>
+            <div 
+              key={index} 
+              className={styles.experience}
+              onClick={() => {
+                if(experience.url) {
+                  window.open(experience.url, "_blank");
+                }
+              }}>
               <div className={styles.timeline}>
                 {getTimelineString(experience)}
               </div>
@@ -185,7 +204,7 @@ export default function Base() {
                 </div>
                 <div className={styles.link_container}>
                   {experience.links?.map((link, index) => (
-                    <a key={index} className={styles.link} href={link.url}>
+                    <a key={index} className={styles.link} href={link.url} target="_blank">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 20 20"
@@ -210,12 +229,29 @@ export default function Base() {
               </div>
             </div>
           ))}
+          {AboutData.resume && 
+            <a 
+              className={styles.resume_link} 
+              href={AboutData.resume}
+              target="_blank">
+                View Full Résumé
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                    className={styles.resume_image}
+                    aria-hidden="true"
+                  >
+                    <path fill-rule="evenodd" d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z" clip-rule="evenodd"></path>
+                  </svg>
+            </a>
+          }
         </div>
         <div className={styles.section_title}>Projects</div>
         <div
           className={styles.project_section}
           ref={section_list.projects.sectionRef}
-          id="project"
+          id="projects"
         >
           {sortProjectData(ProjectData).map((project, index) => (
             <div key={index} className={styles.project}>
@@ -244,7 +280,7 @@ export default function Base() {
                 </div>
                 <div className={styles.link_container}>
                   {project.links?.map((link, index) => (
-                    <a key={index} className={styles.link} href={link.url}>
+                    <a key={index} className={styles.link} href={link.url} target="_blank">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 20 20"

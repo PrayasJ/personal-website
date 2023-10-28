@@ -9,6 +9,7 @@ interface AboutInterface {
     byline?: any
     about?: any
     description: any
+    resume?: any
 }
 
 interface UrlImage {
@@ -60,18 +61,18 @@ interface BlogInterface {
 }
 
 export const Months: { [key: number]: string } = {
-    1: 'January',
-    2: 'February',
-    3: 'March',
-    4: 'April',
+    1: 'Jan',
+    2: 'Feb',
+    3: 'Mar',
+    4: 'Apr',
     5: 'May',
     6: 'June',
     7: 'July',
-    8: 'August',
-    9: 'September',
-    10: 'October',
-    11: 'November',
-    12: 'December'
+    8: 'Aug',
+    9: 'Sept',
+    10: 'Oct',
+    11: 'Nov',
+    12: 'Dec'
 }
 
 /*
@@ -83,10 +84,11 @@ DATA DEFINITIONS
 export const AboutData: AboutInterface = {
     name: 'Prayas Jain',
     byline: 'Senior Fullstack Developer',
-    about: 'I love creating fullstack applications and am very passionate about it.',
-    description: `Back in 2012, I decided to try my hand at creating custom Tumblr themes and tumbled head first into the rabbit hole of coding and web development. Fast-forward to today, and I’ve had the privilege of building software for an advertising agency, a start-up, a student-led design studio, and a huge corporation.
-    My main focus these days is building products and leading projects for our clients at Upstatement. In my free time I've also released an online video course that covers everything you need to know to build a web app with the Spotify API. 
-    When I’m not at the computer, I’m usually rock climbing, hanging out with my wife and two cats, or running around Hyrule searching for Korok seeds.`
+    about: 'I build accessible, inclusive products & digital experiences for web and mobile.',
+    description: `In 2018, I embarked on my developer journey with a deep dive into the intricacies of the C programming language, where I initially recreated the classic game, Asteroids, using just a few lines of code.\n\n` +
+    `This endeavor ignited my passion for software development and led me on a path where I constantly seek to simplify and automate various aspects of my life. Since then, I've honed my skills and expanded my toolkit. I've delved into modern web and mobile app development, mastering technologies such as React and React Native to build intuitive user interfaces. In the realm of web application frameworks, I've become proficient in Django, a robust Python framework, as well as Next.js and Express, JavaScript frameworks that have enabled me to craft dynamic and responsive web applications.\n\n` + 
+    `Yet, despite my ongoing quest for perfection, I've learned to balance the pursuit of excellence with practicality, recognizing that completion is as vital as perfection. My journey as a developer is marked by a continuous commitment to mastering new skills and creating solutions that are both elegant and functional.`,
+    resume: '/resume.pdf',
 }
 
 export const socialData: SocialInterface = {
@@ -113,8 +115,27 @@ export const experienceData: ExperienceInterface[] = [
         company: 'Apricot Planet',
         title: 'SDE',
         title_full: 'Senior Fullstack Developer',
-        links: [],
-        skills: ['React', 'React Native', 'SCSS', 'Wordpress', 'Javascript', 'Typescript', 'PHP'],
+        url: 'https://www.workjapan.jp',
+        description: 'Develop and maintain frontend apps and backend server for Workjapan, including periodic mobile app releases and implementing redesigns.',
+        links: [
+            {
+                url: 'https://www.workjapan.jp/foreigners-home/', 
+                text: 'WJ - Webapp'
+            },
+            {
+                url: 'https://play.google.com/store/apps/details?id=jp.workjapan.home/', 
+                text: 'WJ - Android'
+            },
+            {
+                url: 'https://apps.apple.com/in/app/work-japan-jobs-in-japan/id1303011529/', 
+                text: 'WJ - iOS'
+            },
+            {
+                url: 'https://employer.workjapan.jp/',
+                text: 'WJ - Employer Dashboard'
+            }
+        ],
+        skills: ['git', 'Python', 'Django', 'Docker', 'React', 'React Native', 'SCSS', 'Wordpress', 'Javascript', 'Typescript', 'PHP'],
     },
     {
         start: {
@@ -128,8 +149,19 @@ export const experienceData: ExperienceInterface[] = [
         company: 'Imarticus Learning',
         title: 'SDE',
         title_full: 'Fullstack Developer',
+        url: 'https://imarticus.org/',
         description: 'Accessible through the Imarticus Learning mobile app for iOS and Android as well as the website, Pegasus supports classes and assessment schedules for multiple time zones.',
-        skills: ['React.js', 'Angular.js', 'SCSS', 'Mongo', 'Express', 'RabbitMQ', 'Redis'],
+        links: [
+            {
+                url: 'https://pegasus.imarticus.org/', 
+                text: 'Imarticus - Pegasus'
+            },
+            {
+                url: 'https://teach.pegasus.imarticus.org/',
+                text: 'Imarticus - Admin Panel'
+            }
+        ],
+        skills: ['git', 'Next.js', 'React.js', 'Angular.js', 'SCSS', 'Mongo', 'Express', 'RabbitMQ', 'Redis'],
     },
     {
         start: {
@@ -143,7 +175,18 @@ export const experienceData: ExperienceInterface[] = [
         company: 'Google Summer of Code',
         title: 'Intern',
         title_full: 'Student Developer - Weecology',
-        description: 'The aim of this project is to make the currently running forecasting system capable of parallelization.',
+        url: 'https://summerofcode.withgoogle.com/archive/2022/projects/qBazQsVJ',
+        description: 'This project would involve the parallelization of the code base to allow for running on multiple cores both on individual machines and HPCs.',
+        links: [
+            {
+                url: 'https://github.com/weecology/retriever', 
+                text: 'Organization - NumFOCUS (Data Retriever)'
+            },
+            {
+                url: 'https://github.com/weecology/retriever/wiki/GSoC-2022-Project-Ideas#high-performance-parallel-computing-for-model-fitting-and-prediction-in-portalcasting',
+                text: 'Project Link'
+            }
+        ],
         skills: ['R', 'Multiprocessing', 'git']
     },
     {
@@ -158,6 +201,7 @@ export const experienceData: ExperienceInterface[] = [
         company: 'Codecrust',
         title: 'Game Developer',
         title_full: 'Pixi.js Game Developer',
+        url: 'https://www.linkedin.com/company/codecrust/',
         description: 'CodeCrust is a Game development company specializing in Multiplayer Mobile and HTML5 game development.',
         skills: ['Node.js', 'Pixi.js'],
     },
@@ -170,9 +214,9 @@ export const experienceData: ExperienceInterface[] = [
             year: 2020,
             month: 5,
         },
-        company: 'Dev-up',
+        company: 'Dev-Up',
         title: 'Fullstack Developer',
-        description: 'evUp is an In-house tech team quality development, at the price and time of no-code platforms.',
+        description: 'Dev-Up is an In-house tech team quality development, at the price and time of no-code platforms.',
         skills: ['Python', 'Node.js', 'Flutter']
     },
     {
