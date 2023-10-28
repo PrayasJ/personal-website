@@ -7,7 +7,11 @@ const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'Prayas Jain',
-  description: 'Prayas Jain - Full-Stack Software Developer crafting inclusive and high-performance web experiences. Building accessible products for seamless user interactions.',
+  description: 'Senior full stack developer with experience in react, react native, django, nodejs and other technologies.',
+  openGraph: {
+
+  },
+  keywords: ['react', 'react-native', 'django', 'python', 'nodejs', 'wordpress', 'nextjs', 'express', 'docker', 'SDE', 'fullstack', 'developer']
 }
 
 export default function RootLayout({
