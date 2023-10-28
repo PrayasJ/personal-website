@@ -368,7 +368,7 @@ export const BlogData: BlogInterface[] = [
     {
         title: 'GSoC Final Report',
         filePath: './blogs/GSoC Final Report.md',
-        date: 'August September 11, 2022'
+        date: 'September 11, 2022'
     }
 ]
 
@@ -405,4 +405,21 @@ function compareProjects(a: ProjectInterface, b: ProjectInterface): number {
 
 export function sortProjectData(data: ProjectInterface[]): ProjectInterface[] {
     return data.slice().sort(compareProjects);
+}
+
+function compareBlogsDescending(blog1: BlogInterface, blog2: BlogInterface): number {
+    const date1 = new Date(blog1.date);
+    const date2 = new Date(blog2.date);
+    
+    if (date1 > date2) {
+        return -1;
+    } else if (date1 < date2) {
+        return 1;
+    }
+    
+    return 0;
+}
+
+export function sortBlogs(data: BlogInterface[]): BlogInterface[] {
+    return data.slice().sort(compareBlogsDescending);
 }

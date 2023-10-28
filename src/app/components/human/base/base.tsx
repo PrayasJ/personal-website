@@ -1,20 +1,21 @@
 "use client";
 import Image from "next/image";
-import Link from 'next/link'
 import styles from "./base.module.scss";
 
 import {
   AboutData,
+  BlogData,
   ExperienceInterface,
   Months,
   ProjectData,
   experienceData,
   socialData,
+  sortBlogs,
   sortExperienceData,
   sortProjectData,
 } from "../../../../../data.config.tsx";
 
-import useMousePosition from "../../../../../utils/useMousePosition.js"
+import useMousePosition from "../../../../../utils/useMousePosition.js";
 
 import { RefObject, useEffect, useRef, useState } from "react";
 
@@ -45,7 +46,8 @@ export default function Base() {
     },
   };
 
-  const observationContainerRef: RefObject<HTMLDivElement> = useRef<HTMLDivElement>(null);
+  const observationContainerRef: RefObject<HTMLDivElement> =
+    useRef<HTMLDivElement>(null);
 
   const scrollTo = (ref: RefObject<HTMLDivElement>) => {
     if (ref.current) {
@@ -66,7 +68,7 @@ export default function Base() {
   };
 
   const [activeSection, setActiveSection] = useState<string | null>(null); // State to track the active section
-  const mousePosition = useMousePosition({includeTouch: true});
+  const mousePosition = useMousePosition({ includeTouch: true });
 
   useEffect(() => {
     const handleScroll = () => {
@@ -81,17 +83,19 @@ export default function Base() {
         }
         return null;
       });
-  
-      const visibleSections = sectionOffsets.filter((offset) => offset && offset.top <= 96);
+
+      const visibleSections = sectionOffsets.filter(
+        (offset) => offset && offset.top <= 96
+      );
       if (visibleSections.length > 0) {
         const activeSectionId = visibleSections[visibleSections.length - 1]?.id;
         setActiveSection(activeSectionId || null);
       }
     };
-  
+
     window.addEventListener("scroll", handleScroll);
     handleScroll(); // Initial call to set the active section on mount
-  
+
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
@@ -99,9 +103,12 @@ export default function Base() {
 
   return (
     <div className={styles.human_container}>
-      <div 
-        className={styles.cursor_follower} 
-        style={{left: `${mousePosition.x || 0}px`, top: `${mousePosition.y || 0}px`}}
+      <div
+        className={styles.cursor_follower}
+        style={{
+          left: `${mousePosition.x || 0}px`,
+          top: `${mousePosition.y || 0}px`,
+        }}
       ></div>
       <div className={styles.about_section}>
         <div className={styles.profile_detail}>
@@ -170,14 +177,15 @@ export default function Base() {
           id="experience"
         >
           {sortExperienceData(experienceData).map((experience, index) => (
-            <div 
-              key={index} 
+            <div
+              key={index}
               className={styles.experience}
               onClick={() => {
-                if(experience.url) {
+                if (experience.url) {
                   window.open(experience.url, "_blank");
                 }
-              }}>
+              }}
+            >
               <div className={styles.timeline}>
                 {getTimelineString(experience)}
               </div>
@@ -204,7 +212,12 @@ export default function Base() {
                 </div>
                 <div className={styles.link_container}>
                   {experience.links?.map((link, index) => (
-                    <a key={index} className={styles.link} href={link.url} target="_blank">
+                    <a
+                      key={index}
+                      className={styles.link}
+                      href={link.url}
+                      target="_blank"
+                    >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 20 20"
@@ -229,23 +242,28 @@ export default function Base() {
               </div>
             </div>
           ))}
-          {AboutData.resume && 
-            <a 
-              className={styles.resume_link} 
+          {AboutData.resume && (
+            <a
+              className={styles.resume_link}
               href={AboutData.resume}
-              target="_blank">
-                View Full Résumé
-                <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                    className={styles.resume_image}
-                    aria-hidden="true"
-                  >
-                    <path fill-rule="evenodd" d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z" clip-rule="evenodd"></path>
-                  </svg>
+              target="_blank"
+            >
+              View Full Résumé
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+                className={styles.resume_image}
+                aria-hidden="true"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z"
+                  clip-rule="evenodd"
+                ></path>
+              </svg>
             </a>
-          }
+          )}
         </div>
         <div className={styles.section_title}>Projects</div>
         <div
@@ -255,9 +273,7 @@ export default function Base() {
         >
           {sortProjectData(ProjectData).map((project, index) => (
             <div key={index} className={styles.project}>
-              <div className={styles.timeline}>
-                {project.year}
-              </div>
+              <div className={styles.timeline}>{project.year}</div>
               <div className={styles.project_detail}>
                 <div className={styles.title_proj}>
                   {project.title}
@@ -280,7 +296,12 @@ export default function Base() {
                 </div>
                 <div className={styles.link_container}>
                   {project.links?.map((link, index) => (
-                    <a key={index} className={styles.link} href={link.url} target="_blank">
+                    <a
+                      key={index}
+                      className={styles.link}
+                      href={link.url}
+                      target="_blank"
+                    >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 20 20"
@@ -301,6 +322,39 @@ export default function Base() {
                       {skill}
                     </div>
                   ))}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+        <div className={styles.section_title}>Blogs</div>
+        <div
+          className={styles.blog_section}
+          ref={section_list.blogs.sectionRef}
+          id="blogs"
+        >
+          {sortBlogs(BlogData).map((blog, index) => (
+            <div key={index} className={styles.blog}>
+              <div className={styles.timeline}>{blog.date}</div>
+              <div className={styles.blog_detail}>
+                <div className={styles.title_blog}>
+                  {blog.title}
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                    className={styles.blog_image}
+                    aria-hidden="true"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z"
+                      clip-rule="evenodd"
+                    ></path>
+                  </svg>
+                </div>
+                <div className={styles.description_blog}>
+                  Lorem Ipsum Blog Description
                 </div>
               </div>
             </div>

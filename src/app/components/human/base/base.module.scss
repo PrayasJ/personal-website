@@ -34,7 +34,7 @@
         width: 750px;
         height: 750px;
         border-radius: 100%;
-        background-image: radial-gradient(circle at 50%, #1c2f5c, #0f172a 50%);
+        background-image: radial-gradient(circle at 50%, #1c2f5c, #0f172a 70%);
         position: absolute;
         transform: translate(-50%, -50%);
         z-index: 0;
@@ -775,7 +775,138 @@
         }
 
         .blog_section {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+
+            .blog {
+
+                display: flex;
+                flex-direction: row;
+                gap: 48px;
+                cursor: pointer;
+                padding: 1.5rem;
+
+                @media (max-width: 768px) {  // Media query for tablets and smaller devices
+                    gap: 24px;
+                    padding: 0.75rem;
+                }
+
+                @media (max-width: 480px) {  // Media query for mobile devices
+                    flex-direction: column;
+                }
+
+                &:hover {
+                    transition-property: all;
+                    transition-timing-function: cubic-bezier(.4,0,.2,1);
+                    animation-duration: 0.15s;
+                    animation-fill-mode: forwards; 
+                    animation-name: experience-hover;
+                    border-radius: 0.375rem;
+    
+                    @keyframes experience-hover {
+                    
+                        100% {
+                            background: rgba(234, 239, 247, 0.1);
+                            box-shadow: rgba(255, 255, 255, 0.24) 0px -1px 4px;
+                        }
+                    }
+
+                    .blog_detail {
+
+                        .title_blog {
+                            transition-property: all;
+                            transition-timing-function: cubic-bezier(.4,0,.2,1);
+                            animation-duration: 0.15s;
+                            animation-fill-mode: forwards; 
+                            animation-name: title-hover;
             
+                            @keyframes title-hover {
+                            
+                                100% {
+                                    color: rgb(94, 234, 212);
+                                }
+                            }
+
+                            .blog_image {
+                                transition-property: all;
+                                transition-timing-function: cubic-bezier(.4,0,.2,1);
+                                animation-duration: 0.15s;
+                                animation-fill-mode: forwards; 
+                                animation-name: title-image-hover;
+                
+                                @keyframes title-image-hover {
+                                
+                                    100% {
+                                        right: -1.5rem;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                .timeline {
+                    color: rgb(100, 116, 139);
+                    letter-spacing: .025em;
+                    text-transform: uppercase;
+                    font-weight: 600;
+                    font-size: .75rem;
+                    line-height: 1rem;
+                    margin-top: 0.25rem;
+                    margin-bottom: 0.5rem;
+                    width: 13rem;
+
+                    @media (max-width: 768px) {  // Media query for tablets and smaller devices
+                        width: 4rem;
+                    }
+
+                    @media (max-width: 480px) {  // Media query for mobile devices
+                        width: 100%;
+                    }
+                }
+
+                .blog_detail {
+
+                    display: flex;
+                    flex-direction: column;
+                    width: 100%;
+
+                    .title_blog {
+
+                        display: flex;
+                        flex-direction: row;
+                        align-items: center;
+                        gap: 0.25rem;
+
+                        color: rgb(226, 232, 240);
+                        letter-spacing: .05em;
+                        font-weight: 500;
+                        font-size: 1rem;
+                        line-height: 1rem;
+                        margin-top: 0.25rem;
+                        margin-bottom: 0.5rem;
+                        position: relative;
+                        width: fit-content;
+
+                        .blog_image {
+                            width: 1rem;
+                            height: 1rem;
+                            position: absolute;
+                            right: -1.35rem;
+                        }
+                    }
+
+                    .description_blog {
+                        color: rgb(100, 116, 139);
+                        font-weight: 500;
+                        font-size: 0.875rem;
+                        line-height: 1.5rem;
+                        margin-top: 0.5rem;
+                        margin-bottom: 0.5rem;
+                    }
+                }
+            }
         }
     }
 }
