@@ -1,34 +1,24 @@
 const fs = require('fs');
-const path = require('path');
-const remark = require('remark');
-const html = require('remark-html');
+const { BlogData } = require('../../blogdata.js');
+const showdown  = require('showdown');
 
-export async function loadMarkdown(filePath) {
-  const fullPath = path.join(process.cwd(), filePath);
-  const fileContents = fs.readFileSync(fullPath, 'utf8');
-  const processedContent = await remark().use(html).process(fileContents);
-  return processedContent.toString();
+converter = new showdown.Converter();
+
+async function loadAllMarkdown() {
+  let markdowns = {}
+  for(let i = 0; i < BlogData.length; i++) {
+    let blog = BlogData[i]
+    const fullPath = path.join(process.cwd(), blog.filePath);
+    const fileContents = fs.readFileSync(fullPath, 'utf8');
+    markdowns[blog.title] = converter.makeHtml(fileContents);
+  }
+
+  const outputPath = path.join(process.cwd(), 'ladedMarkdown.json')
+  fs.writeFile('loadedMarkdown.json', JSON.stringify(markdowns), (error) => {
+    if (error) throw error;
+  });
 }
 
-/* USAGE */
-
-/*
-
-import { loadMarkdown } from '../utils/markdownLoader';
-
-export default function Home({ markdownContent }) {
-  return <div dangerouslySetInnerHTML={{ __html: markdownContent }} />;
-}
-
-export async function getServerSideProps() {
-  const markdownFilePath = './blogs/GSoC - Week 1.md';
-  const markdownContent = await loadMarkdown(markdownFilePath);
-
-  return {
-    props: {
-      markdownContent,
-    },
-  };
-}
-
-*/
+console.log("Loading the development content!")
+loadAllMarkdown();
+console.log("Loaded the development content!!")
