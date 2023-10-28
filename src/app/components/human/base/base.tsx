@@ -16,8 +16,18 @@ import {
 } from "../../../../../data.config.tsx";
 
 import useMousePosition from "../../../../lib/useMousePosition.js";
+interface BlogMarkdownInterface {
+  [key: string]: {
+    html: string
+    summary: string
+  }
+}
 
-import { RefObject, useEffect, useRef, useState } from "react";
+import markDownHTML from "../../../../../loadedMarkdown.json"
+
+import { ReactElement, RefObject, useEffect, useRef, useState } from "react";
+
+let markDownHTMLTS = markDownHTML as BlogMarkdownInterface
 
 export default function Base() {
   interface Section {
@@ -67,6 +77,17 @@ export default function Base() {
     return generatedString;
   };
 
+  const getBlogSummary = (title: string): ReactElement => {
+    
+    let summary = markDownHTMLTS[title].summary;
+    return (
+    <div className={styles.description_blog}>
+       {/* <div dangerouslySetInnerHTML={{__html: markDownHTMLTS[title]}}></div> */}
+       {summary}...
+    </div>
+    )
+  }
+
   const [activeSection, setActiveSection] = useState<string | null>(null); // State to track the active section
   const mousePosition = useMousePosition({ includeTouch: true });
 
@@ -99,7 +120,7 @@ export default function Base() {
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, []);
+  });
 
   return (
     <div className={styles.human_container}>
@@ -353,9 +374,7 @@ export default function Base() {
                     ></path>
                   </svg>
                 </div>
-                <div className={styles.description_blog}>
-                  Lorem Ipsum Blog Description
-                </div>
+                {getBlogSummary(blog.title)}
               </div>
             </div>
           ))}
