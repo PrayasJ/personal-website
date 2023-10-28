@@ -38,6 +38,10 @@
         position: absolute;
         transform: translate(-50%, -50%);
         z-index: 0;
+
+        @media (max-width: 480px) {  // Media query for mobile devices
+            display: none;
+        }
     }
 
     .about_section {
@@ -238,12 +242,16 @@
                 letter-spacing: .1em;
                 font-weight: 700;
                 font-size: 0.875rem;
-                line-height: 1.25rem;
                 text-transform: uppercase;
                 margin-bottom: 2rem;
                 top: 0;
                 background-color: #0f172a;
-                padding: 1.25rem 1.5rem;
+                padding: 0 1.5rem;
+                width: 95%;
+                transform: translateX(-1rem);
+                z-index: 1;
+                align-self: auto;
+                line-height: 3.5rem;
             }
         }
 
