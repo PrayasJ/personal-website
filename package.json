@@ -13,6 +13,8 @@
     "@vercel/analytics": "^1.0.2",
     "eslint": "8.45.0",
     "eslint-config-next": "13.4.12",
+    "fs": "^0.0.1-security",
+    "gray-matter": "^4.0.3",
     "next": "13.4.12",
     "node-sass": "^9.0.0",
     "raw-loader": "^4.0.2",

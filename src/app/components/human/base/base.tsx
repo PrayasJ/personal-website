@@ -15,7 +15,7 @@ import {
   sortProjectData,
 } from "../../../../../data.config.tsx";
 
-import useMousePosition from "../../../../../utils/useMousePosition.js";
+import useMousePosition from "../../../../lib/useMousePosition.js";
 
 import { RefObject, useEffect, useRef, useState } from "react";
 
