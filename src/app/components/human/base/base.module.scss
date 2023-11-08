@@ -30,6 +30,29 @@
         padding-right: 1rem;
     }
 
+    ::-webkit-scrollbar {
+        width: 17px;
+        height: 17px;
+        border-radius: 6px;
+        background: rgba(0, 0, 0, 0.05);
+    }
+    ::-webkit-scrollbar:hover {
+        background: rgba(0, 0, 0, 0.075);
+    }
+    ::-webkit-scrollbar-track {
+        border-radius: 2px;
+    }
+    ::-webkit-scrollbar-thumb {
+        min-height: 30px;
+        border-radius: 100px;
+        border: 4px solid transparent;
+        background-clip: padding-box;
+        background-color: rgba(0, 0, 0, 0.3);
+    }
+    ::-webkit-scrollbar-thumb:hover {
+        background-color: rgba(0, 0, 0, 0.45);
+    }
+
     .cursor_follower {
         width: 750px;
         height: 750px;
@@ -905,6 +928,77 @@
                         line-height: 1.5rem;
                         margin-top: 0.5rem;
                         margin-bottom: 0.5rem;
+                    }
+                }
+            }
+
+            .blog_modal_container {
+                display: flex;
+                position: fixed;
+                width: 100vw;
+                height: 100vh;
+                backdrop-filter: blur(10px);
+                align-items: center;
+                justify-content: center;
+                // background-color: rgba(0, 0, 0, 0.555);
+                top: 0;
+                left: 0;
+
+                .blog_modal {
+                    width: 70%;
+                    height: 70%;
+                    overflow-y: scroll;
+                    border-radius: 1rem;
+                    background-color: #162342;
+                    filter: drop-shadow(0 0 0.5rem rgb(27, 27, 27));
+                    padding: 3rem;
+
+                    .blog_modal_title {
+                        color: rgb(226, 232, 240);
+                        letter-spacing: .05em;
+                        font-weight: 500;
+                        font-size: 2rem;
+                        line-height: 1rem;
+                    }
+
+                    h1, h2, h3, p, li, table {
+                        color: rgb(148, 163, 184);
+                    }
+
+                    a {
+                        color: rgb(94, 234, 212);
+                        cursor: pointer;
+                    }
+
+                    table {
+                        width: 100%;
+                    }
+
+                    code {
+                        padding: 0.2rem;
+                        border-radius: 0.3rem;
+                        border: #303c5e9b solid 0.1rem;
+                        background-color: #303c5e9b;
+                        line-height: 2.25;
+                        color: rgb(226, 232, 240);
+                    }
+
+                    pre {
+                        padding: 0.2rem 0.75rem;
+                        border-radius: 0.3rem;
+                        border: #303c5e9b solid 0.1rem;
+                        background-color: #303c5e9b;
+                        line-height: 2.25;
+                        color: rgb(226, 232, 240);
+                        text-wrap: wrap;
+
+                        code {
+                            padding: unset;
+                            border-radius: unset;
+                            border: unset;
+                            background-color: unset;
+                            line-height: unset;
+                        }
                     }
                 }
             }

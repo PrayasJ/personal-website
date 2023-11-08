@@ -5,7 +5,7 @@ const showdown  = require('showdown');
 
 const { BlogData } = require('../../blogdata.js');
 
-converter = new showdown.Converter();
+converter = new showdown.Converter({tables: true, strikethrough: true, ghCodeBlocks: true});
 
 function extractContent(html) {
   const handler = new htmlparser2.DomHandler();
@@ -15,7 +15,7 @@ function extractContent(html) {
   
   let summary = htmlparser2.DomUtils.textContent(handler.root.childNodes);
   summary = summary.replace(/\n\n/g, '\n').replace(/---/g, '')
-  summary = summary.substring(summary.indexOf("\n") + 2).substring(0, 250)
+  summary = summary.substring(summary.indexOf("\n") + 1).substring(0, 250)
   return summary;
 }
 
@@ -25,9 +25,10 @@ async function loadAllMarkdown() {
     let blog = BlogData[i]
     const fullPath = path.join(process.cwd(), blog.filePath);
     const fileContents = fs.readFileSync(fullPath, 'utf8');
+    const html = converter.makeHtml(fileContents)
     markdowns[blog.title] = {
-      html: converter.makeHtml(fileContents),
-      summary: extractContent(fileContents)
+      html: html,
+      summary: extractContent(html)
     };
   }
 

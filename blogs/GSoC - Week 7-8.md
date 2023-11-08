@@ -94,7 +94,7 @@ Let us consider our implementation of `mcparallel` in  the `cast` function,
 
 ```r
 models_list <- lapply(1:nmodels, function(i) {
-    mcparallel(model_f(i))
+    mcparallel(model_f(i))
 })
 
 mccollect(models_list)
@@ -108,9 +108,9 @@ Now, in order to attain a similar execution flow using sockets, we use the follo
 clusters <- makeCluster(detectCores() - 1, outfile = "")
 
 clusterExport(
-    cl=clusters, 
-    varlist=c('models_scripts'), 
-    envir=environment()
+    cl=clusters, 
+    varlist=c('models_scripts'), 
+    envir=environment()
 )
 
 parLapply(clusters, 1:nmodels, function(i) {

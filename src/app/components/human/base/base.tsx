@@ -90,6 +90,7 @@ export default function Base() {
 
   const [activeSection, setActiveSection] = useState<string | null>(null); // State to track the active section
   const mousePosition = useMousePosition({ includeTouch: true });
+  const [currentBlogTitle, setCurrentBlogTitle] = useState<string | null>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -355,7 +356,13 @@ export default function Base() {
           id="blogs"
         >
           {sortBlogs(BlogData).map((blog, index) => (
-            <div key={index} className={styles.blog}>
+            <div 
+              key={index} 
+              className={styles.blog}
+              onClick={() => {
+                setCurrentBlogTitle(blog.title);
+              }}
+            >
               <div className={styles.timeline}>{blog.date}</div>
               <div className={styles.blog_detail}>
                 <div className={styles.title_blog}>
@@ -378,6 +385,28 @@ export default function Base() {
               </div>
             </div>
           ))}
+          {currentBlogTitle != null && 
+          <div className={styles.blog_modal_container} onClick={(ev) => {
+            const target = ev.target;
+
+            if (target instanceof HTMLElement) {
+              if (target.tagName.toLowerCase() === 'a' && target instanceof HTMLAnchorElement) {
+                target.setAttribute('target', '_blank');
+                target.style.cursor = 'pointer';
+              } else {
+                ev.preventDefault();
+              }
+            }
+
+            if (target === ev.currentTarget) {
+              setCurrentBlogTitle(null);
+            }
+          }}>
+            <div className={styles.blog_modal}>
+              <div className={styles.blog_modal_title}>{currentBlogTitle}</div>
+              <div className={styles.blog_html} dangerouslySetInnerHTML={{__html: markDownHTMLTS[currentBlogTitle].html}}></div>
+            </div>
+          </div>}
         </div>
       </div>
     </div>

@@ -67,11 +67,11 @@ square_function <- function(num) {
 
 microbenchmark (
     linear={
-        lapply(nums, square_function)
-    },
+        lapply(nums, square_function)
+    },
     parallel={
-        mclapply(nums, square_function, mc.cores = detectCores())
-    },
+        mclapply(nums, square_function, mc.cores = detectCores())
+    },
     times = 10
 )
 ```

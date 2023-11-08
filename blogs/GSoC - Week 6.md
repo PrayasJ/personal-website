@@ -157,16 +157,16 @@ microbenchmark(
             "NaiveArima", 
             "jags_RW", 
             "jags_logistic")
-        )
+        )
     }, 
     parallel = {
         portalcast(models=c(
-            "ESSS", 
-            "AutoArima", 
-            "NaiveArima", 
-            "jags_RW", 
-            "jags_logistic"
-        ), multiprocess = TRUE)
+            "ESSS",
+            "AutoArima", 
+            "NaiveArima", 
+            "jags_RW", 
+            "jags_logistic"
+        ), multiprocess = TRUE)
     }, 
     times = 5
 )
