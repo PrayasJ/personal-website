@@ -103,6 +103,10 @@ export const socialData: SocialInterface = {
     instagram: {
         url: 'https://instagram.com/_.prayas._',
         logoPath: require('./public/social_icons/instagram.svg'),
+    },
+    email: {
+        url: 'mailto:prayas.jn24@gmail.com',
+        logoPath: require('./public/social_icons/email.svg'),
     }
 }
 
