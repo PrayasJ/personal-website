@@ -652,15 +652,27 @@
                 }
 
                 .timeline {
-                    color: rgb(100, 116, 139);
-                    letter-spacing: .025em;
-                    text-transform: uppercase;
-                    font-weight: 600;
-                    font-size: .75rem;
-                    line-height: 1rem;
+
                     margin-top: 0.25rem;
                     margin-bottom: 0.5rem;
                     width: 13rem;
+
+                    .timeline_date {
+                        color: rgb(100, 116, 139);
+                        letter-spacing: .025em;
+                        text-transform: uppercase;
+                        font-weight: 600;
+                        font-size: .75rem;
+                        line-height: 1rem;
+                    }
+
+                    .project_image {
+                        margin-top: 0.25rem;
+                        border-color: rgba(226,232,240,.1);
+                        border-width: 2px;
+                        border-radius: 0.25rem;
+                        border-style: solid;
+                    }
 
                     @media (max-width: 768px) {  // Media query for tablets and smaller devices
                         width: 4rem;
@@ -668,6 +680,10 @@
 
                     @media (max-width: 480px) {  // Media query for mobile devices
                         width: 100%;
+
+                        .project_image {
+                            display: none;
+                        }
                     }
                 }
 

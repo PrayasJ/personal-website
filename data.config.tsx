@@ -50,8 +50,8 @@ interface ProjectInterface {
     description?: string
     links?: UrlText[]
     skills?: string[]
-    image?: UrlImage
     year: number
+    imagePath?: string
 }
 
 interface BlogInterface {
@@ -242,6 +242,18 @@ export const experienceData: ExperienceInterface[] = [
 
 export const ProjectData: ProjectInterface[] = [
     {
+        url: 'https://datatoolbelt.netlify.app/',
+        links: [
+            {
+                url: 'https://github.com/dassaniansh/Datatoolbelt',
+                text: 'Github - Backend'
+            },
+            {
+                url: 'https://github.com/PrayasJ/DataToolBelt-Frontend',
+                text: 'Github - Frontend'
+            }
+        ],
+        imagePath: require('./public/images/datatoolbelt.png'),
         title: 'DataToolBelt',
         description: `The DataToolBelt frontend provides the following features:
         A file manager for uploading, downloading, and deleting files
@@ -249,7 +261,7 @@ export const ProjectData: ProjectInterface[] = [
         A charting tool for creating charts and graphs from data
         A SQL editor for writing and executing SQL queries
         A machine learning tool for training and deploying machine learning models`,
-        year: 2022,
+        year: 2023,
         skills: ['Python', 'Flask', 'Numpy', 'Matplotlib', 'Node.js', 'React.js', 'SASS', 'Typescript', 'Jquery', 'LottieFiles', 'Nginx'],
     },
     {
@@ -259,6 +271,14 @@ export const ProjectData: ProjectInterface[] = [
         skills: ['Python', 'Pickle', 'NLTK', 'Matplotlib', 'Tweepy'],
     },
     {
+        url: 'https://drive.google.com/file/d/1zyMI9JaOi4W_ennCHtPcRsrBdkFrkn8f/view?usp=sharing',
+        links: [
+            {
+                url: 'https://drive.google.com/file/d/1zyMI9JaOi4W_ennCHtPcRsrBdkFrkn8f/view?usp=sharing',
+                text: 'Demo Video'
+            }
+        ],
+        imagePath: require('./public/images/mvs.png'),
         title: 'MyVirtualStream',
         description: `MyVirtualStream is a Flask powered web application which utilizes the capabilities
         of FFmpeg to bring about a 24/7 Streaming scheduler similar to those that are
@@ -275,6 +295,13 @@ export const ProjectData: ProjectInterface[] = [
         skills: ['Node.js', 'Typescript', 'Python'],
     },
     {
+        url: 'https://github.com/PrayasJ/Project_Seek',
+        links: [
+            {
+                text: 'Github - Client & Server',
+                url: 'https://github.com/PrayasJ/Project_Seek'
+            }
+        ],
         title: 'Project Seek',
         description: `Implemented using Godot as the Game Engine, OAuth and Firebase while Python with Websockets for game server while Heroku for deploying the server.
         Top Down Strategic Shooter with a PvP model.
@@ -297,30 +324,73 @@ export const ProjectData: ProjectInterface[] = [
         skills: ['Python', 'Flutter', 'Firebase'],
     },
     {
+        url: 'https://percyx.itch.io/rainbow-dash',
+        links: [
+            {
+                url: 'https://percyx.itch.io/rainbow-dash',
+                text: 'Itch.io - Game'
+            },
+            {
+                url: 'https://drive.google.com/file/d/1o8lGmyV0qnf4KNJsOJOI70PMSBQaSs0k/view?usp=sharing',
+                text: 'Rainbow Dash - Gameplay'
+            }
+        ],
+        imagePath: require('./public/images/rainbow-dash.png'),
         title: 'Rainbow Dash',
         description: 'Rainbow Dash is an indie game developed solo. It\'s a casual game with a procedural level generator.',
         year: 2020,
         skills: ['Godot'],
     },
     {
+        url: 'https://drive.google.com/file/d/1F5iAgaruyq3_5J9_6ugMVVmD4rDYUXPU/view?usp=sharing',
+        links: [
+            {
+                url: 'https://drive.google.com/file/d/1F5iAgaruyq3_5J9_6ugMVVmD4rDYUXPU/view?usp=sharing',
+                text: 'Demo Video'
+            }
+        ],
+        imagePath: require('./public/images/blinded.png'),
         title: 'Blinded',
         description: 'Blinded was a solo project with a procedural map generation with action and gore in a top down environment.',
         year: 2020,
         skills: ['Godot'],
     },
     {
+        url: 'https://drive.google.com/file/d/1ij2WKLJ67rh6uvSPmytjzUIeqBIX9hjU/view?usp=sharing',
+        links: [
+            {
+                url: 'https://drive.google.com/file/d/1ij2WKLJ67rh6uvSPmytjzUIeqBIX9hjU/view?usp=sharing',
+                text: 'Demo Video'
+            }
+        ],
+        imagePath: require('./public/images/bwvn.png'),
         title: 'Bouncy Walls Vs. Ninja',
         description: `Game powered by Godot Engine. The 2D game had used the physics capabilities of Godot to make a pocket tank like functionality`,
         year: 2019,
         skills: ['Godot'],
     },
     {
+        url: 'https://drive.google.com/file/d/1pP-xzrS43DePO-Hj5r0vqoJ_C37NWrFP/view?usp=sharing',
+        links: [
+            {
+                url: 'https://drive.google.com/file/d/1pP-xzrS43DePO-Hj5r0vqoJ_C37NWrFP/view?usp=sharing',
+                text: 'Demo Video'
+            }
+        ],
+        imagePath: require('./public/images/greenable.png'),
         title: 'Greenable',
         description: `Greenable was a project which allowed it's users to generate event tags geologically and add them to a common database for everyone.`,
         year: 2019,
         skills: ['Python', 'Flask', 'Heroku'],
     },
     {
+        url: 'https://drive.google.com/file/d/1HHFBt5CboWZ3yN5w9dL430IXHe-NYD6n/view?usp=sharing',
+        links: [
+            {
+                url: 'https://drive.google.com/file/d/1HHFBt5CboWZ3yN5w9dL430IXHe-NYD6n/view?usp=sharing',
+                text: 'Demo Video'
+            }
+        ],
         title: 'Symbiosis',
         description: `A 2D game with Asteroids-like mechanism made completely with C. The engine was made from scratch by me.`,
         year: 2018,

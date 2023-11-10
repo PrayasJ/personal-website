@@ -294,8 +294,27 @@ export default function Base() {
           id="projects"
         >
           {sortProjectData(ProjectData).map((project, index) => (
-            <div key={index} className={styles.project}>
-              <div className={styles.timeline}>{project.year}</div>
+            <div 
+              key={index}
+              className={styles.project}
+              onClick={() => {
+                if (project.url) {
+                  window.open(project.url, "_blank");
+                }
+              }}
+              >
+              <div className={styles.timeline}>
+                <div className={styles.timeline_date}>{project.year}</div>
+                {project.imagePath && 
+                  <Image
+                    className={styles.project_image}
+                    src={project.imagePath}
+                    alt={project.title}
+                    layout="responsive"
+                    loading="lazy"
+                  />
+                }
+              </div>
               <div className={styles.project_detail}>
                 <div className={styles.title_proj}>
                   {project.title}
