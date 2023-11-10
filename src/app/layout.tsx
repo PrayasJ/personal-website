@@ -7,9 +7,28 @@ const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'Prayas Jain',
-  description: 'Senior full stack developer with experience in react, react native, django, nodejs and other technologies.',
+  description: 'Senior Software Developer With Experience in React, React-Native, Django, Node.js and other technologies.',
   openGraph: {
-
+    title: 'Prayas Jain',
+    description: 'Senior Full Stack Developer With Experience in React, React-Native, Django, Node.js and other technologies.',
+    url: 'https://www.prayas.dev/',
+    siteName: 'Prayas Jain - SDE',
+    images: [
+      {
+        url: 'https://www.prayas.dev/images/site-preview.png'
+      }
+    ],
+    type: 'website'
+  },
+  twitter: {
+    title: 'Prayas Jain',
+    description: 'Senior Full Stack Developer With Experience in React, React-Native, Django, Node.js and other technologies.',
+    images: [
+      {
+        url: 'https://www.prayas.dev/images/site-preview.png'
+      }
+    ],
+    card: 'summary_large_image'
   },
   keywords: ['react', 'react-native', 'django', 'python', 'nodejs', 'wordpress', 'nextjs', 'express', 'docker', 'SDE', 'fullstack', 'developer']
 }
