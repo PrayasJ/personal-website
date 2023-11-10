@@ -127,7 +127,7 @@ export const experienceData: ExperienceInterface[] = [
                 text: 'WJ - Webapp'
             },
             {
-                url: 'https://play.google.com/store/apps/details?id=jp.workjapan.home/', 
+                url: 'https://play.google.com/store/apps/details?id=jp.workjapan.home', 
                 text: 'WJ - Android'
             },
             {

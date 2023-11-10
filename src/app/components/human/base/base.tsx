@@ -239,6 +239,9 @@ export default function Base() {
                       className={styles.link}
                       href={link.url}
                       target="_blank"
+                      onClick={(ev) => {
+                        ev.stopPropagation()
+                      }}
                     >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
