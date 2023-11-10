@@ -15,7 +15,14 @@ export const metadata: Metadata = {
     siteName: 'Prayas Jain - SDE',
     images: [
       {
-        url: 'https://www.prayas.dev/images/site-preview.png'
+        url: 'https://www.prayas.dev/images/site-preview.png',
+        width: 1726,
+        height: 971,
+      },
+      {
+        url: 'https://www.prayas.dev/images/site-preview-square.png',
+        width: 1019,
+        height: 1019,
       }
     ],
     type: 'website'
@@ -25,7 +32,14 @@ export const metadata: Metadata = {
     description: 'Senior Full Stack Developer With Experience in React, React-Native, Django, Node.js and other technologies.',
     images: [
       {
-        url: 'https://www.prayas.dev/images/site-preview.png'
+        url: 'https://www.prayas.dev/images/site-preview.png',
+        width: 1726,
+        height: 971,
+      },
+      {
+        url: 'https://www.prayas.dev/images/site-preview-square.png',
+        width: 1019,
+        height: 1019,
       }
     ],
     card: 'summary_large_image'
