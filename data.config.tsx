@@ -258,13 +258,18 @@ export const ProjectData: ProjectInterface[] = [
         description: `The DataToolBelt frontend provides the following features:
         A file manager for uploading, downloading, and deleting files
         A table viewer for displaying data in a tabular format
-        A charting tool for creating charts and graphs from data
-        A SQL editor for writing and executing SQL queries
-        A machine learning tool for training and deploying machine learning models`,
+        A charting tool for creating charts and graphs from data`,
         year: 2023,
         skills: ['Python', 'Flask', 'Numpy', 'Matplotlib', 'Node.js', 'React.js', 'SASS', 'Typescript', 'Jquery', 'LottieFiles', 'Nginx'],
     },
     {
+        url: 'https://github.com/PrayasJ/PollAnalysis',
+        links: [
+            {
+                url: 'https://github.com/PrayasJ/PollAnalysis',
+                text: 'Project Repository'
+            }
+        ],
         title: 'Poll Analysis',
         description: 'Goal behind this project is to collect the social media tweets from a month before the poll and to analyze it through various perspectives.',
         year: 2022,
