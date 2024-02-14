@@ -7,7 +7,7 @@ const correctOTP = "MEOW";
 export default function Page() {
   const [noCount, setNoCount] = useState(0);
   const [yesPressed, setYesPressed] = useState(false);
-  const yesButtonSize = noCount * 20 + 16;
+  const yesButtonSize = noCount * 10 + 16;
 
   const handleNoClick = () => {
     setNoCount(noCount + 1);
@@ -100,15 +100,14 @@ export default function Page() {
     <div className={styles.page}>
       {yesPressed ? (
         <>
-          <Image width={236} height={233} alt='bear' src={require('../../../public/images/you1.gif')} />
+          <Image width={250} alt='bear' src={require('../../../public/images/you1.gif')} />
           <div className={`${styles.my} ${styles.text4xl} ${styles.fontBold}`}>WOOOOOO!!! I love you muffinnnnnn!! ;))</div>
         </>
       ) : (
         <>
           <Image
             alt='bear'
-            width={618}
-            height={500}
+            width={250}
             src={require('../../../public/images/you2.gif')}
           />
           <h1 className={`${styles.my} ${styles.text4xl}`}>Will you be my Valentine?</h1>
