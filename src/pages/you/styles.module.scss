@@ -1,0 +1,128 @@
+.page {
+  margin-top: -16rem;
+  display: flex;
+  height: 100vh;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  h1 {
+    margin-top: 1rem;
+    font-size: 4rem;
+    font-weight: bold;
+    color: #333; /* Adjust color as needed */
+  }
+
+  .buttonContainer {
+    display: flex;
+    align-items: center;
+
+    .yesButton,
+    .noButton {
+      margin-right: 1rem;
+      border-radius: 0.25rem;
+      padding: 0.5rem 1rem;
+      font-weight: bold;
+      color: white;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      border: none; /* Remove button outline */
+    }
+
+    .yesButton {
+      background-color: #34d399;
+
+      &:hover {
+        background-color: #10b981;
+      }
+    }
+
+    .noButton {
+      background-color: #ef4444;
+
+      &:hover {
+        background-color: #f87171;
+      }
+    }
+  }
+
+  .my {
+    margin-top: 0.25rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333; /* Adjust color as needed */
+  }
+}
+
+.otpInputWithValidation {
+  width: 50%;
+	height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	margin: auto;
+
+	@media (max-width: 768px) {  // Media query for tablets and smaller devices
+		width: 100%;
+	}
+}
+
+.otpDescription {
+  font-size: 2rem;
+  font-weight: medium;
+  margin-top: 3rem;
+	@media (max-width: 768px) {  // Media query for tablets and smaller devices
+		font-size: 1.5rem;
+	}
+}
+
+.otpInfo {
+  font-size: 1.5rem;
+  margin-top: 1rem;
+  background-color: #323232;
+  padding: 1rem;
+	color: white;
+  border-radius: 0.5rem;
+	@media (max-width: 768px) {  // Media query for tablets and smaller devices
+		font-size: 1rem;
+	}
+}
+
+.otpLabel {
+  font-size: 1.5rem;
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.otpInputContainer {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.otpInput {
+  border: 1px solid;
+  width: 25%;
+  height: auto;
+  padding: 0.75rem;
+  border-radius: 0.25rem;
+  background-color: #323232;
+  color: white;
+  outline: none;
+  appearance: none;
+	text-align: center;
+}
+
+.otpInput:focus {
+  border-width: 2px;
+}
+
+.otpError {
+  font-size: 1.25rem;
+  margin-top: 1rem;
+}
+
+.error-show {
+  display: block;
+}
