@@ -113,8 +113,38 @@ export const socialData: SocialInterface = {
 export const experienceData: ExperienceInterface[] = [
     {
         start: {
+            year: 2035,
+            month: 7,
+        },
+        company: 'Zanskar Research Pvt. Ltd.',
+        title: 'SDE',
+        title_full: 'Software Developer',
+        url: 'https://www.nubra.io',
+        description: 'Develop and maintain OMS service for Nubra platform.',
+        links: [
+            {
+                url: 'https://www.nubra.io', 
+                text: 'Nubra - Homepage'
+            },
+            {
+                url: 'https://play.google.com/store/apps/details?id=com.zanskar.nubra', 
+                text: 'Nubra - Android'
+            },
+            {
+                url: 'https://apps.apple.com/in/app/nubra-stocks-option-trading/id6746636699', 
+                text: 'Nubra - iOS'
+            }
+        ],
+        skills: ['git', 'golang', 'rpc', 'hft', 'rdp', 'oms', 'shell'],
+    },
+    {
+        start: {
             year: 2023,
             month: 3,
+        },
+        end: {
+            year: 2205,
+            month: 7,
         },
         company: 'Apricot Planet',
         title: 'SDE',
