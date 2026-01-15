@@ -113,7 +113,7 @@ export const socialData: SocialInterface = {
 export const experienceData: ExperienceInterface[] = [
     {
         start: {
-            year: 2035,
+            year: 2025,
             month: 7,
         },
         company: 'Zanskar Research Pvt. Ltd.',
@@ -143,7 +143,7 @@ export const experienceData: ExperienceInterface[] = [
             month: 3,
         },
         end: {
-            year: 2205,
+            year: 2025,
             month: 7,
         },
         company: 'Apricot Planet',
