@@ -61,6 +61,9 @@ import { CgpaToPercentage } from "@/components/tools/cgpa/CgpaToPercentage";
 import { AttendanceCalculator } from "@/components/tools/attendance/AttendanceCalculator";
 import { AgeCalculator } from "@/components/tools/age/AgeCalculator";
 import { QrGenerator } from "@/components/tools/qr/QrGenerator";
+import { TargetPdfCompress } from "@/components/tools/target-pdf-compress/TargetPdfCompress";
+import { WhatsAppLinkGenerator } from "@/components/tools/whatsapp/WhatsAppLinkGenerator";
+import { RentReceipt } from "@/components/tools/rent-receipt/RentReceipt";
 
 export function ToolInterface({ slug }: { slug: string }) {
   switch (slug) {
@@ -154,6 +157,12 @@ export function ToolInterface({ slug }: { slug: string }) {
       return <PdfSplit />;
     case "compress-pdf":
       return <PdfCompress />;
+    case "compress-pdf-to-200kb":
+      return <TargetPdfCompress maxBytes={200 * 1024} label="200 KB" />;
+    case "compress-pdf-to-500kb":
+      return <TargetPdfCompress maxBytes={500 * 1024} label="500 KB" />;
+    case "compress-pdf-to-1mb":
+      return <TargetPdfCompress maxBytes={1024 * 1024} label="1 MB" />;
     case "rotate-pdf":
       return <PdfRotate />;
     case "pdf-to-image":
@@ -196,6 +205,10 @@ export function ToolInterface({ slug }: { slug: string }) {
       return <QrGenerator defaultMode="url" />;
     case "upi-qr-code-generator":
       return <QrGenerator defaultMode="upi" />;
+    case "whatsapp-link-generator":
+      return <WhatsAppLinkGenerator />;
+    case "rent-receipt":
+      return <RentReceipt />;
     default:
       return null;
   }

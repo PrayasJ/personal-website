@@ -8,12 +8,17 @@ import { AdSlot } from "@/components/ads/AdSlot";
 import { ItemListSchema } from "@/components/seo/ItemListSchema";
 
 export const metadata = pageMetadata({
-  title: "Free QR Code Generator — URL, Text, UPI PNG",
+  title: "Free QR Code Generator — URL, Text, UPI, WhatsApp",
   description:
-    "Generate QR codes for URLs, text, and UPI payment strings in your browser. Download PNG. No upload.",
+    "Generate QR codes for URLs, text, UPI, and WhatsApp wa.me links in your browser. Download PNG. No upload.",
   path: "/qr",
   absoluteTitle: true,
-  keywords: ["qr code generator", "upi qr code", "create qr online"],
+  keywords: [
+    "qr code generator",
+    "upi qr code",
+    "whatsapp link generator",
+    "create qr online",
+  ],
 });
 
 export default function QrToolsPage() {

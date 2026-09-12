@@ -63,8 +63,8 @@ export const categories: Record<
     name: "PDF Tools",
     path: "/pdf",
     description:
-      "Free PDF tools to merge, split, compress, rotate, and convert pages to images in your browser. Files never leave this tab.",
-    blurb: "Merge, split, compress, rotate — files stay local.",
+      "Free PDF tools to merge, split, compress to a target KB, rotate, and convert pages to images in your browser. Files never leave this tab.",
+    blurb: "Merge, split, compress to KB — files stay local.",
   },
   calculator: {
     name: "Calculators",
@@ -84,8 +84,8 @@ export const categories: Record<
     name: "QR Tools",
     path: "/qr",
     description:
-      "Generate QR codes for URLs, text, and UPI payment strings in your browser. Download a PNG — nothing is uploaded.",
-    blurb: "URL, text, and UPI QR — PNG download, no upload.",
+      "Generate QR codes for URLs, text, UPI payment strings, and WhatsApp wa.me links in your browser. Download a PNG — nothing is uploaded.",
+    blurb: "URL, text, UPI, and WhatsApp QR — PNG download, no upload.",
   },
   image: {
     name: "Image Tools",

@@ -204,6 +204,15 @@ export async function compressPdf(
   onProgress?: (page: number, total: number) => void,
 ): Promise<Uint8Array> {
   const preset = compressPresets[quality];
+  return compressPdfWithSettings(data, preset.scale, preset.jpeg, onProgress);
+}
+
+async function compressPdfWithSettings(
+  data: ArrayBuffer,
+  scale: number,
+  jpeg: number,
+  onProgress?: (page: number, total: number) => void,
+): Promise<Uint8Array> {
   const pdfjs = await loadPdfjs();
   const pdf = await pdfjs.getDocument({ data: new Uint8Array(data) }).promise;
   const out = await PDFDocument.create();
@@ -211,7 +220,7 @@ export async function compressPdf(
     const count = pdf.numPages;
     for (let page = 1; page <= count; page += 1) {
       onProgress?.(page, count);
-      const canvas = await renderLoadedPage(pdf, page, preset.scale);
+      const canvas = await renderLoadedPage(pdf, page, scale);
       const blob = await new Promise<Blob>((resolve, reject) => {
         canvas.toBlob(
           (next) => {
@@ -222,7 +231,7 @@ export async function compressPdf(
             resolve(next);
           },
           "image/jpeg",
-          preset.jpeg,
+          jpeg,
         );
       });
       const bytes = new Uint8Array(await blob.arrayBuffer());
@@ -239,4 +248,82 @@ export async function compressPdf(
     await pdf.cleanup();
   }
   return out.save({ useObjectStreams: true });
+}
+
+const targetCompressLadder: { scale: number; jpeg: number }[] = [
+  { scale: 1.5, jpeg: 0.72 },
+  { scale: 1.25, jpeg: 0.6 },
+  { scale: 1.1, jpeg: 0.52 },
+  { scale: 1.0, jpeg: 0.42 },
+  { scale: 0.85, jpeg: 0.35 },
+  { scale: 0.7, jpeg: 0.28 },
+  { scale: 0.55, jpeg: 0.22 },
+  { scale: 0.45, jpeg: 0.18 },
+];
+
+export type CompressPdfToMaxBytesResult = {
+  bytes: Uint8Array;
+  alreadyUnder: boolean;
+  scale: number;
+  jpeg: number;
+};
+
+/**
+ * Rasterize with progressively lower scale/JPEG quality until size <= maxBytes.
+ * If the source is already under the cap, returns the original bytes.
+ */
+export async function compressPdfToMaxBytes(
+  data: ArrayBuffer,
+  maxBytes: number,
+  onProgress?: (info: {
+    page: number;
+    total: number;
+    attempt: number;
+    attempts: number;
+  }) => void,
+): Promise<CompressPdfToMaxBytesResult> {
+  if (!(maxBytes > 0)) {
+    throw new Error("Target size must be positive.");
+  }
+  if (data.byteLength <= maxBytes) {
+    return {
+      bytes: new Uint8Array(data.slice(0)),
+      alreadyUnder: true,
+      scale: 0,
+      jpeg: 0,
+    };
+  }
+
+  let best: CompressPdfToMaxBytesResult | null = null;
+  const attempts = targetCompressLadder.length;
+
+  for (let i = 0; i < attempts; i += 1) {
+    const step = targetCompressLadder[i]!;
+    const bytes = await compressPdfWithSettings(
+      data,
+      step.scale,
+      step.jpeg,
+      (page, total) => {
+        onProgress?.({ page, total, attempt: i + 1, attempts });
+      },
+    );
+    if (!best || bytes.length < best.bytes.length) {
+      best = {
+        bytes,
+        alreadyUnder: false,
+        scale: step.scale,
+        jpeg: step.jpeg,
+      };
+    }
+    if (bytes.length <= maxBytes) {
+      return best;
+    }
+  }
+
+  if (best && best.bytes.length <= maxBytes) {
+    return best;
+  }
+  throw new Error(
+    `Could not reach ${Math.round(maxBytes / 1024)} KB. Try fewer pages or a simpler scan.`,
+  );
 }

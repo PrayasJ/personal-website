@@ -507,4 +507,47 @@ export const calculatorTools: Tool[] = [
       },
     ],
   },
+  {
+    slug: "rent-receipt",
+    name: "Rent receipt generator",
+    description:
+      "Generate a simple Indian rent receipt PDF with amount in words.",
+    category: "calculator",
+    keywords: [
+      "rent receipt generator",
+      "rent receipt online",
+      "house rent receipt",
+      "rent receipt pdf",
+    ],
+    path: "/calculators/rent-receipt",
+    title: "Rent Receipt Generator Online — PDF with Amount in Words",
+    metaDescription:
+      "Create a simple Indian rent receipt PDF with landlord, tenant, period, and amount in words. Browser-only. Not a legal template.",
+    h1: "Rent Receipt Generator",
+    intro:
+      "Fill landlord, tenant, amount, period, and address. Preview the wording, then download a one-page PDF. Optional PAN and receipt number. Not legal advice.",
+    related: ["hra-calculator", "income-tax-calculator", "in-hand-salary"],
+    popular: true,
+    localProcessing: true,
+    faqs: [
+      {
+        question: "Is this a legal rent receipt?",
+        answer:
+          "It is a simple wording helper. Stamp paper, revenue stamp, and format rules vary — follow what your agreement or employer asks for.",
+      },
+      {
+        question: "Is data uploaded?",
+        answer: "No. The PDF is built with pdf-lib in this tab.",
+      },
+    ],
+    examples: [],
+    sections: [
+      {
+        title: "HRA paperwork",
+        paragraphs: [
+          "Employers often ask for monthly rent receipts when you claim HRA. Pair this with the HRA calculator for exemption estimates under the old regime.",
+        ],
+      },
+    ],
+  },
 ];

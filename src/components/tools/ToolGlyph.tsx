@@ -256,6 +256,9 @@ export function ToolGlyph({ slug }: { slug: string }) {
     case "merge-pdf":
     case "split-pdf":
     case "compress-pdf":
+    case "compress-pdf-to-200kb":
+    case "compress-pdf-to-500kb":
+    case "compress-pdf-to-1mb":
     case "rotate-pdf":
     case "pdf-to-image":
     case "images-to-pdf":
@@ -388,6 +391,19 @@ export function ToolGlyph({ slug }: { slug: string }) {
           <rect x="13" y="4" width="7" height="7" rx="1" />
           <rect x="4" y="13" width="7" height="7" rx="1" />
           <path d="M14 14h2v2h-2zM18 14h2v2h-2zM14 18h2v2h-2zM17 17h3v3" />
+        </Mark>
+      );
+    case "whatsapp-link-generator":
+      return (
+        <Mark>
+          <path d="M6 8.5c0-3 2.7-5 6-5s6 2 6 5-2.7 5-6 5c-.7 0-1.4-.1-2-.3L6 16l1.2-3.2C6.4 11.8 6 10.2 6 8.5z" />
+        </Mark>
+      );
+    case "rent-receipt":
+      return (
+        <Mark>
+          <path d="M6 4h9l3 3v13H6z" />
+          <path d="M15 4v3h3M8 11h8M8 14h6M8 17h4" />
         </Mark>
       );
     default:

@@ -9,12 +9,18 @@ import { AdSlot } from "@/components/ads/AdSlot";
 import { ItemListSchema } from "@/components/seo/ItemListSchema";
 
 export const metadata = pageMetadata({
-  title: "Free PDF Tools Online — Merge, Split, Compress, No Upload",
+  title: "Free PDF Tools Online — Merge, Split, Compress to KB, No Upload",
   description:
-    "Merge, split, compress, rotate, and convert PDF pages to images in your browser. Files stay on your device — no upload, no account.",
+    "Merge, split, compress PDF to 200KB/500KB/1MB, rotate, and convert pages to images in your browser. Files stay on your device.",
   path: "/pdf",
   absoluteTitle: true,
-  keywords: ["merge pdf", "split pdf", "compress pdf", "pdf to png", "pdf tools"],
+  keywords: [
+    "merge pdf",
+    "compress pdf to 200kb",
+    "compress pdf",
+    "pdf to png",
+    "pdf tools",
+  ],
 });
 
 export default function PdfToolsPage() {

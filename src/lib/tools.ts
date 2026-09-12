@@ -280,13 +280,13 @@ export function getToolsByCategory(category: ToolCategory): Tool[] {
 /** Consumer-first footer / discovery order when tools are marked popular. */
 const popularPreferred = [
   "compress-image-to-50kb",
+  "compress-pdf-to-200kb",
+  "whatsapp-link-generator",
+  "rent-receipt",
   "images-to-pdf",
   "emi-calculator",
   "cgpa-to-percentage",
   "qr-code-generator",
-  "merge-pdf",
-  "image-compress",
-  "json-formatter",
 ] as const;
 
 export function getPopularTools(limit = 6): Tool[] {

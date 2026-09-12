@@ -394,6 +394,55 @@ export const guides: Guide[] = [
       },
     ],
   },
+  {
+    slug: "compress-pdf-to-200kb",
+    path: "/guides/compress-pdf-to-200kb",
+    title: "How to Compress a PDF to 200 KB",
+    metaDescription:
+      "Why portals ask for small PDFs, how in-browser raster compression works, and when 200 KB is unreachable.",
+    h1: "Compress a PDF to 200 KB",
+    description:
+      "Job and KYC uploads often cap PDFs at a few hundred kilobytes. Hitting 200 KB in the browser usually means redrawing pages as JPEG — text will not stay selectable.",
+    relatedTools: [
+      "compress-pdf-to-200kb",
+      "compress-pdf-to-500kb",
+      "compress-pdf-to-1mb",
+      "compress-pdf",
+    ],
+    sections: [
+      {
+        title: "Rasterize on purpose",
+        paragraphs: [
+          "True lossless PDF recompression is hard in a tab. The tools here draw each page, encode JPEG, and write a new PDF. Scans shrink; contracts become pictures.",
+          "The 200 KB tool steps down quality until the size fits or reports failure. Prefer 500 KB or 1 MB when the portal allows it.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "whatsapp-wa-me-links",
+    path: "/guides/whatsapp-wa-me-links",
+    title: "WhatsApp wa.me Click-to-Chat Links",
+    metaDescription:
+      "How wa.me links work, country codes for India, and how to add a pre-filled message or QR without uploading data.",
+    h1: "WhatsApp wa.me links",
+    description:
+      "A wa.me link opens a chat with a number. Add ?text= for a draft message. Useful for business cards, posters, and support pages.",
+    relatedTools: [
+      "whatsapp-link-generator",
+      "qr-code-generator",
+      "upi-qr-code-generator",
+    ],
+    sections: [
+      {
+        title: "Format",
+        paragraphs: [
+          "Use digits only after wa.me/ — country code then number, e.g. 91 for India. Ten-digit Indian mobiles can omit the country code in the generator; it adds 91.",
+          "Keep messages short if you also print a QR. Dense payloads are harder to scan.",
+        ],
+      },
+    ],
+  },
 ];
 
 export function getGuideBySlug(slug: string): Guide | undefined {

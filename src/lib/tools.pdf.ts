@@ -82,7 +82,7 @@ export const pdfTools: Tool[] = [
     h1: "Compress PDF Online",
     intro:
       "Each page is drawn, JPEG-encoded, and placed in a new PDF. That is honest in-browser compression: scans shrink; sharp vector text will look like a picture.",
-    related: ["pdf-to-image", "merge-pdf", "split-pdf"],
+    related: ["compress-pdf-to-200kb", "compress-pdf-to-500kb", "pdf-to-image", "merge-pdf"],
     localProcessing: true,
     faqs: [
       {
@@ -96,6 +96,131 @@ export const pdfTools: Tool[] = [
         title: "Why rasterize",
         paragraphs: [
           "pdf-lib cannot recompress arbitrary embedded images well. Drawing pages with PDF.js and writing JPEGs is the method that actually reduces size here.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "compress-pdf-to-200kb",
+    name: "Compress PDF to 200 KB",
+    description: "Shrink a PDF to 200 KB or less by rasterizing pages in the browser.",
+    category: "pdf",
+    keywords: [
+      "compress pdf to 200kb",
+      "reduce pdf to 200kb",
+      "pdf compressor 200kb",
+    ],
+    path: "/pdf/compress-pdf-to-200kb",
+    title: "Compress PDF to 200 KB Online — No Upload",
+    metaDescription:
+      "Compress a PDF to 200 KB or less in your browser by rasterizing pages. Preview, then download. No upload.",
+    h1: "Compress PDF to 200 KB",
+    intro:
+      "Tries progressively stronger JPEG raster settings until the file is ≤ 200 KB — or says when it cannot. Best for scans and photo PDFs.",
+    related: [
+      "compress-pdf-to-500kb",
+      "compress-pdf-to-1mb",
+      "compress-pdf",
+      "compress-image-to-50kb",
+    ],
+    popular: true,
+    localProcessing: true,
+    faqs: [
+      {
+        question: "Is the PDF uploaded?",
+        answer: "No. PDF.js and pdf-lib run in this tab.",
+      },
+      {
+        question: "Will text stay selectable?",
+        answer: "No. Pages become JPEG images inside a new PDF.",
+      },
+    ],
+    examples: [],
+    sections: [
+      {
+        title: "Target size",
+        paragraphs: [
+          "Portals often ask for PDFs under a few hundred KB. This page aims for 200 KB. Multi-page photo scans may still fail — try fewer pages or the 500 KB / 1 MB tools.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "compress-pdf-to-500kb",
+    name: "Compress PDF to 500 KB",
+    description: "Shrink a PDF to 500 KB or less in the browser.",
+    category: "pdf",
+    keywords: [
+      "compress pdf to 500kb",
+      "reduce pdf to 500kb",
+      "pdf under 500kb",
+    ],
+    path: "/pdf/compress-pdf-to-500kb",
+    title: "Compress PDF to 500 KB Online — No Upload",
+    metaDescription:
+      "Compress a PDF to 500 KB or less in your browser. Preview pages, then download. No upload.",
+    h1: "Compress PDF to 500 KB",
+    intro:
+      "Same target-byte engine as the 200 KB tool, with a 500 KB cap. Useful when portals allow a bit more headroom.",
+    related: [
+      "compress-pdf-to-200kb",
+      "compress-pdf-to-1mb",
+      "compress-pdf",
+      "images-to-pdf",
+    ],
+    localProcessing: true,
+    faqs: [
+      {
+        question: "Is the PDF uploaded?",
+        answer: "No. Processing stays in this tab.",
+      },
+    ],
+    examples: [],
+    sections: [
+      {
+        title: "When to use 500 KB",
+        paragraphs: [
+          "Many job and KYC uploads accept half a megabyte. Prefer this over aggressive 200 KB when you need clearer scans.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "compress-pdf-to-1mb",
+    name: "Compress PDF to 1 MB",
+    description: "Shrink a PDF to 1 MB or less in the browser.",
+    category: "pdf",
+    keywords: [
+      "compress pdf to 1mb",
+      "reduce pdf to 1mb",
+      "pdf under 1mb",
+    ],
+    path: "/pdf/compress-pdf-to-1mb",
+    title: "Compress PDF to 1 MB Online — No Upload",
+    metaDescription:
+      "Compress a PDF to 1 MB or less in your browser. Preview, then download. No upload.",
+    h1: "Compress PDF to 1 MB",
+    intro:
+      "Target-byte PDF compression with a 1 MB limit. If the file is already under 1 MB, you can download it as-is.",
+    related: [
+      "compress-pdf-to-200kb",
+      "compress-pdf-to-500kb",
+      "compress-pdf",
+      "merge-pdf",
+    ],
+    localProcessing: true,
+    faqs: [
+      {
+        question: "Already under 1 MB?",
+        answer: "The tool detects that and offers the original bytes without re-encoding.",
+      },
+    ],
+    examples: [],
+    sections: [
+      {
+        title: "Quality ladder",
+        paragraphs: [
+          "Scale and JPEG quality step down until the cap is met. Very large multi-page photo PDFs may still miss the target.",
         ],
       },
     ],
