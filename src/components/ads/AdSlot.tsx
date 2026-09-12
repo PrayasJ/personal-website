@@ -42,7 +42,11 @@ export function AdSlot({
     }
 
     function readStatus() {
-      const status = node.getAttribute("data-ad-status");
+      const ins = insRef.current;
+      if (!ins) {
+        return;
+      }
+      const status = ins.getAttribute("data-ad-status");
       if (status === "filled" || status === "unfilled") {
         setFill(status);
       }
@@ -63,7 +67,8 @@ export function AdSlot({
     }
 
     const timer = window.setTimeout(() => {
-      if (!node.getAttribute("data-ad-status")) {
+      const ins = insRef.current;
+      if (!ins?.getAttribute("data-ad-status")) {
         setFill("unfilled");
       }
     }, 3500);
