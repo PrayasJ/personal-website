@@ -132,6 +132,223 @@ export async function canvasPngBytes(canvas: HTMLCanvasElement): Promise<Uint8Ar
   return new Uint8Array(await blob.arrayBuffer());
 }
 
+export type CompressToMaxBytesResult = {
+  blob: Blob;
+  canvas: HTMLCanvasElement;
+  quality: number;
+  width: number;
+  height: number;
+  bytes: number;
+};
+
+export type CompressToMaxBytesOptions = {
+  maxBytes: number;
+  mime?: "image/jpeg" | "image/webp";
+  /** Starting max long edge before quality search. Defaults to source edge. */
+  startMaxEdge?: number;
+  /** Smallest long edge to try when quality alone is not enough. */
+  minEdge?: number;
+};
+
+/**
+ * Encode until blob.size <= maxBytes. Binary-searches JPEG/WebP quality, then
+ * downscales the long edge if needed. Throws if the target cannot be reached.
+ */
+export async function compressToMaxBytes(
+  source: HTMLCanvasElement,
+  options: CompressToMaxBytesOptions,
+): Promise<CompressToMaxBytesResult> {
+  const maxBytes = options.maxBytes;
+  if (!(maxBytes > 0)) {
+    throw new Error("Target size must be positive.");
+  }
+  const mime = options.mime ?? "image/jpeg";
+  const minEdge = Math.max(32, options.minEdge ?? 320);
+  let edge = Math.max(
+    source.width,
+    source.height,
+    options.startMaxEdge ?? Math.max(source.width, source.height),
+  );
+  edge = Math.min(edge, Math.max(source.width, source.height));
+
+  let best: CompressToMaxBytesResult | null = null;
+
+  while (edge >= minEdge) {
+    const sized = fitMaxEdge(source, edge);
+    let lo = 0.08;
+    let hi = 0.95;
+    let localBest: CompressToMaxBytesResult | null = null;
+
+    for (let step = 0; step < 10; step += 1) {
+      const quality = (lo + hi) / 2;
+      const blob = await canvasToBlob(sized, mime, quality);
+      if (blob.size <= maxBytes) {
+        localBest = {
+          blob,
+          canvas: sized,
+          quality,
+          width: sized.width,
+          height: sized.height,
+          bytes: blob.size,
+        };
+        lo = quality;
+      } else {
+        hi = quality;
+      }
+    }
+
+    if (localBest) {
+      best = localBest;
+      break;
+    }
+
+    // Still too large at lowest quality — shrink and retry.
+    const next = Math.floor(edge * 0.75);
+    if (next >= edge) {
+      break;
+    }
+    edge = next;
+  }
+
+  // Final attempt at minEdge + floor quality.
+  if (!best) {
+    const sized = fitMaxEdge(source, minEdge);
+    const blob = await canvasToBlob(sized, mime, 0.08);
+    if (blob.size <= maxBytes) {
+      best = {
+        blob,
+        canvas: sized,
+        quality: 0.08,
+        width: sized.width,
+        height: sized.height,
+        bytes: blob.size,
+      };
+    }
+  }
+
+  if (!best) {
+    throw new Error(
+      `Could not reach ${Math.round(maxBytes / 1024)} KB. Try a smaller photo or a different format.`,
+    );
+  }
+  return best;
+}
+
+export type PhotoPreset = {
+  id: string;
+  label: string;
+  width: number;
+  height: number;
+  hint: string;
+};
+
+/** Common photo sizes in pixels (not official exam requirements). */
+export const passportPresets: PhotoPreset[] = [
+  {
+    id: "35x45-300",
+    label: "35 × 45 mm",
+    width: 413,
+    height: 531,
+    hint: "Common Indian passport / form size at ~300 dpi",
+  },
+  {
+    id: "2x2-300",
+    label: "2 × 2 inch",
+    width: 600,
+    height: 600,
+    hint: "Common US-style square photo at ~300 dpi",
+  },
+  {
+    id: "51x51-300",
+    label: "51 × 51 mm",
+    width: 600,
+    height: 600,
+    hint: "Common square form photo (~2×2 in)",
+  },
+];
+
+export const signaturePresets: {
+  id: string;
+  label: string;
+  maxEdge: number;
+  maxBytes?: number;
+  hint: string;
+}[] = [
+  {
+    id: "sig-200",
+    label: "Max edge 200 px",
+    maxEdge: 200,
+    hint: "Small signature for many online forms",
+  },
+  {
+    id: "sig-140-20kb",
+    label: "140 px · under 20 KB",
+    maxEdge: 140,
+    maxBytes: 20 * 1024,
+    hint: "Common tight signature target",
+  },
+  {
+    id: "sig-300-50kb",
+    label: "300 px · under 50 KB",
+    maxEdge: 300,
+    maxBytes: 50 * 1024,
+    hint: "Larger signature with a byte cap",
+  },
+];
+
+/** Center-crop to cover target aspect, then resize to exact pixels. */
+export function fitCoverResize(
+  source: HTMLCanvasElement,
+  width: number,
+  height: number,
+): HTMLCanvasElement {
+  const targetRatio = width / height;
+  const sourceRatio = source.width / source.height;
+  let cropW = source.width;
+  let cropH = source.height;
+  let x = 0;
+  let y = 0;
+  if (sourceRatio > targetRatio) {
+    cropW = Math.round(source.height * targetRatio);
+    x = Math.round((source.width - cropW) / 2);
+  } else {
+    cropH = Math.round(source.width / targetRatio);
+    y = Math.round((source.height - cropH) / 2);
+  }
+  const cropped = cropCanvas(source, x, y, cropW, cropH);
+  return resizeCanvas(cropped, width, height);
+}
+
+export async function exportPassportPhoto(
+  source: HTMLCanvasElement,
+  preset: PhotoPreset,
+  mime: "image/jpeg" | "image/png" = "image/jpeg",
+  quality = 0.9,
+): Promise<{ blob: Blob; canvas: HTMLCanvasElement }> {
+  const canvas = fitCoverResize(source, preset.width, preset.height);
+  const blob = await canvasToBlob(canvas, mime, quality);
+  return { blob, canvas };
+}
+
+export async function exportSignature(
+  source: HTMLCanvasElement,
+  maxEdge: number,
+  maxBytes?: number,
+): Promise<{ blob: Blob; canvas: HTMLCanvasElement }> {
+  let canvas = fitMaxEdge(source, maxEdge);
+  if (maxBytes) {
+    const result = await compressToMaxBytes(canvas, {
+      maxBytes,
+      mime: "image/jpeg",
+      startMaxEdge: maxEdge,
+      minEdge: 48,
+    });
+    return { blob: result.blob, canvas: result.canvas };
+  }
+  const blob = await canvasToBlob(canvas, "image/png");
+  return { blob, canvas };
+}
+
 export function canvasPreviewUrl(
   canvas: HTMLCanvasElement,
   maxEdge = 720,

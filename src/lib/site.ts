@@ -26,8 +26,11 @@ export const navItems = [
 export const footerNavItems = [
   { href: "/", label: "Index" },
   { href: "/tools", label: "Tools" },
-  { href: "/calculators", label: "Calculators" },
+  { href: "/photo", label: "Photo" },
   { href: "/pdf", label: "PDF" },
+  { href: "/calculators", label: "Calculators" },
+  { href: "/student", label: "Student" },
+  { href: "/qr", label: "QR" },
   { href: "/image", label: "Image" },
   { href: "/guides", label: "Guides" },
   { href: "/#writing", label: "Writing" },
@@ -36,25 +39,25 @@ export const footerNavItems = [
   { href: "/contact", label: "Contact" },
 ] as const;
 
-export type ToolCategory = "developer" | "calculator" | "pdf" | "image";
+export type ToolCategory =
+  | "developer"
+  | "calculator"
+  | "pdf"
+  | "image"
+  | "photo"
+  | "student"
+  | "qr";
 
 export const categories: Record<
   ToolCategory,
   { name: string; path: string; description: string; blurb: string }
 > = {
-  developer: {
-    name: "Developer Tools",
-    path: "/tools",
+  photo: {
+    name: "Photo Tools",
+    path: "/photo",
     description:
-      "Free online developer tools: JSON formatter, JWT decoder, Base64, UUID, cron, regex, and more. All run in the browser with no upload.",
-    blurb: "JSON, JWT, Base64, regex, cron, and more — no upload.",
-  },
-  calculator: {
-    name: "Calculators",
-    path: "/calculators",
-    description:
-      "Free India calculators for EMI, SIP, CTC, in-hand salary, GST, PPF, and FD. Textbook formulas in INR, no signup.",
-    blurb: "CTC, in-hand, EMI, SIP, PF, and more — INR.",
+      "Compress photos to a target size, make passport-style crops, and resize signatures in your browser. No upload.",
+    blurb: "Compress to KB, passport sizes, signature resize — no upload.",
   },
   pdf: {
     name: "PDF Tools",
@@ -63,6 +66,27 @@ export const categories: Record<
       "Free PDF tools to merge, split, compress, rotate, and convert pages to images in your browser. Files never leave this tab.",
     blurb: "Merge, split, compress, rotate — files stay local.",
   },
+  calculator: {
+    name: "Calculators",
+    path: "/calculators",
+    description:
+      "Free India calculators for EMI, SIP, CTC, in-hand salary, GST, PPF, and FD. Textbook formulas in INR, no signup.",
+    blurb: "CTC, in-hand, EMI, SIP, PF, and more — INR.",
+  },
+  student: {
+    name: "Student Tools",
+    path: "/student",
+    description:
+      "CGPA to percentage and attendance calculators for school and college. Run in the browser — no signup.",
+    blurb: "CGPA to %, attendance — board formulas vary.",
+  },
+  qr: {
+    name: "QR Tools",
+    path: "/qr",
+    description:
+      "Generate QR codes for URLs, text, and UPI payment strings in your browser. Download a PNG — nothing is uploaded.",
+    blurb: "URL, text, and UPI QR — PNG download, no upload.",
+  },
   image: {
     name: "Image Tools",
     path: "/image",
@@ -70,14 +94,24 @@ export const categories: Record<
       "Free image tools to compress, resize, convert, crop, and generate favicons. PNG, JPEG, and WebP — processed in the browser.",
     blurb: "Compress, resize, convert, crop, and favicons — no upload.",
   },
+  developer: {
+    name: "Developer Tools",
+    path: "/tools",
+    description:
+      "Free online developer tools: JSON formatter, JWT decoder, Base64, UUID, cron, regex, and more. All run in the browser with no upload.",
+    blurb: "JSON, JWT, Base64, regex, cron, and more — no upload.",
+  },
 };
 
 export const staticPages = [
   { path: "/", changeFrequency: "weekly" as const, priority: 1 },
   { path: "/privacy", changeFrequency: "yearly" as const, priority: 0.3 },
   { path: "/tools", changeFrequency: "weekly" as const, priority: 0.9 },
+  { path: "/photo", changeFrequency: "weekly" as const, priority: 0.85 },
   { path: "/calculators", changeFrequency: "weekly" as const, priority: 0.8 },
   { path: "/pdf", changeFrequency: "weekly" as const, priority: 0.8 },
+  { path: "/student", changeFrequency: "weekly" as const, priority: 0.8 },
+  { path: "/qr", changeFrequency: "weekly" as const, priority: 0.8 },
   { path: "/image", changeFrequency: "weekly" as const, priority: 0.8 },
   { path: "/guides", changeFrequency: "weekly" as const, priority: 0.75 },
   { path: "/about", changeFrequency: "yearly" as const, priority: 0.4 },

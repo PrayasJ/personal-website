@@ -5,6 +5,9 @@ import { nextDeveloperTools } from "@/lib/tools.next";
 import { calculatorTools } from "@/lib/tools.calculators";
 import { pdfTools } from "@/lib/tools.pdf";
 import { imageTools } from "@/lib/tools.image";
+import { photoTools } from "@/lib/tools.photo";
+import { studentTools, ageCalculatorTool } from "@/lib/tools.student";
+import { qrTools } from "@/lib/tools.qr";
 
 export type { ToolCategory };
 
@@ -254,8 +257,12 @@ export const tools: Tool[] = [
   ...moreDeveloperTools,
   ...nextDeveloperTools,
   ...calculatorTools,
+  ageCalculatorTool,
   ...pdfTools,
   ...imageTools,
+  ...photoTools,
+  ...studentTools,
+  ...qrTools,
 ];
 
 export function getToolBySlug(slug: string): Tool | undefined {
@@ -270,10 +277,29 @@ export function getToolsByCategory(category: ToolCategory): Tool[] {
   return tools.filter((tool) => tool.category === category);
 }
 
+/** Consumer-first footer / discovery order when tools are marked popular. */
+const popularPreferred = [
+  "compress-image-to-50kb",
+  "images-to-pdf",
+  "emi-calculator",
+  "cgpa-to-percentage",
+  "qr-code-generator",
+  "merge-pdf",
+  "image-compress",
+  "json-formatter",
+] as const;
+
 export function getPopularTools(limit = 6): Tool[] {
-  const popular = tools.filter((tool) => tool.popular);
-  if (popular.length > 0) {
-    return popular.slice(0, limit);
+  const bySlug = new Map(tools.map((tool) => [tool.slug, tool]));
+  const preferred = popularPreferred
+    .map((slug) => bySlug.get(slug))
+    .filter((tool): tool is Tool => Boolean(tool));
+  const rest = tools.filter(
+    (tool) => tool.popular && !popularPreferred.includes(tool.slug as (typeof popularPreferred)[number]),
+  );
+  const ordered = [...preferred, ...rest];
+  if (ordered.length > 0) {
+    return ordered.slice(0, limit);
   }
   return tools.slice(0, limit);
 }

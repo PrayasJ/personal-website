@@ -142,9 +142,12 @@ export function allToolFaqs(tool: Tool): ToolFaq[] {
 export function toolSoftwareCategory(tool: Tool): string {
   switch (tool.category) {
     case "calculator":
+    case "student":
       return "FinanceApplication";
     case "pdf":
     case "image":
+    case "photo":
+    case "qr":
       return "UtilitiesApplication";
     default:
       return "DeveloperApplication";
@@ -152,7 +155,12 @@ export function toolSoftwareCategory(tool: Tool): string {
 }
 
 export function toolInLanguage(tool: Tool): string {
-  return tool.category === "calculator" ? "en-IN" : "en";
+  return tool.category === "calculator" ||
+    tool.category === "student" ||
+    tool.category === "photo" ||
+    tool.category === "qr"
+    ? "en-IN"
+    : "en";
 }
 
 export function toolMetaKeywords(tool: Tool): string[] {

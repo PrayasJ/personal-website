@@ -24,7 +24,10 @@ export function ToolCard({
       href={tool.path}
       data-cursor="hot"
       onMouseMove={onMove}
-      className={cn("tool-card", tool.category === "calculator" && "is-calc")}
+      className={cn(
+        "tool-card",
+        (tool.category === "calculator" || tool.category === "student") && "is-calc",
+      )}
       style={{ "--i": index } as CSSProperties}
     >
       <span className="tool-card-glow" aria-hidden />

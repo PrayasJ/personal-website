@@ -54,6 +54,13 @@ import { MarkdownPreview } from "@/components/tools/markdown-preview/MarkdownPre
 import { XmlFormatter } from "@/components/tools/xml-formatter/XmlFormatter";
 import { SqlFormatter } from "@/components/tools/sql-formatter/SqlFormatter";
 import { ImagesToPdf } from "@/components/tools/images-to-pdf/ImagesToPdf";
+import { TargetCompress } from "@/components/tools/target-compress/TargetCompress";
+import { PassportPhoto } from "@/components/tools/passport-photo/PassportPhoto";
+import { SignatureResizer } from "@/components/tools/signature-resizer/SignatureResizer";
+import { CgpaToPercentage } from "@/components/tools/cgpa/CgpaToPercentage";
+import { AttendanceCalculator } from "@/components/tools/attendance/AttendanceCalculator";
+import { AgeCalculator } from "@/components/tools/age/AgeCalculator";
+import { QrGenerator } from "@/components/tools/qr/QrGenerator";
 
 export function ToolInterface({ slug }: { slug: string }) {
   switch (slug) {
@@ -169,6 +176,26 @@ export function ToolInterface({ slug }: { slug: string }) {
       return <XmlFormatter />;
     case "sql-formatter":
       return <SqlFormatter />;
+    case "compress-image-to-50kb":
+      return <TargetCompress maxBytes={50 * 1024} label="50 KB" />;
+    case "compress-image-to-100kb":
+      return <TargetCompress maxBytes={100 * 1024} label="100 KB" />;
+    case "compress-image-to-200kb":
+      return <TargetCompress maxBytes={200 * 1024} label="200 KB" />;
+    case "passport-photo":
+      return <PassportPhoto />;
+    case "signature-resizer":
+      return <SignatureResizer />;
+    case "cgpa-to-percentage":
+      return <CgpaToPercentage />;
+    case "attendance-calculator":
+      return <AttendanceCalculator />;
+    case "age-calculator":
+      return <AgeCalculator />;
+    case "qr-code-generator":
+      return <QrGenerator defaultMode="url" />;
+    case "upi-qr-code-generator":
+      return <QrGenerator defaultMode="upi" />;
     default:
       return null;
   }

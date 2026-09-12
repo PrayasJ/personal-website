@@ -8,34 +8,77 @@ import { AdSlot } from "@/components/ads/AdSlot";
 import { ItemListSchema } from "@/components/seo/ItemListSchema";
 
 export const metadata = pageMetadata({
-  title: "Free Developer Tools Online — JSON, JWT, UUID, Cron",
+  title: "Free Online Tools — Photo, PDF, Calculators, Student, QR",
   description:
-    "Free browser tools: JSON formatter, JWT decoder, Base64, UUID, cron, regex, hashes, and more. No signup, no upload — processing stays in this tab.",
+    "Free browser tools: compress photos to KB, PDF merge, EMI, CGPA, QR codes, JSON, and more. No signup, no upload — processing stays in this tab.",
   path: "/tools",
   absoluteTitle: true,
   keywords: [
+    "compress image to 50kb",
+    "pdf tools",
+    "emi calculator",
+    "cgpa to percentage",
+    "qr code generator",
     "developer tools",
-    "JSON formatter",
-    "JWT decoder",
-    "Base64",
-    "UUID generator",
-    "cron generator",
   ],
 });
 
 export default function ToolsIndexPage() {
-  const developer = getToolsByCategory("developer");
-  const calculators = getToolsByCategory("calculator");
+  const photo = getToolsByCategory("photo");
   const pdf = getToolsByCategory("pdf");
+  const calculators = getToolsByCategory("calculator");
+  const student = getToolsByCategory("student");
+  const qr = getToolsByCategory("qr");
   const image = getToolsByCategory("image");
+  const developer = getToolsByCategory("developer");
+
+  const all = [
+    ...photo,
+    ...pdf,
+    ...calculators,
+    ...student,
+    ...qr,
+    ...image,
+    ...developer,
+  ];
+
+  const sections: {
+    key: string;
+    title: string;
+    tools: typeof photo;
+    blurb: string;
+  }[] = [
+    { key: "photo", title: "Photo", tools: photo, blurb: categories.photo.blurb },
+    { key: "pdf", title: "PDF", tools: pdf, blurb: categories.pdf.blurb },
+    {
+      key: "calculators",
+      title: "Calculators",
+      tools: calculators,
+      blurb: categories.calculator.blurb,
+    },
+    {
+      key: "student",
+      title: "Student",
+      tools: student,
+      blurb: categories.student.blurb,
+    },
+    { key: "qr", title: "QR", tools: qr, blurb: categories.qr.blurb },
+    { key: "image", title: "Image", tools: image, blurb: categories.image.blurb },
+    {
+      key: "developer",
+      title: "Developer",
+      tools: developer,
+      blurb: categories.developer.blurb,
+    },
+  ];
 
   return (
     <>
       <ItemListSchema
-        name="Developer tools"
-        description={categories.developer.description}
+        name="Free online tools"
+        description="Photo, PDF, calculators, student, QR, image, and developer tools that run in the browser."
         path="/tools"
-        items={[...developer, ...calculators, ...pdf, ...image].map((tool) => ({
+        items={all.map((tool) => ({
           name: tool.name,
           path: tool.path,
           description: tool.description,
@@ -43,62 +86,29 @@ export default function ToolsIndexPage() {
       />
       <PageHeader
         title="Tools"
-        description={`${categories.developer.description} ${categories.calculator.blurb}`}
+        description="Everyday utilities first — photo compress, PDF, EMI, CGPA, QR — plus developer tools. Everything runs in this tab."
         crumbs={[
           { name: "Index", path: "/" },
           { name: "Tools", path: "/tools" },
         ]}
       />
       <Container className="pb-20">
-        <div className="tool-index-kicker">
-          <h2>Developer</h2>
-          <span className="tool-index-rule" aria-hidden />
-          <span className="chip">{developer.length}</span>
-        </div>
-        <p className="tool-index-blurb">{categories.developer.blurb}</p>
-        <div className="mt-4">
-          <ToolGrid tools={developer} hideEmpty />
-        </div>
-        <AdSlot placement="index" />
-        {calculators.length > 0 ? (
-          <>
-            <div className="tool-index-kicker mt-14">
-              <h2>Calculators</h2>
-              <span className="tool-index-rule" aria-hidden />
-              <span className="chip">{calculators.length}</span>
+        {sections.map((section, index) =>
+          section.tools.length > 0 ? (
+            <div key={section.key} className={index === 0 ? undefined : "mt-14"}>
+              <div className="tool-index-kicker">
+                <h2>{section.title}</h2>
+                <span className="tool-index-rule" aria-hidden />
+                <span className="chip">{section.tools.length}</span>
+              </div>
+              <p className="tool-index-blurb">{section.blurb}</p>
+              <div className="mt-4">
+                <ToolGrid tools={section.tools} hideEmpty />
+              </div>
+              {index === 0 ? <AdSlot placement="index" /> : null}
             </div>
-            <p className="tool-index-blurb">{categories.calculator.blurb}</p>
-            <div className="mt-4">
-              <ToolGrid tools={calculators} hideEmpty />
-            </div>
-          </>
-        ) : null}
-        {pdf.length > 0 ? (
-          <>
-            <div className="tool-index-kicker mt-14">
-              <h2>PDF</h2>
-              <span className="tool-index-rule" aria-hidden />
-              <span className="chip">{pdf.length}</span>
-            </div>
-            <p className="tool-index-blurb">{categories.pdf.blurb}</p>
-            <div className="mt-4">
-              <ToolGrid tools={pdf} hideEmpty />
-            </div>
-          </>
-        ) : null}
-        {image.length > 0 ? (
-          <>
-            <div className="tool-index-kicker mt-14">
-              <h2>Image</h2>
-              <span className="tool-index-rule" aria-hidden />
-              <span className="chip">{image.length}</span>
-            </div>
-            <p className="tool-index-blurb">{categories.image.blurb}</p>
-            <div className="mt-4">
-              <ToolGrid tools={image} hideEmpty />
-            </div>
-          </>
-        ) : null}
+          ) : null,
+        )}
         <AdSlot placement="foot" />
       </Container>
     </>

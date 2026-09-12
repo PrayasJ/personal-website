@@ -335,6 +335,61 @@ export function ToolGlyph({ slug }: { slug: string }) {
           <path d="M5 12v5c0 1.4 3.1 2.5 7 2.5s7-1.1 7-2.5v-5" />
         </Mark>
       );
+    case "compress-image-to-50kb":
+    case "compress-image-to-100kb":
+    case "compress-image-to-200kb":
+      return (
+        <Mark>
+          <rect x="4" y="5" width="16" height="14" rx="2" />
+          <path d="M8 14l2.5-3 2 2 3.5-4.5" />
+          <path d="M15 17H9" />
+        </Mark>
+      );
+    case "passport-photo":
+      return (
+        <Mark>
+          <rect x="6" y="3.5" width="12" height="17" rx="1.5" />
+          <circle cx="12" cy="9" r="2.2" />
+          <path d="M8.5 16.5c1-2 2.2-3 3.5-3s2.5 1 3.5 3" />
+        </Mark>
+      );
+    case "signature-resizer":
+      return (
+        <Mark>
+          <path d="M5 16c2-4 4-6 7-6s5 2 7 6" />
+          <path d="M7 18h10" />
+        </Mark>
+      );
+    case "cgpa-to-percentage":
+      return (
+        <Mark>
+          <path d="M7 17V7l5 6 5-6v10" />
+        </Mark>
+      );
+    case "attendance-calculator":
+      return (
+        <Mark>
+          <rect x="4" y="5" width="16" height="14" rx="2" />
+          <path d="M8 9h8M8 12h5M8 15h3" />
+        </Mark>
+      );
+    case "age-calculator":
+      return (
+        <Mark>
+          <circle cx="12" cy="12" r="8" />
+          <path d="M12 8v4.5l3 1.5" />
+        </Mark>
+      );
+    case "qr-code-generator":
+    case "upi-qr-code-generator":
+      return (
+        <Mark>
+          <rect x="4" y="4" width="7" height="7" rx="1" />
+          <rect x="13" y="4" width="7" height="7" rx="1" />
+          <rect x="4" y="13" width="7" height="7" rx="1" />
+          <path d="M14 14h2v2h-2zM18 14h2v2h-2zM14 18h2v2h-2zM17 17h3v3" />
+        </Mark>
+      );
     default:
       return (
         <Mark>

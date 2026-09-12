@@ -56,7 +56,13 @@ export function ToolSchema({ tool }: { tool: Tool }) {
               url: SITE_URL,
             },
             isAccessibleForFree: true,
-            countriesSupported: tool.category === "calculator" ? "IN" : undefined,
+            countriesSupported:
+              tool.category === "calculator" ||
+              tool.category === "student" ||
+              tool.category === "photo" ||
+              tool.category === "qr"
+                ? "IN"
+                : undefined,
           },
           {
             "@type": "HowTo",

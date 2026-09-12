@@ -302,6 +302,98 @@ export const guides: Guide[] = [
       },
     ],
   },
+  {
+    slug: "compress-image-to-50kb",
+    path: "/guides/compress-image-to-50kb",
+    title: "How to Compress an Image to 50 KB",
+    metaDescription:
+      "Why forms ask for 50 KB photos, how quality search and downscaling work, and how to do it in the browser without uploading.",
+    h1: "Compress an image to 50 KB",
+    description:
+      "Many KYC and job portals cap photo uploads at 50 KB. Hitting that size usually means lowering JPEG quality and, if needed, shrinking the long edge — not just dragging a single slider once.",
+    relatedTools: [
+      "compress-image-to-50kb",
+      "compress-image-to-100kb",
+      "compress-image-to-200kb",
+      "image-compress",
+    ],
+    sections: [
+      {
+        title: "Quality first, then scale",
+        paragraphs: [
+          "Encoders trade detail for bytes. A binary search on JPEG or WebP quality often gets under 50 KB. If the lowest useful quality is still too large, reduce the long edge and try again.",
+          "The compress-to-50KB tool on this site does that loop in your browser and reports the final size before you download. If it cannot reach the cap, it says so instead of handing you an oversize file.",
+        ],
+      },
+      {
+        title: "Start from a sensible original",
+        paragraphs: [
+          "A huge phone photo with heavy noise may never look good at 50 KB. Crop first, prefer JPEG over PNG for photos, and avoid upscaling a soft source.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "passport-photo-common-sizes",
+    path: "/guides/passport-photo-common-sizes",
+    title: "Passport Photo Common Sizes (Pixels)",
+    metaDescription:
+      "Common passport and form photo pixel sizes such as 35×45 mm and 2×2 inch — and why you should still read the form, not a generic claim.",
+    h1: "Passport photo common sizes",
+    description:
+      "Online forms often want a fixed pixel box. This note lists common sizes used on many Indian and US-style forms — not verified official SSC, UPSC, or embassy requirements.",
+    relatedTools: [
+      "passport-photo",
+      "signature-resizer",
+      "compress-image-to-50kb",
+      "image-crop",
+    ],
+    sections: [
+      {
+        title: "Common pixel boxes",
+        paragraphs: [
+          "35×45 mm at about 300 dpi is roughly 413×531 px. A 2×2 inch square at 300 dpi is about 600×600 px. Tools on this site center-crop to cover that aspect, then resize.",
+          "Background color, chin-to-crown height, and print margins are separate rules. Always match the instructions on the form or portal you are filling.",
+        ],
+      },
+      {
+        title: "Byte limits after crop",
+        paragraphs: [
+          "Some portals also cap file size. After you have the right dimensions, use a compress-to-KB tool if the JPEG is still too large.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "cgpa-to-percentage-caveats",
+    path: "/guides/cgpa-to-percentage-caveats",
+    title: "CGPA to Percentage — Why Boards Differ",
+    metaDescription:
+      "Why ×9.5 is only a common rule of thumb for CGPA to percentage, and how to use a custom multiplier from your handbook.",
+    h1: "CGPA to percentage caveats",
+    description:
+      "Percentage = CGPA × multiplier looks simple. The hard part is which multiplier your board or university actually uses.",
+    relatedTools: [
+      "cgpa-to-percentage",
+      "attendance-calculator",
+      "percentage-calculator",
+      "age-calculator",
+    ],
+    sections: [
+      {
+        title: "The ×9.5 habit",
+        paragraphs: [
+          "A common CBSE-style conversion is percentage = CGPA × 9.5. Many colleges publish a different factor, a grade table, or no single formula at all. Treat ×9.5 as a default estimate unless your mark sheet or handbook says otherwise.",
+        ],
+      },
+      {
+        title: "Use the converter carefully",
+        paragraphs: [
+          "The CGPA tool on this site lets you pick ×9.5 or a custom multiplier. It does not replace an official transcript. For attendance planning, use the attendance calculator separately.",
+        ],
+      },
+    ],
+  },
 ];
 
 export function getGuideBySlug(slug: string): Guide | undefined {

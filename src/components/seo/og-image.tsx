@@ -130,7 +130,9 @@ export function guideOgImage(slug: string) {
   );
 }
 
-export function hubOgImage(hub: "tools" | "pdf" | "image" | "calculators" | "guides") {
+export function hubOgImage(
+  hub: "tools" | "pdf" | "image" | "calculators" | "guides" | "photo" | "student" | "qr",
+) {
   const copy = {
     tools: {
       title: "Developer tools",
@@ -143,6 +145,18 @@ export function hubOgImage(hub: "tools" | "pdf" | "image" | "calculators" | "gui
     image: {
       title: "Image tools",
       lead: "Compress, resize, convert, crop, and favicons in this tab.",
+    },
+    photo: {
+      title: "Photo tools",
+      lead: "Compress to KB, passport sizes, signature resize — no upload.",
+    },
+    student: {
+      title: "Student tools",
+      lead: "CGPA to percentage and attendance — board formulas vary.",
+    },
+    qr: {
+      title: "QR tools",
+      lead: "URL, text, and UPI QR codes as PNG — nothing uploaded.",
     },
     calculators: {
       title: "India calculators",
