@@ -82,7 +82,7 @@ export const pdfTools: Tool[] = [
     h1: "Compress PDF Online",
     intro:
       "Each page is drawn, JPEG-encoded, and placed in a new PDF. That is honest in-browser compression: scans shrink; sharp vector text will look like a picture.",
-    related: ["compress-pdf-to-200kb", "compress-pdf-to-500kb", "pdf-to-image", "merge-pdf"],
+    related: ["compress-pdf-to-100kb", "compress-pdf-to-200kb", "pdf-to-image", "merge-pdf"],
     localProcessing: true,
     faqs: [
       {
@@ -96,6 +96,46 @@ export const pdfTools: Tool[] = [
         title: "Why rasterize",
         paragraphs: [
           "pdf-lib cannot recompress arbitrary embedded images well. Drawing pages with PDF.js and writing JPEGs is the method that actually reduces size here.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "compress-pdf-to-100kb",
+    name: "Compress PDF to 100 KB",
+    description: "Shrink a PDF to 100 KB or less by rasterizing pages in the browser.",
+    category: "pdf",
+    keywords: [
+      "compress pdf to 100kb",
+      "reduce pdf to 100kb",
+      "pdf under 100kb",
+    ],
+    path: "/pdf/compress-pdf-to-100kb",
+    title: "Compress PDF to 100 KB Online — No Upload",
+    metaDescription:
+      "Compress a PDF to 100 KB or less in your browser by rasterizing pages. Preview, then download. No upload.",
+    h1: "Compress PDF to 100 KB",
+    intro:
+      "Aggressive target-byte compression for portals that demand ~100 KB. Best for short scans; multi-page photo PDFs may fail honestly.",
+    related: [
+      "compress-pdf-to-200kb",
+      "compress-pdf-to-500kb",
+      "compress-pdf",
+      "compress-image-to-50kb",
+    ],
+    localProcessing: true,
+    faqs: [
+      {
+        question: "Is the PDF uploaded?",
+        answer: "No. PDF.js and pdf-lib run in this tab.",
+      },
+    ],
+    examples: [],
+    sections: [
+      {
+        title: "Tight PDF caps",
+        paragraphs: [
+          "100 KB is hard for long documents. Split pages first, or try the 200 KB / 500 KB tools.",
         ],
       },
     ],
@@ -118,10 +158,10 @@ export const pdfTools: Tool[] = [
     intro:
       "Tries progressively stronger JPEG raster settings until the file is ≤ 200 KB — or says when it cannot. Best for scans and photo PDFs.",
     related: [
+      "compress-pdf-to-100kb",
       "compress-pdf-to-500kb",
       "compress-pdf-to-1mb",
-      "compress-pdf",
-      "compress-image-to-50kb",
+      "compress-pdf-to-2mb",
     ],
     popular: true,
     localProcessing: true,
@@ -203,10 +243,10 @@ export const pdfTools: Tool[] = [
     intro:
       "Target-byte PDF compression with a 1 MB limit. If the file is already under 1 MB, you can download it as-is.",
     related: [
+      "compress-pdf-to-100kb",
       "compress-pdf-to-200kb",
-      "compress-pdf-to-500kb",
-      "compress-pdf",
-      "merge-pdf",
+      "compress-pdf-to-1mb",
+      "compress-pdf-to-2mb",
     ],
     localProcessing: true,
     faqs: [
@@ -221,6 +261,46 @@ export const pdfTools: Tool[] = [
         title: "Quality ladder",
         paragraphs: [
           "Scale and JPEG quality step down until the cap is met. Very large multi-page photo PDFs may still miss the target.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "compress-pdf-to-2mb",
+    name: "Compress PDF to 2 MB",
+    description: "Shrink a PDF to 2 MB or less in the browser.",
+    category: "pdf",
+    keywords: [
+      "compress pdf to 2mb",
+      "reduce pdf to 2mb",
+      "pdf under 2mb",
+    ],
+    path: "/pdf/compress-pdf-to-2mb",
+    title: "Compress PDF to 2 MB Online — No Upload",
+    metaDescription:
+      "Compress a PDF to 2 MB or less in your browser. Preview, then download. No upload.",
+    h1: "Compress PDF to 2 MB",
+    intro:
+      "A higher byte cap for longer scans. If the file is already under 2 MB, you can download it as-is.",
+    related: [
+      "compress-pdf-to-200kb",
+      "compress-pdf-to-500kb",
+      "compress-pdf-to-1mb",
+      "compress-pdf",
+    ],
+    localProcessing: true,
+    faqs: [
+      {
+        question: "Is text selectable after compress?",
+        answer: "No. Pages are rasterized to JPEG inside a new PDF.",
+      },
+    ],
+    examples: [],
+    sections: [
+      {
+        title: "When to use 2 MB",
+        paragraphs: [
+          "Email and portal limits often sit at 2 MB. Prefer this over 100–200 KB when you need clearer pages.",
         ],
       },
     ],

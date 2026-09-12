@@ -139,7 +139,7 @@ export const calculatorTools: Tool[] = [
     h1: "GST Calculator",
     intro:
       "Exclusive or inclusive amount, plus a GST slab. CGST and SGST are half each. IGST for interstate supply is the full GST line.",
-    related: ["percentage-calculator", "emi-calculator", "fd-calculator"],
+    related: ["gst-invoice", "number-to-words", "percentage-calculator", "emi-calculator"],
     localProcessing: true,
     faqs: [
       {
@@ -526,7 +526,7 @@ export const calculatorTools: Tool[] = [
     h1: "Rent Receipt Generator",
     intro:
       "Fill landlord, tenant, amount, period, and address. Preview the wording, then download a one-page PDF. Optional PAN and receipt number. Not legal advice.",
-    related: ["hra-calculator", "income-tax-calculator", "in-hand-salary"],
+    related: ["hra-calculator", "income-tax-calculator", "gst-invoice", "number-to-words"],
     popular: true,
     localProcessing: true,
     faqs: [
@@ -546,6 +546,90 @@ export const calculatorTools: Tool[] = [
         title: "HRA paperwork",
         paragraphs: [
           "Employers often ask for monthly rent receipts when you claim HRA. Pair this with the HRA calculator for exemption estimates under the old regime.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "number-to-words",
+    name: "Number to words (Indian)",
+    description:
+      "Convert a number or rupee amount to Indian words (crore / lakh / thousand).",
+    category: "calculator",
+    keywords: [
+      "number to words",
+      "amount in words",
+      "rupees in words",
+      "cheque amount in words",
+      "indian number system",
+    ],
+    path: "/calculators/number-to-words",
+    title: "Number to Words Converter India — Rupees in Words Online",
+    metaDescription:
+      "Convert numbers to Indian-style words with crore and lakh. Rupees and paise for cheques and invoices. Browser-only.",
+    h1: "Number to Words (Indian)",
+    intro:
+      "Type an amount and copy Indian-style words. Rupees … Only format for cheques, or plain number words. Same engine as rent receipts and invoices.",
+    related: ["gst-invoice", "rent-receipt", "gst-calculator", "emi-calculator"],
+    popular: true,
+    localProcessing: true,
+    faqs: [
+      {
+        question: "Is this official bank wording?",
+        answer:
+          "It follows common Indian numbering. Banks may still prefer their own cheque printer wording.",
+      },
+    ],
+    examples: [],
+    sections: [
+      {
+        title: "Crore and lakh",
+        paragraphs: [
+          "The converter uses the Indian grouping (thousand, lakh, crore), not the Western million/billion scale.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "gst-invoice",
+    name: "GST invoice generator",
+    description:
+      "Build a simple GST tax invoice or estimate PDF with line items and amount in words.",
+    category: "calculator",
+    keywords: [
+      "gst invoice generator",
+      "tax invoice online",
+      "create gst invoice",
+      "gst bill generator",
+    ],
+    path: "/calculators/gst-invoice",
+    title: "GST Invoice Generator Online — Tax Invoice PDF, Free",
+    metaDescription:
+      "Create a simple GST tax invoice or estimate with CGST/SGST or IGST, line items, and amount in words. Download PDF in your browser.",
+    h1: "GST Invoice Generator",
+    intro:
+      "Add seller, buyer, and line items. Live taxable value and tax split, then download a PDF. Not a statutory e-invoice — for estimates and simple bills.",
+    related: ["gst-calculator", "number-to-words", "rent-receipt", "emi-calculator"],
+    popular: true,
+    localProcessing: true,
+    faqs: [
+      {
+        question: "Is this a valid e-invoice?",
+        answer:
+          "No. It does not talk to the GST portal. Use it for drafts, estimates, and simple PDF bills.",
+      },
+      {
+        question: "CGST/SGST vs IGST?",
+        answer:
+          "Pick same state for a CGST+SGST split, or other state for IGST. Confirm with your accountant for real filings.",
+      },
+    ],
+    examples: [],
+    sections: [
+      {
+        title: "Line items",
+        paragraphs: [
+          "Each line has quantity, rate, and a GST slab. Totals and amount in words update as you edit. Build the PDF when the preview looks right.",
         ],
       },
     ],

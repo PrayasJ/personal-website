@@ -69,11 +69,11 @@ export function ToolPage({ tool }: { tool: Tool }) {
             </div>
           </header>
 
-          <AdSlot placement="top" />
-
           <div className="tool-stage">
             <ToolInterface slug={tool.slug} />
           </div>
+
+          <AdSlot placement="top" />
 
           <AdSlot placement="mid" />
 

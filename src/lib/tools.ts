@@ -281,12 +281,12 @@ export function getToolsByCategory(category: ToolCategory): Tool[] {
 const popularPreferred = [
   "compress-image-to-50kb",
   "compress-pdf-to-200kb",
+  "gst-invoice",
+  "number-to-words",
   "whatsapp-link-generator",
   "rent-receipt",
-  "images-to-pdf",
   "emi-calculator",
   "cgpa-to-percentage",
-  "qr-code-generator",
 ] as const;
 
 export function getPopularTools(limit = 6): Tool[] {

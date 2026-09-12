@@ -2,6 +2,47 @@ import type { Tool } from "@/lib/tools";
 
 export const photoTools: Tool[] = [
   {
+    slug: "compress-image-to-40kb",
+    name: "Compress image to 40 KB",
+    description:
+      "Shrink a photo to 40 KB or less in the browser with quality search and downscale.",
+    category: "photo",
+    keywords: [
+      "compress image to 40kb",
+      "reduce image to 40kb",
+      "photo under 40kb",
+    ],
+    path: "/photo/compress-image-to-40kb",
+    title: "Compress Image to 40 KB Online — No Upload",
+    metaDescription:
+      "Compress a JPEG or WebP photo to 40 KB or less in your browser. Preview, then download. No upload.",
+    h1: "Compress Image to 40 KB",
+    intro:
+      "Same target-byte engine as the 50 KB tool, with a tighter 40 KB cap. Honest failure if the photo cannot fit.",
+    related: [
+      "compress-image-to-50kb",
+      "compress-image-to-100kb",
+      "compress-image-to-300kb",
+      "image-compress",
+    ],
+    localProcessing: true,
+    faqs: [
+      {
+        question: "Is the photo uploaded?",
+        answer: "No. Canvas encode runs in this tab only.",
+      },
+    ],
+    examples: [],
+    sections: [
+      {
+        title: "Tight caps",
+        paragraphs: [
+          "Some forms ask for under 40 KB. Start from a cropped photo; noisy phone originals may not reach the target.",
+        ],
+      },
+    ],
+  },
+  {
     slug: "compress-image-to-50kb",
     name: "Compress image to 50 KB",
     description:
@@ -21,10 +62,10 @@ export const photoTools: Tool[] = [
     intro:
       "Binary-searches encode quality, then downscales if needed, until the file is ≤ 50 KB — or tells you honestly when it cannot.",
     related: [
+      "compress-image-to-40kb",
       "compress-image-to-100kb",
       "compress-image-to-200kb",
-      "image-compress",
-      "passport-photo",
+      "compress-image-to-300kb",
     ],
     popular: true,
     localProcessing: true,
@@ -68,10 +109,10 @@ export const photoTools: Tool[] = [
     intro:
       "Same target-byte engine as the 50 KB tool, with a 100 KB cap. Preview before you download.",
     related: [
+      "compress-image-to-40kb",
       "compress-image-to-50kb",
       "compress-image-to-200kb",
-      "image-compress",
-      "signature-resizer",
+      "compress-image-to-300kb",
     ],
     localProcessing: true,
     faqs: [
@@ -110,7 +151,7 @@ export const photoTools: Tool[] = [
     related: [
       "compress-image-to-50kb",
       "compress-image-to-100kb",
-      "image-compress",
+      "compress-image-to-300kb",
       "images-to-pdf",
     ],
     localProcessing: true,
@@ -126,6 +167,46 @@ export const photoTools: Tool[] = [
         title: "Quality vs size",
         paragraphs: [
           "Larger targets usually keep more detail. If the result still looks soft, start from a sharper original rather than upscaling.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "compress-image-to-300kb",
+    name: "Compress image to 300 KB",
+    description: "Shrink a photo to 300 KB or less in the browser.",
+    category: "photo",
+    keywords: [
+      "compress image to 300kb",
+      "reduce image to 300kb",
+      "photo under 300kb",
+    ],
+    path: "/photo/compress-image-to-300kb",
+    title: "Compress Image to 300 KB Online — No Upload",
+    metaDescription:
+      "Compress a JPEG or WebP photo to 300 KB or less in your browser. Preview, then download. No upload.",
+    h1: "Compress Image to 300 KB",
+    intro:
+      "A looser byte cap when portals allow ~300 KB. Same engine as the 50/100 KB tools.",
+    related: [
+      "compress-image-to-50kb",
+      "compress-image-to-100kb",
+      "compress-image-to-200kb",
+      "passport-photo",
+    ],
+    localProcessing: true,
+    faqs: [
+      {
+        question: "Is the photo uploaded?",
+        answer: "No. Encoding stays in this tab.",
+      },
+    ],
+    examples: [],
+    sections: [
+      {
+        title: "Headroom",
+        paragraphs: [
+          "300 KB usually preserves more detail than 50–100 KB caps. Still preview before you submit.",
         ],
       },
     ],

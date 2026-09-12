@@ -64,6 +64,8 @@ import { QrGenerator } from "@/components/tools/qr/QrGenerator";
 import { TargetPdfCompress } from "@/components/tools/target-pdf-compress/TargetPdfCompress";
 import { WhatsAppLinkGenerator } from "@/components/tools/whatsapp/WhatsAppLinkGenerator";
 import { RentReceipt } from "@/components/tools/rent-receipt/RentReceipt";
+import { NumberToWords } from "@/components/tools/number-to-words/NumberToWords";
+import { GstInvoice } from "@/components/tools/gst-invoice/GstInvoice";
 
 export function ToolInterface({ slug }: { slug: string }) {
   switch (slug) {
@@ -157,12 +159,16 @@ export function ToolInterface({ slug }: { slug: string }) {
       return <PdfSplit />;
     case "compress-pdf":
       return <PdfCompress />;
+    case "compress-pdf-to-100kb":
+      return <TargetPdfCompress maxBytes={100 * 1024} label="100 KB" />;
     case "compress-pdf-to-200kb":
       return <TargetPdfCompress maxBytes={200 * 1024} label="200 KB" />;
     case "compress-pdf-to-500kb":
       return <TargetPdfCompress maxBytes={500 * 1024} label="500 KB" />;
     case "compress-pdf-to-1mb":
       return <TargetPdfCompress maxBytes={1024 * 1024} label="1 MB" />;
+    case "compress-pdf-to-2mb":
+      return <TargetPdfCompress maxBytes={2 * 1024 * 1024} label="2 MB" />;
     case "rotate-pdf":
       return <PdfRotate />;
     case "pdf-to-image":
@@ -185,12 +191,16 @@ export function ToolInterface({ slug }: { slug: string }) {
       return <XmlFormatter />;
     case "sql-formatter":
       return <SqlFormatter />;
+    case "compress-image-to-40kb":
+      return <TargetCompress maxBytes={40 * 1024} label="40 KB" />;
     case "compress-image-to-50kb":
       return <TargetCompress maxBytes={50 * 1024} label="50 KB" />;
     case "compress-image-to-100kb":
       return <TargetCompress maxBytes={100 * 1024} label="100 KB" />;
     case "compress-image-to-200kb":
       return <TargetCompress maxBytes={200 * 1024} label="200 KB" />;
+    case "compress-image-to-300kb":
+      return <TargetCompress maxBytes={300 * 1024} label="300 KB" />;
     case "passport-photo":
       return <PassportPhoto />;
     case "signature-resizer":
@@ -209,6 +219,10 @@ export function ToolInterface({ slug }: { slug: string }) {
       return <WhatsAppLinkGenerator />;
     case "rent-receipt":
       return <RentReceipt />;
+    case "number-to-words":
+      return <NumberToWords />;
+    case "gst-invoice":
+      return <GstInvoice />;
     default:
       return null;
   }

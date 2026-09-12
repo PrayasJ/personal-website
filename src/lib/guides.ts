@@ -443,6 +443,26 @@ export const guides: Guide[] = [
       },
     ],
   },
+  {
+    slug: "number-to-words-india",
+    path: "/guides/number-to-words-india",
+    title: "Number to Words in Indian Rupees",
+    metaDescription:
+      "How Indian amount-in-words works (lakh, crore, paise) for cheques and invoices — and a browser converter that stays on your device.",
+    h1: "Number to words (Indian)",
+    description:
+      "Cheques and invoices still ask for amounts in words. Indian numbering uses lakh and crore, not million and billion.",
+    relatedTools: ["number-to-words", "gst-invoice", "rent-receipt", "gst-calculator"],
+    sections: [
+      {
+        title: "Lakh and crore",
+        paragraphs: [
+          "After thousand comes lakh (1,00,000) then crore (1,00,00,000). The converter on this site follows that scale and can append paise for rupee amounts.",
+          "Banks may still prefer their own cheque wording. Treat the output as a helper, then copy it into your document.",
+        ],
+      },
+    ],
+  },
 ];
 
 export function getGuideBySlug(slug: string): Guide | undefined {

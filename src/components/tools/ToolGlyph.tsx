@@ -256,9 +256,11 @@ export function ToolGlyph({ slug }: { slug: string }) {
     case "merge-pdf":
     case "split-pdf":
     case "compress-pdf":
+    case "compress-pdf-to-100kb":
     case "compress-pdf-to-200kb":
     case "compress-pdf-to-500kb":
     case "compress-pdf-to-1mb":
+    case "compress-pdf-to-2mb":
     case "rotate-pdf":
     case "pdf-to-image":
     case "images-to-pdf":
@@ -338,9 +340,11 @@ export function ToolGlyph({ slug }: { slug: string }) {
           <path d="M5 12v5c0 1.4 3.1 2.5 7 2.5s7-1.1 7-2.5v-5" />
         </Mark>
       );
+    case "compress-image-to-40kb":
     case "compress-image-to-50kb":
     case "compress-image-to-100kb":
     case "compress-image-to-200kb":
+    case "compress-image-to-300kb":
       return (
         <Mark>
           <rect x="4" y="5" width="16" height="14" rx="2" />
@@ -404,6 +408,19 @@ export function ToolGlyph({ slug }: { slug: string }) {
         <Mark>
           <path d="M6 4h9l3 3v13H6z" />
           <path d="M15 4v3h3M8 11h8M8 14h6M8 17h4" />
+        </Mark>
+      );
+    case "number-to-words":
+      return (
+        <Mark>
+          <path d="M7 16V8l4 5 4-5v8" />
+        </Mark>
+      );
+    case "gst-invoice":
+      return (
+        <Mark>
+          <path d="M6 4h9l3 3v13H6z" />
+          <path d="M15 4v3h3M8 11h8M8 14h5M8 17h6" />
         </Mark>
       );
     default:

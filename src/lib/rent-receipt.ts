@@ -1,99 +1,5 @@
 import { PDFDocument, StandardFonts, rgb } from "pdf-lib";
-
-const ones = [
-  "",
-  "One",
-  "Two",
-  "Three",
-  "Four",
-  "Five",
-  "Six",
-  "Seven",
-  "Eight",
-  "Nine",
-  "Ten",
-  "Eleven",
-  "Twelve",
-  "Thirteen",
-  "Fourteen",
-  "Fifteen",
-  "Sixteen",
-  "Seventeen",
-  "Eighteen",
-  "Nineteen",
-];
-const tens = [
-  "",
-  "",
-  "Twenty",
-  "Thirty",
-  "Forty",
-  "Fifty",
-  "Sixty",
-  "Seventy",
-  "Eighty",
-  "Ninety",
-];
-
-function twoDigits(n: number): string {
-  if (n < 20) {
-    return ones[n] ?? "";
-  }
-  const t = Math.floor(n / 10);
-  const o = n % 10;
-  return `${tens[t]}${o ? ` ${ones[o]}` : ""}`.trim();
-}
-
-function threeDigits(n: number): string {
-  if (n < 100) {
-    return twoDigits(n);
-  }
-  const h = Math.floor(n / 100);
-  const rest = n % 100;
-  return `${ones[h]} Hundred${rest ? ` ${twoDigits(rest)}` : ""}`.trim();
-}
-
-/** Indian numbering: crore / lakh / thousand. Integers only for the rupee part. */
-export function amountInWordsInr(amount: number): string {
-  if (!Number.isFinite(amount) || amount < 0) {
-    throw new Error("Amount must be a non-negative number.");
-  }
-  const rounded = Math.round(amount * 100) / 100;
-  const rupees = Math.floor(rounded);
-  const paise = Math.round((rounded - rupees) * 100);
-
-  if (rupees === 0 && paise === 0) {
-    return "Rupees Zero Only";
-  }
-
-  const parts: string[] = [];
-  let n = rupees;
-  const crore = Math.floor(n / 1_00_00_000);
-  n %= 1_00_00_000;
-  const lakh = Math.floor(n / 1_00_000);
-  n %= 1_00_000;
-  const thousand = Math.floor(n / 1000);
-  n %= 1000;
-
-  if (crore) {
-    parts.push(`${threeDigits(crore)} Crore`);
-  }
-  if (lakh) {
-    parts.push(`${threeDigits(lakh)} Lakh`);
-  }
-  if (thousand) {
-    parts.push(`${threeDigits(thousand)} Thousand`);
-  }
-  if (n) {
-    parts.push(threeDigits(n));
-  }
-
-  let out = parts.length ? `Rupees ${parts.join(" ")}` : "Rupees Zero";
-  if (paise) {
-    out += ` and ${twoDigits(paise)} Paise`;
-  }
-  return `${out} Only`;
-}
+import { amountInWordsInr } from "@/lib/inr-words";
 
 export type RentReceiptInput = {
   landlordName: string;
@@ -160,7 +66,13 @@ export async function buildRentReceiptPdf(
     for (const word of words) {
       const next = row ? `${row} ${word}` : word;
       if (face.widthOfTextAtSize(next, size) > maxWidth && row) {
-        page.drawText(row, { x: margin, y, size, font: face, color: rgb(0.1, 0.1, 0.1) });
+        page.drawText(row, {
+          x: margin,
+          y,
+          size,
+          font: face,
+          color: rgb(0.1, 0.1, 0.1),
+        });
         y -= size + 6;
         row = word;
       } else {
@@ -168,7 +80,13 @@ export async function buildRentReceiptPdf(
       }
     }
     if (row) {
-      page.drawText(row, { x: margin, y, size, font: face, color: rgb(0.1, 0.1, 0.1) });
+      page.drawText(row, {
+        x: margin,
+        y,
+        size,
+        font: face,
+        color: rgb(0.1, 0.1, 0.1),
+      });
       y -= size + 6;
     }
   }
@@ -188,3 +106,5 @@ export async function buildRentReceiptPdf(
 
   return doc.save({ useObjectStreams: true });
 }
+
+export { amountInWordsInr } from "@/lib/inr-words";
