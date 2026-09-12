@@ -6,15 +6,16 @@ export const calculatorTools: Tool[] = [
     name: "EMI Calculator",
     description: "Reducing-balance loan EMI in INR, with the first year of the schedule.",
     category: "calculator",
-    keywords: ["emi", "loan", "home loan", "reducing balance", "inr"],
+    keywords: ["emi", "loan", "home loan", "reducing balance", "inr", "emi calculator india"],
     path: "/calculators/emi-calculator",
-    title: "EMI Calculator India — Reducing Balance | Prayas.dev",
+    title: "EMI Calculator India — Reducing Balance Home Loan EMI",
     metaDescription:
-      "Calculate monthly EMI, total interest, and the first year of a reducing-balance schedule. INR, runs in your browser. Not a loan offer.",
-    h1: "EMI Calculator",
+      "Free EMI calculator for India. Monthly reducing-balance EMI, total interest, first-year schedule. INR, in your browser. Not a loan offer.",
+    h1: "EMI Calculator (India)",
     intro:
       "Principal, annual rate, and tenure in years. EMI uses a monthly reducing balance. Numbers are illustrative and not an offer of credit.",
     related: ["ctc-calculator", "rd-calculator", "fd-calculator"],
+    popular: true,
     localProcessing: true,
     faqs: [
       {
@@ -47,15 +48,16 @@ export const calculatorTools: Tool[] = [
     name: "SIP Calculator",
     description: "Future value of a monthly SIP with a stated expected return.",
     category: "calculator",
-    keywords: ["sip", "mutual fund", "investment", "future value", "inr"],
+    keywords: ["sip", "mutual fund", "investment", "future value", "inr", "sip calculator india"],
     path: "/calculators/sip-calculator",
-    title: "SIP Calculator India — Monthly Investment | Prayas.dev",
+    title: "SIP Calculator India — Monthly Mutual Fund Returns",
     metaDescription:
-      "Estimate the future value of a monthly SIP in your browser. Compounded monthly. Not investment advice.",
-    h1: "SIP Calculator",
+      "Free SIP calculator for India. Estimate future value of a monthly SIP with monthly compounding. INR, in your browser. Not investment advice.",
+    h1: "SIP Calculator (India)",
     intro:
       "Monthly contribution, expected annual return, and years. The future value assumes monthly compounding at that rate. Markets do not guarantee it.",
     related: ["rd-calculator", "ppf-calculator", "emi-calculator"],
+    popular: true,
     localProcessing: true,
     faqs: [
       {
@@ -131,7 +133,7 @@ export const calculatorTools: Tool[] = [
     category: "calculator",
     keywords: ["gst", "cgst", "sgst", "india tax", "invoice"],
     path: "/calculators/gst-calculator",
-    title: "GST Calculator India — Inclusive & Exclusive | Prayas.dev",
+    title: "GST Calculator India — Inclusive & Exclusive Online",
     metaDescription:
       "Add or remove GST at 0, 5, 12, 18, or 28 percent. Shows CGST and SGST. Runs in your browser. Not tax advice.",
     h1: "GST Calculator",
@@ -321,7 +323,7 @@ export const calculatorTools: Tool[] = [
     category: "calculator",
     keywords: ["ctc", "cost to company", "basic", "hra", "salary structure"],
     path: "/calculators/ctc-calculator",
-    title: "CTC Calculator India — Basic HRA PF | Prayas.dev",
+    title: "CTC Calculator India — Basic, HRA, PF Split",
     metaDescription:
       "Break annual CTC into basic, HRA, special allowance, employer PF, and gratuity in your browser. Not a CTC letter.",
     h1: "CTC Calculator",
@@ -363,7 +365,7 @@ export const calculatorTools: Tool[] = [
     category: "calculator",
     keywords: ["in-hand salary", "take home", "tds", "new regime", "epf"],
     path: "/calculators/in-hand-salary",
-    title: "In-hand Salary Calculator India — New Regime | Prayas.dev",
+    title: "In-hand Salary Calculator India — New Tax Regime",
     metaDescription:
       "Estimate in-hand salary from CTC or monthly gross. New regime slabs after Budget 2025, EPF, professional tax. Not tax advice.",
     h1: "In-hand salary",

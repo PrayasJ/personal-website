@@ -49,7 +49,8 @@ export default function PrivacyPage() {
           <h2 className="text-base text-ink">Hosting and analytics</h2>
           <p className="mt-2">
             The host may collect standard request logs. This site uses Vercel
-            Analytics for anonymized usage statistics. See{" "}
+            Analytics for anonymized usage statistics and Vercel Speed Insights
+            for Core Web Vitals. See{" "}
             <a
               href="https://vercel.com/legal/privacy-policy"
               className="text-accent hover:underline"

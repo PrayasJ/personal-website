@@ -6,12 +6,21 @@ import { PageHeader } from "@/components/layout/PageHeader";
 import { ToolGrid } from "@/components/tools/ToolGrid";
 import { pageMetadata } from "@/lib/seo";
 import { AdSlot } from "@/components/ads/AdSlot";
+import { ItemListSchema } from "@/components/seo/ItemListSchema";
 
 export const metadata = pageMetadata({
-  title: "Image Tools",
+  title: "Free Image Tools Online — Compress, Resize, Convert, Crop",
   description:
-    "Compress, resize, convert, and crop PNG, JPEG, and WebP in your browser. Favicon generator included.",
+    "Compress, resize, convert, and crop PNG, JPEG, and WebP in your browser. Favicon generator included. No upload.",
   path: "/image",
+  absoluteTitle: true,
+  keywords: [
+    "compress image",
+    "resize image",
+    "png to jpg",
+    "favicon generator",
+    "webp converter",
+  ],
 });
 
 export default function ImageToolsPage() {
@@ -19,6 +28,16 @@ export default function ImageToolsPage() {
 
   return (
     <>
+      <ItemListSchema
+        name="Image tools"
+        description={categories.image.description}
+        path="/image"
+        items={items.map((tool) => ({
+          name: tool.name,
+          path: tool.path,
+          description: tool.description,
+        }))}
+      />
       <PageHeader
         title="Image Tools"
         description={categories.image.description}

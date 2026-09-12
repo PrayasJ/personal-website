@@ -6,12 +6,22 @@ import { PageHeader } from "@/components/layout/PageHeader";
 import { ToolGrid } from "@/components/tools/ToolGrid";
 import { pageMetadata } from "@/lib/seo";
 import { AdSlot } from "@/components/ads/AdSlot";
+import { ItemListSchema } from "@/components/seo/ItemListSchema";
 
 export const metadata = pageMetadata({
-  title: "Calculators",
+  title: "Free Calculators India — EMI, SIP, CTC, In-hand, GST",
   description:
-    "Free India-focused calculators for CTC, in-hand salary, EMI, SIP, and more. Clear assumptions, no signup. Not financial advice.",
+    "Free India-focused calculators for EMI, SIP, CTC, in-hand salary, GST, PPF, and FD. Clear assumptions, INR, no signup. Not financial advice.",
   path: "/calculators",
+  absoluteTitle: true,
+  locale: "en_IN",
+  keywords: [
+    "EMI calculator India",
+    "SIP calculator",
+    "in-hand salary calculator",
+    "CTC calculator",
+    "GST calculator",
+  ],
 });
 
 export default function CalculatorsPage() {
@@ -19,6 +29,16 @@ export default function CalculatorsPage() {
 
   return (
     <>
+      <ItemListSchema
+        name="India calculators"
+        description={categories.calculator.description}
+        path="/calculators"
+        items={items.map((tool) => ({
+          name: tool.name,
+          path: tool.path,
+          description: tool.description,
+        }))}
+      />
       <PageHeader
         title="Calculators"
         description={categories.calculator.description}

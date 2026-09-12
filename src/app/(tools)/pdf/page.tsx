@@ -6,12 +6,15 @@ import { PageHeader } from "@/components/layout/PageHeader";
 import { ToolGrid } from "@/components/tools/ToolGrid";
 import { pageMetadata } from "@/lib/seo";
 import { AdSlot } from "@/components/ads/AdSlot";
+import { ItemListSchema } from "@/components/seo/ItemListSchema";
 
 export const metadata = pageMetadata({
-  title: "PDF Tools",
+  title: "Free PDF Tools Online — Merge, Split, Compress, No Upload",
   description:
-    "Browser-based PDF tools to merge, split, compress, rotate, and render pages locally. No upload.",
+    "Merge, split, compress, rotate, and convert PDF pages to images in your browser. Files stay on your device — no upload, no account.",
   path: "/pdf",
+  absoluteTitle: true,
+  keywords: ["merge pdf", "split pdf", "compress pdf", "pdf to png", "pdf tools"],
 });
 
 export default function PdfToolsPage() {
@@ -19,6 +22,16 @@ export default function PdfToolsPage() {
 
   return (
     <>
+      <ItemListSchema
+        name="PDF tools"
+        description={categories.pdf.description}
+        path="/pdf"
+        items={items.map((tool) => ({
+          name: tool.name,
+          path: tool.path,
+          description: tool.description,
+        }))}
+      />
       <PageHeader
         title="PDF Tools"
         description={categories.pdf.description}

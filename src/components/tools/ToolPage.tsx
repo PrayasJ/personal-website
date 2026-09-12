@@ -1,6 +1,7 @@
-import { FAQSchema, ToolSchema } from "@/components/seo/schemas";
+import { ToolSchema } from "@/components/seo/schemas";
 import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
 import { RelatedTools } from "@/components/tools/RelatedTools";
+import { RelatedGuides } from "@/components/tools/RelatedGuides";
 import { ToolInterface } from "@/components/tools/ToolInterface";
 import { ToolFaq } from "@/components/tools/ToolFaq";
 import { ToolGlyph } from "@/components/tools/ToolGlyph";
@@ -8,6 +9,7 @@ import { CopyButton } from "@/components/tools/CopyButton";
 import { CodeHighlight } from "@/components/tools/CodeHighlight";
 import { Container } from "@/components/layout/Container";
 import { categories } from "@/lib/site";
+import { allToolFaqs, toolFeatures, toolHowToSteps } from "@/lib/tool-seo";
 import type { Tool } from "@/lib/tools";
 import type { HighlightLang } from "@/lib/highlight";
 import { AdSlot } from "@/components/ads/AdSlot";
@@ -31,11 +33,13 @@ function exampleLang(code: string): HighlightLang {
 
 export function ToolPage({ tool }: { tool: Tool }) {
   const category = categories[tool.category];
+  const steps = toolHowToSteps(tool);
+  const features = toolFeatures(tool);
+  const faqs = allToolFaqs(tool);
 
   return (
     <>
       <ToolSchema tool={tool} />
-      <FAQSchema faqs={tool.faqs} />
       <Container size="wide" className="py-8 sm:py-12">
         <div className="tool-desk" data-category={tool.category}>
           <Breadcrumbs
@@ -57,6 +61,11 @@ export function ToolPage({ tool }: { tool: Tool }) {
               </div>
               <h1 className="tool-hero-title text-gradient">{tool.h1}</h1>
               <p className="tool-hero-lead">{tool.intro}</p>
+              <ul className="tool-feature-row">
+                {features.map((feature) => (
+                  <li key={feature}>{feature}</li>
+                ))}
+              </ul>
             </div>
           </header>
 
@@ -70,6 +79,21 @@ export function ToolPage({ tool }: { tool: Tool }) {
 
           <div className="tool-after">
             <div className="tool-after-main">
+              <section className="tool-docs">
+                <h2 className="tool-docs-title">How to use {tool.name}</h2>
+                <ol className="tool-howto">
+                  {steps.map((step, index) => (
+                    <li key={step.name}>
+                      <span className="tool-howto-n">{index + 1}</span>
+                      <div>
+                        <p className="tool-howto-name">{step.name}</p>
+                        <p className="tool-howto-text">{step.text}</p>
+                      </div>
+                    </li>
+                  ))}
+                </ol>
+              </section>
+
               {tool.sections.map((section) => (
                 <section key={section.title} className="tool-docs">
                   <h2 className="tool-docs-title">{section.title}</h2>
@@ -103,7 +127,8 @@ export function ToolPage({ tool }: { tool: Tool }) {
                 </section>
               ) : null}
 
-              <ToolFaq faqs={tool.faqs} />
+              <ToolFaq faqs={faqs} />
+              <RelatedGuides slug={tool.slug} />
             </div>
             <AdSlot placement="rail" />
           </div>

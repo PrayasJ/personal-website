@@ -5,12 +5,22 @@ import { PageHeader } from "@/components/layout/PageHeader";
 import { ToolGrid } from "@/components/tools/ToolGrid";
 import { pageMetadata } from "@/lib/seo";
 import { AdSlot } from "@/components/ads/AdSlot";
+import { ItemListSchema } from "@/components/seo/ItemListSchema";
 
 export const metadata = pageMetadata({
-  title: "Tools",
+  title: "Free Developer Tools Online — JSON, JWT, UUID, Cron",
   description:
-    "Free browser tools: JSON formatter, JWT decoder, hashes, diff, Base64, UUID, cron, regex, EMI and SIP calculators, and more.",
+    "Free browser tools: JSON formatter, JWT decoder, Base64, UUID, cron, regex, hashes, and more. No signup, no upload — processing stays in this tab.",
   path: "/tools",
+  absoluteTitle: true,
+  keywords: [
+    "developer tools",
+    "JSON formatter",
+    "JWT decoder",
+    "Base64",
+    "UUID generator",
+    "cron generator",
+  ],
 });
 
 export default function ToolsIndexPage() {
@@ -21,6 +31,16 @@ export default function ToolsIndexPage() {
 
   return (
     <>
+      <ItemListSchema
+        name="Developer tools"
+        description={categories.developer.description}
+        path="/tools"
+        items={[...developer, ...calculators, ...pdf, ...image].map((tool) => ({
+          name: tool.name,
+          path: tool.path,
+          description: tool.description,
+        }))}
+      />
       <PageHeader
         title="Tools"
         description={`${categories.developer.description} ${categories.calculator.blurb}`}

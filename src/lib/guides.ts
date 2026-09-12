@@ -1,0 +1,270 @@
+import { absoluteUrl } from "@/lib/site";
+
+export type GuideSection = {
+  title: string;
+  paragraphs: string[];
+};
+
+export type Guide = {
+  slug: string;
+  path: string;
+  title: string;
+  metaDescription: string;
+  h1: string;
+  description: string;
+  relatedTools: string[];
+  sections: GuideSection[];
+};
+
+export const guides: Guide[] = [
+  {
+    slug: "format-json",
+    path: "/guides/format-json",
+    title: "How to Format and Validate JSON Online",
+    metaDescription:
+      "Pretty-print, minify, and validate JSON in the browser. Trailing commas, quotes, and other parse errors — without uploading the payload.",
+    h1: "How to format and validate JSON",
+    description:
+      "JSON is picky about commas and quotes. This is the short version of how to beautify it, minify it, and see why a parser rejected it — on a page that never sends the text to a server.",
+    relatedTools: ["json-formatter", "json-yaml", "json-to-go", "json-to-ts"],
+    sections: [
+      {
+        title: "What “format” actually changes",
+        paragraphs: [
+          "Pretty-printing JSON only changes whitespace. The value is the same: objects, arrays, strings, numbers, booleans, and null. Minify is the inverse — one compact value, still valid JSON.",
+          "If two documents parse to the same structure, they are the same JSON, even when one is indented and the other is a single line. That is why a formatter is safe for configs and API payloads you still intend to send.",
+        ],
+      },
+      {
+        title: "Why a payload fails to parse",
+        paragraphs: [
+          "The usual breaks are trailing commas, single quotes, unquoted keys, comments, and JavaScript-only syntax such as undefined. Standard JSON does not allow those. JSON5 and object literals in source files are a different language.",
+          "Read the first error the parser reports, then the character position if it gives one. Fix that token before chasing anything further down the file — later errors are often knock-ons.",
+        ],
+      },
+      {
+        title: "Do it without uploading",
+        paragraphs: [
+          "A lot of “JSON formatter” sites post the text to a backend. That is convenient until the payload has tokens, PII, or an internal OMS dump. The JSON formatter on this site runs JSON.parse and JSON.stringify in your browser.",
+          "Paste, hit Format, copy the result. Use Minify when you need a smaller body. Nothing in that flow is an API call.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "read-jwt",
+    path: "/guides/read-jwt",
+    title: "How to Read a JWT Header and Payload",
+    metaDescription:
+      "Decode a JSON Web Token in the browser. What header, payload, and signature mean — and why decoding is not verification.",
+    h1: "How to read a JWT",
+    description:
+      "A JWT is three base64url segments. Reading claims such as exp and sub is useful when an API returns 401. Trusting those claims still requires a signature check you should not skip.",
+    relatedTools: ["jwt-decoder", "base64", "unix-timestamp", "json-formatter"],
+    sections: [
+      {
+        title: "The three segments",
+        paragraphs: [
+          "header.payload.signature — each piece is base64url, not encryption. Anyone who can see the token can read the header and payload. The signature is meant to prove that someone with the key issued it.",
+          "Typical header fields are alg and typ. Typical payload fields are iss, sub, aud, iat, nbf, and exp. Times are usually unix seconds.",
+        ],
+      },
+      {
+        title: "Decoding is not verifying",
+        paragraphs: [
+          "A decoder that only base64url-decodes the first two segments cannot tell a forged token from a real one. Do not use a browser decoder to authorize anything.",
+          "Use it to inspect a token you already have on a machine you trust: see whether exp is in the past, whether alg is none, whether the payload is even JSON. Then verify with the real key in your service.",
+        ],
+      },
+      {
+        title: "Treat tokens as credentials",
+        paragraphs: [
+          "Do not paste production tokens into a site that uploads them. The JWT decoder here stays in the tab. That still does not make a screenshot of the token safe.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "unix-timestamps",
+    path: "/guides/unix-timestamps",
+    title: "Unix Timestamps: Seconds, Milliseconds, UTC and IST",
+    metaDescription:
+      "What unix time is, how to tell seconds from milliseconds, and how to convert epoch values to UTC and IST in the browser.",
+    h1: "Unix timestamps, UTC, and IST",
+    description:
+      "Logs and APIs store time as an integer. This is how to read it without guessing the timezone, and without sending the value to a conversion service.",
+    relatedTools: ["unix-timestamp", "timezone-converter", "cron", "go-duration"],
+    sections: [
+      {
+        title: "Seconds since 1970",
+        paragraphs: [
+          "Unix time counts seconds since 1970-01-01T00:00:00Z, ignoring leap seconds. Ten-digit values around 1.7e9 are seconds in the 2020s. Thirteen-digit values are usually milliseconds (Java, JavaScript Date.now, many databases).",
+          "ISO-8601 with a trailing Z is the same instant in UTC. Asia/Kolkata (IST) is UTC+05:30 with no daylight-saving shift.",
+        ],
+      },
+      {
+        title: "Convert it locally",
+        paragraphs: [
+          "The unix timestamp converter on this site treats a 13+ digit integer as milliseconds and shorter integers as seconds. It prints UTC and IST next to each other so OMS logs and IST wall clocks can be compared without a spreadsheet.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "merge-pdf-no-upload",
+    path: "/guides/merge-pdf-no-upload",
+    title: "Merge PDF Files in the Browser — No Upload",
+    metaDescription:
+      "Combine PDFs on your machine with pdf-lib. Why local merge is different from an upload-based PDF site, and how page order works.",
+    h1: "Merge PDFs without uploading them",
+    description:
+      "Most “merge PDF” products send the file to a server, wait, then let you download. That is the wrong model for contracts, IDs, and anything you would not attach to a random email.",
+    relatedTools: ["merge-pdf", "split-pdf", "rotate-pdf", "compress-pdf"],
+    sections: [
+      {
+        title: "What local merge does",
+        paragraphs: [
+          "This site’s merge tool loads each PDF with pdf-lib in the tab, copies pages into a new document in the order you set, and asks you to confirm before download. Encrypted PDFs fail on purpose — decrypt them yourself first.",
+          "The download is a new file. Your originals are not rewritten.",
+        ],
+      },
+      {
+        title: "Split, rotate, compress",
+        paragraphs: [
+          "Extract a range such as 1-3,5 into its own PDF. Rotate by setting the page rotate flag (content streams stay). Compress here means rasterizing pages to JPEG — honest for scans, wrong for contracts you still need to search.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "compress-images-locally",
+    path: "/guides/compress-images-locally",
+    title: "Compress and Convert Images in the Browser",
+    metaDescription:
+      "Shrink JPEG, WebP, and PNG with canvas encoding. Resize, crop, convert, and build a favicon without uploading the photo.",
+    h1: "Compress images without an upload",
+    description:
+      "Image CDNs and “compress image” websites decode your file on their servers. If the photo should not leave the laptop, use the canvas in the browser instead.",
+    relatedTools: [
+      "image-compress",
+      "image-resize",
+      "image-convert",
+      "image-crop",
+      "favicon-generator",
+    ],
+    sections: [
+      {
+        title: "What the encoder can and cannot do",
+        paragraphs: [
+          "This site draws the bitmap and calls canvas.toBlob. JPEG and WebP quality is whatever the current browser implements — Chrome, Firefox, and Safari will not bit-match. PNG is rewritten without a quality slider.",
+          "That is still enough to cap a long edge, drop a 12 MB phone photo to a size you can attach, or turn a PNG into WebP. It is not Adobe’s encoder and it will not magically restore a blurry source.",
+        ],
+      },
+      {
+        title: "Favicons",
+        paragraphs: [
+          "A favicon.ico here is an ICO container with 16, 32, and 48 px PNG frames, plus a 180 px Apple touch PNG. Crop to a square first if the source is not already one.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "emi-calculator-india",
+    path: "/guides/emi-calculator-india",
+    title: "EMI Calculator India — Reducing Balance Formula",
+    metaDescription:
+      "How monthly reducing-balance EMI is calculated in INR, what the schedule shows, and why it will not match every bank quote.",
+    h1: "How an EMI calculator works (India)",
+    description:
+      "Home and personal loans in India are usually quoted as a monthly EMI on a reducing balance. The formula is short. The bank’s number still includes fees and day-count you will not see on a webpage.",
+    relatedTools: ["emi-calculator", "fd-calculator", "rd-calculator", "sip-calculator"],
+    sections: [
+      {
+        title: "The textbook EMI",
+        paragraphs: [
+          "Monthly rate r is annual percent divided by 1200. If P is principal and n is the number of months, EMI is P·r·(1+r)^n / ((1+r)^n−1). Interest each month is charged on the remaining principal; the rest of the EMI pays principal down.",
+          "The calculator on this site uses that formula and prints the first year of the schedule. It is not a loan offer.",
+        ],
+      },
+      {
+        title: "What it will not match",
+        paragraphs: [
+          "Processing fees, rounding to the nearest rupee, moratoriums, and floating-rate resets all move the number. Use the page to sanity-check a quote, not to replace the amortization the lender signs.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "ctc-in-hand-india",
+    path: "/guides/ctc-in-hand-india",
+    title: "CTC vs In-hand Salary in India (New Regime)",
+    metaDescription:
+      "How a common IT CTC split (basic, HRA, PF, gratuity) becomes monthly in-hand under the new tax regime — and which bits this site does not model.",
+    h1: "CTC and in-hand salary, without the HR fog",
+    description:
+      "Cost-to-company is not take-home. This is the split many Indian IT offers use, then the new-regime tax that comes off, with the assumptions written in the open.",
+    relatedTools: [
+      "ctc-calculator",
+      "in-hand-salary",
+      "gratuity-calculator",
+      "gst-calculator",
+    ],
+    sections: [
+      {
+        title: "A common CTC template",
+        paragraphs: [
+          "Basic as a percent of CTC, HRA as 50% of basic in metro cities (40% otherwise), employer PF at 12% of basic (sometimes capped), gratuity provision around 4.81% of basic, special allowance as the remainder. Gross for in-hand is usually basic + HRA + special — employer PF and gratuity stay in CTC.",
+          "Your offer letter can differ on every one of those knobs. The CTC calculator is a template, not the letter.",
+        ],
+      },
+      {
+        title: "New regime in-hand",
+        paragraphs: [
+          "The in-hand page subtracts employee PF, professional tax, and new-regime income tax (standard deduction, rebate toward ₹12 lakh, marginal relief, 4% cess). Old regime, 80C, and HRA exemption are omitted on purpose so the arithmetic stays inspectable. It is not tax advice.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "cron-expressions",
+    path: "/guides/cron-expressions",
+    title: "How to Read a Cron Expression",
+    metaDescription:
+      "Five-field cron (minute hour day month weekday), common gotchas, and a browser generator that never sends the expression to a server.",
+    h1: "How to read a cron expression",
+    description:
+      "Cron looks like noise until you name the five fields. This is the mental model, plus why “every day at 9” is not the same in every engine.",
+    relatedTools: ["cron", "unix-timestamp", "timezone-converter"],
+    sections: [
+      {
+        title: "Five fields",
+        paragraphs: [
+          "Standard unix cron is minute, hour, day-of-month, month, day-of-week. Stars mean any. Commas are lists. Hyphens are ranges. A slash is a step (*/15 in minutes is every quarter hour).",
+          "Day-of-month and day-of-week together are the classic trap: some engines OR them, some AND them. Read the man page for the scheduler you actually run (cron, systemd, k8s, a cloud worker).",
+        ],
+      },
+      {
+        title: "Generate one locally",
+        paragraphs: [
+          "The cron generator on this site builds a five-field expression in the browser. It will not know whether your worker uses UTC or IST — pair it with the timezone page if the job must hit an Indian wall clock.",
+        ],
+      },
+    ],
+  },
+];
+
+export function getGuideBySlug(slug: string): Guide | undefined {
+  return guides.find((guide) => guide.slug === slug);
+}
+
+export function getGuidesForTool(toolSlug: string): Guide[] {
+  return guides.filter((guide) => guide.relatedTools.includes(toolSlug));
+}
+
+export function getIndexableGuidePaths(): string[] {
+  return guides.map((guide) => guide.path);
+}
+
+export function guideUrl(guide: Guide): string {
+  return absoluteUrl(guide.path);
+}

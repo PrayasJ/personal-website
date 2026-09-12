@@ -26,6 +26,10 @@ export const navItems = [
 export const footerNavItems = [
   { href: "/", label: "Index" },
   { href: "/tools", label: "Tools" },
+  { href: "/calculators", label: "Calculators" },
+  { href: "/pdf", label: "PDF" },
+  { href: "/image", label: "Image" },
+  { href: "/guides", label: "Guides" },
   { href: "/#writing", label: "Writing" },
   { href: "/privacy", label: "Privacy" },
   { href: "/terms", label: "Terms" },
@@ -42,29 +46,29 @@ export const categories: Record<
     name: "Developer Tools",
     path: "/tools",
     description:
-      "Format JSON, decode JWTs, generate UUIDs, and other browser-based developer utilities.",
-    blurb: "JSON, JWT, Base64, regex, cron, and more.",
+      "Free online developer tools: JSON formatter, JWT decoder, Base64, UUID, cron, regex, and more. All run in the browser with no upload.",
+    blurb: "JSON, JWT, Base64, regex, cron, and more — no upload.",
   },
   calculator: {
     name: "Calculators",
     path: "/calculators",
     description:
-      "India-focused salary, investment, and loan calculators with clear assumptions.",
-    blurb: "CTC, in-hand, EMI, SIP, PF, and more.",
+      "Free India calculators for EMI, SIP, CTC, in-hand salary, GST, PPF, and FD. Textbook formulas in INR, no signup.",
+    blurb: "CTC, in-hand, EMI, SIP, PF, and more — INR.",
   },
   pdf: {
     name: "PDF Tools",
     path: "/pdf",
     description:
-      "Merge, split, compress, and rotate PDFs in your browser when technically possible.",
+      "Free PDF tools to merge, split, compress, rotate, and convert pages to images in your browser. Files never leave this tab.",
     blurb: "Merge, split, compress, rotate — files stay local.",
   },
   image: {
     name: "Image Tools",
     path: "/image",
     description:
-      "Compress, resize, convert, and crop images with PNG, JPEG, and WebP support.",
-    blurb: "Compress, resize, convert, crop, and favicons.",
+      "Free image tools to compress, resize, convert, crop, and generate favicons. PNG, JPEG, and WebP — processed in the browser.",
+    blurb: "Compress, resize, convert, crop, and favicons — no upload.",
   },
 };
 
@@ -73,9 +77,9 @@ export const staticPages = [
   { path: "/privacy", changeFrequency: "yearly" as const, priority: 0.3 },
   { path: "/tools", changeFrequency: "weekly" as const, priority: 0.9 },
   { path: "/calculators", changeFrequency: "weekly" as const, priority: 0.8 },
-  { path: "/pdf", changeFrequency: "weekly" as const, priority: 0.7 },
-  { path: "/image", changeFrequency: "weekly" as const, priority: 0.7 },
-  { path: "/guides", changeFrequency: "weekly" as const, priority: 0.7 },
+  { path: "/pdf", changeFrequency: "weekly" as const, priority: 0.8 },
+  { path: "/image", changeFrequency: "weekly" as const, priority: 0.8 },
+  { path: "/guides", changeFrequency: "weekly" as const, priority: 0.75 },
   { path: "/about", changeFrequency: "yearly" as const, priority: 0.4 },
   { path: "/terms", changeFrequency: "yearly" as const, priority: 0.3 },
   { path: "/contact", changeFrequency: "yearly" as const, priority: 0.4 },

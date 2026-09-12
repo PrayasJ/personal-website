@@ -47,11 +47,11 @@ export const extraDeveloperTools: Tool[] = [
     name: "JWT Decoder",
     description: "Decode a JWT header and payload. Signatures are not verified.",
     category: "developer",
-    keywords: ["jwt", "json web token", "decode", "base64url"],
+    keywords: ["jwt", "json web token", "decode", "base64url", "jwt decoder online"],
     path: "/tools/jwt-decoder",
-    title: "JWT Decoder Online — Header & Payload | Prayas.dev",
+    title: "JWT Decoder Online — Header & Payload, No Upload",
     metaDescription:
-      "Decode JWT header and payload in your browser. Claims such as exp and iat are shown as ISO times. Signatures are never verified.",
+      "Decode a JWT in your browser. Header and payload, exp/iat as ISO times. Signatures are never verified. Token is not uploaded.",
     h1: "JWT Decoder",
     intro:
       "Paste a token. The header and payload are base64url-decoded here. This page does not check signatures and must not be used to decide whether a token is authentic.",
@@ -91,11 +91,11 @@ export const extraDeveloperTools: Tool[] = [
     name: "Base64 Encoder",
     description: "Encode and decode UTF-8 text as Base64, including URL-safe alphabet.",
     category: "developer",
-    keywords: ["base64", "encode", "decode", "base64url"],
+    keywords: ["base64", "encode", "decode", "base64url", "base64 encoder online"],
     path: "/tools/base64",
-    title: "Base64 Encoder & Decoder Online | Prayas.dev",
+    title: "Base64 Encoder & Decoder Online — UTF-8, URL-safe",
     metaDescription:
-      "Encode and decode Base64 in your browser. UTF-8 text, standard or URL-safe alphabet. No upload.",
+      "Encode and decode Base64 in your browser. UTF-8 text, standard or URL-safe alphabet. No upload, no account.",
     h1: "Base64 Encoder & Decoder",
     intro:
       "Convert UTF-8 text to Base64 and back. URL-safe mode uses - and _ and omits padding. Processing stays on this page.",
@@ -175,15 +175,16 @@ export const extraDeveloperTools: Tool[] = [
     name: "UUID Generator",
     description: "Generate RFC 4122 version 4 UUIDs in the browser.",
     category: "developer",
-    keywords: ["uuid", "guid", "v4", "generate"],
+    keywords: ["uuid", "guid", "v4", "generate", "uuid generator online"],
     path: "/tools/uuid-generator",
-    title: "UUID Generator Online — v4 | Prayas.dev",
+    title: "UUID Generator Online — Free v4 UUID / GUID",
     metaDescription:
-      "Generate UUID v4 values in your browser with the Web Crypto API. Copy one or many. No upload.",
-    h1: "UUID Generator",
+      "Generate UUID v4 values in your browser with Web Crypto. Copy one or many, with or without hyphens. No upload.",
+    h1: "UUID Generator (v4)",
     intro:
       "Version 4 UUIDs from crypto.randomUUID when the browser has it. Generate up to 100 at a time, with or without hyphens.",
     related: ["ulid-generator", "base64", "json-formatter"],
+    popular: true,
     localProcessing: true,
     faqs: [
       {
@@ -218,11 +219,11 @@ export const extraDeveloperTools: Tool[] = [
     name: "Cron Expression Generator",
     description: "Build and read 5-field cron expressions.",
     category: "developer",
-    keywords: ["cron", "schedule", "crontab", "expression"],
+    keywords: ["cron", "schedule", "crontab", "expression", "cron generator"],
     path: "/tools/cron",
-    title: "Cron Expression Generator Online | Prayas.dev",
+    title: "Cron Expression Generator Online — 5-Field Crontab",
     metaDescription:
-      "Build a 5-field cron expression and read it in plain language. Minute, hour, day, month, weekday.",
+      "Build a 5-field cron expression and read it in plain language. Minute, hour, day, month, weekday. Runs in your browser.",
     h1: "Cron Expression Generator",
     intro:
       "Five fields: minute, hour, day of month, month, day of week. Presets for hourly, weekdays, and monthly. This is not Quartz and not systemd OnCalendar.",
@@ -260,11 +261,11 @@ export const extraDeveloperTools: Tool[] = [
     name: "Regex Tester",
     description: "Test JavaScript regular expressions against a string.",
     category: "developer",
-    keywords: ["regex", "regexp", "match", "replace"],
+    keywords: ["regex", "regexp", "match", "replace", "regex tester online"],
     path: "/tools/regex-tester",
-    title: "Regex Tester Online — JavaScript | Prayas.dev",
+    title: "Regex Tester Online — JavaScript RegExp, No Upload",
     metaDescription:
-      "Test JavaScript regular expressions in your browser. Flags, match list, and replace. No upload.",
+      "Test JavaScript regular expressions in your browser. Flags, match list, and replace. The test string is not uploaded.",
     h1: "Regex Tester",
     intro:
       "The same RegExp engine the browser uses. Set flags, list matches with indices, and run a replace.",

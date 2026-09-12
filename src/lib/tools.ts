@@ -62,14 +62,16 @@ export const tools: Tool[] = [
       "validate",
       "beautify",
       "json validator",
+      "json formatter online",
+      "json beautifier",
     ],
     path: "/tools/json-formatter",
-    title: "JSON Formatter & Validator Online - Free | Prayas.dev",
+    title: "JSON Formatter Online — Beautify, Validate & Minify JSON",
     metaDescription:
-      "Format, validate and minify JSON online for free. Fast browser-based JSON formatter with syntax error detection.",
-    h1: "JSON Formatter",
+      "Free JSON formatter and validator in your browser. Pretty-print, minify, and catch syntax errors. No upload, no signup.",
+    h1: "JSON Formatter & Validator",
     intro:
-      "Paste JSON, format or minify it, and copy the result. Validation runs in your browser and never sends the text to a server.",
+      "Paste JSON, format or minify it, and copy the result. Validation runs in your browser and never sends the text to a server. Use it as a JSON beautifier when a payload is one unreadable line.",
     related: ["json-yaml", "json-to-go", "json-to-ts"],
     popular: true,
     localProcessing: true,
@@ -115,6 +117,7 @@ export const tools: Tool[] = [
         paragraphs: [
           "This page is a small JSON editor: paste a payload, format it for reading, minify it for transport, or check that it parses. Errors are reported with a short explanation and, when the engine provides it, a character position.",
           "It exists because JSON is easy to produce and just as easy to break with a trailing comma. The formatter is the first tool on Prayas.dev and the template for the rest.",
+          "Unlike many JSON formatter sites, the text is not posted to an API. JSON.parse and JSON.stringify run here. That matters when the payload has tokens, PII, or an internal dump you would not paste into a random form.",
         ],
       },
       {
@@ -200,9 +203,9 @@ export const tools: Tool[] = [
       "convert time",
     ],
     path: "/tools/unix-timestamp",
-    title: "Unix Timestamp Converter Online | Prayas.dev",
+    title: "Unix Timestamp Converter Online — UTC, IST, Seconds & ms",
     metaDescription:
-      "Convert unix timestamps and ISO datetimes in your browser. Seconds, milliseconds, UTC, and IST. No upload.",
+      "Convert unix timestamps and ISO datetimes in your browser. Seconds or milliseconds, UTC and IST (Asia/Kolkata). No upload.",
     h1: "Unix Timestamp Converter",
     intro:
       "Paste unix seconds, milliseconds, or an ISO-8601 string. The converter stays in your browser and prints UTC and Asia/Kolkata next to each other.",

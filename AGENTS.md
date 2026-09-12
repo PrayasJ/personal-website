@@ -9,12 +9,15 @@
 - New tools should also appear in the projects list with links.
 - Work and experience should present as a timeline.
 - Tools process user data in the browser only — no backend, database, user accounts, or paid APIs.
+- PDF and image tools should preview the file and result, then ask for confirmation before download.
+- Ads on tool pages should earn revenue without making the tools unusable.
 
 ## Learned Workspace Facts
-- The site is https://prayas.dev — Prayas Jain's portfolio plus SEO-focused free browser tools, intended for static hosting.
+- The site is https://prayas.dev — Prayas Jain's portfolio plus SEO-focused free browser tools, deployed on Vercel for static hosting.
 - The owner is a backend engineer at Nubra working on the order management system (Go, RPC).
 - Stack is Next.js App Router, TypeScript, React, and Tailwind CSS, plus existing Sass portfolio styles; prefer static generation.
 - Portfolio content lives in `data.config.tsx`; site constants and navigation live in `src/lib/site.ts`.
-- Tools are registered centrally in `src/lib/tools.ts` and routed under `/tools`, `/calculators`, `/pdf`, and `/image`.
+- Tools are registered centrally in `src/lib/tools.ts` and routed under `/tools`, `/calculators`, `/pdf`, and `/image`; the `/tools` hub lists all categories including calculators.
 - The homepage includes About, Work, Desk (an interactive trading game), Projects, Tools, and Writing.
 - Legal and utility pages include `/privacy`, `/terms`, `/about`, `/contact`, and `/guides`.
+- Google AdSense is wired through `NEXT_PUBLIC_ADSENSE_*` environment variables and shown on tool pages.
