@@ -14,7 +14,7 @@ export const pdfTools: Tool[] = [
     h1: "Merge PDF Online",
     intro:
       "Drop two or more PDFs, order them, merge. pdf-lib runs in this tab. Encrypted files are not supported.",
-    related: ["split-pdf", "rotate-pdf", "compress-pdf"],
+    related: ["merge-pdf", "rotate-pdf", "images-to-pdf"],
     popular: true,
     localProcessing: true,
     faqs: [
@@ -144,7 +144,7 @@ export const pdfTools: Tool[] = [
     h1: "PDF to PNG / JPEG / WebP",
     intro:
       "Pick pages and a scale. PDF.js draws onto a canvas; the canvas encodes the image. Multiple pages download one after another.",
-    related: ["compress-pdf", "split-pdf", "image-compress"],
+    related: ["compress-pdf", "split-pdf", "images-to-pdf"],
     localProcessing: true,
     faqs: [
       {
@@ -158,6 +158,48 @@ export const pdfTools: Tool[] = [
         title: "Rendering",
         paragraphs: [
           "The worker is a local copy of pdf.worker.min.mjs. Page bytes never go to a conversion API.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "images-to-pdf",
+    name: "Images to PDF",
+    description: "Combine PNG, JPEG, or WebP images into one PDF in the browser.",
+    category: "pdf",
+    keywords: [
+      "images to pdf",
+      "jpg to pdf",
+      "png to pdf",
+      "convert images to pdf",
+    ],
+    path: "/pdf/images-to-pdf",
+    title: "Images to PDF Online — PNG, JPEG, WebP, No Upload",
+    metaDescription:
+      "Convert images to a PDF in your browser. PNG, JPEG, WebP. Reorder pages, preview, confirm download. No upload.",
+    h1: "Images to PDF",
+    intro:
+      "Drop images, set the page order, build a PDF with pdf-lib. Each image is one page at its pixel size. Preview, then confirm download. Nothing is uploaded.",
+    related: ["merge-pdf", "pdf-to-image", "image-convert"],
+    popular: true,
+    localProcessing: true,
+    faqs: [
+      {
+        question: "Is WebP supported?",
+        answer:
+          "Yes. WebP is drawn to a canvas and embedded as PNG or JPEG. Animated WebP becomes a still frame.",
+      },
+      {
+        question: "Are the images uploaded?",
+        answer: "No. Files stay in this tab until you download the PDF.",
+      },
+    ],
+    examples: [],
+    sections: [
+      {
+        title: "Page size",
+        paragraphs: [
+          "Each page matches the image pixel dimensions. For a fixed A4 layout you would need a different tool; this one keeps the bitmap size.",
         ],
       },
     ],

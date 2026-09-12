@@ -72,7 +72,7 @@ export const tools: Tool[] = [
     h1: "JSON Formatter & Validator",
     intro:
       "Paste JSON, format or minify it, and copy the result. Validation runs in your browser and never sends the text to a server. Use it as a JSON beautifier when a payload is one unreadable line.",
-    related: ["json-yaml", "json-to-go", "json-to-ts"],
+    related: ["json-yaml", "json-to-go", "xml-formatter"],
     popular: true,
     localProcessing: true,
     faqs: [

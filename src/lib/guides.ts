@@ -251,6 +251,57 @@ export const guides: Guide[] = [
       },
     ],
   },
+  {
+    slug: "income-tax-new-regime",
+    path: "/guides/income-tax-new-regime",
+    title: "Income Tax New Regime India — Slabs, Rebate, Cess",
+    metaDescription:
+      "How Budget 2025 new-regime income tax works in India: slabs, §87A rebate to ₹12 lakh, standard deduction, and 4% cess — without uploading numbers.",
+    h1: "New-regime income tax, without the fog",
+    description:
+      "The new regime after Budget 2025 is a short ladder of slabs plus a rebate. This is the mental model behind the calculator on this site.",
+    relatedTools: [
+      "income-tax-calculator",
+      "in-hand-salary",
+      "ctc-calculator",
+      "hra-calculator",
+    ],
+    sections: [
+      {
+        title: "Slabs and the rebate",
+        paragraphs: [
+          "Taxable income is sliced: 0–4L nil, then 5%, 10%, 15%, 20%, 25%, and 30% above ₹24 lakh. If taxable income is at most ₹12 lakh, §87A rebates income tax to zero. Just above that, marginal relief stops you paying more tax than the rupees over ₹12 lakh until the slab tax is smaller.",
+          "A 4% health and education cess sits on top. Surcharge for very high incomes is a separate story and is not modelled on this site’s calculators.",
+        ],
+      },
+      {
+        title: "Gross vs taxable",
+        paragraphs: [
+          "The income tax calculator can take taxable income as-is, or subtract the ₹75,000 standard deduction from gross. The in-hand salary page starts from CTC or monthly gross and also pulls employee PF and professional tax. HRA exemption is old-regime only — use the HRA page for that formula.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "markdown-to-html",
+    path: "/guides/markdown-to-html",
+    title: "Markdown to HTML in the Browser",
+    metaDescription:
+      "Preview markdown as HTML without uploading. What Showdown supports, and why you should not paste untrusted markdown into a client-side preview.",
+    h1: "Markdown to HTML, locally",
+    description:
+      "README drafts and PR descriptions are markdown. A browser preview is enough when you do not want the text on someone else’s server.",
+    relatedTools: ["markdown-preview", "html-entities", "text-diff", "xml-formatter"],
+    sections: [
+      {
+        title: "What the preview does",
+        paragraphs: [
+          "The markdown preview on this site uses Showdown with tables, strikethrough, GFM code blocks, and task lists. The HTML is rendered in the tab and you can copy it out.",
+          "It is not a sanitizer. Untrusted markdown can carry script-shaped content. Use it for your own notes.",
+        ],
+      },
+    ],
+  },
 ];
 
 export function getGuideBySlug(slug: string): Guide | undefined {

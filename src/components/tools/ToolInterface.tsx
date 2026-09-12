@@ -48,6 +48,12 @@ import { ImageResize } from "@/components/tools/image-resize/ImageResize";
 import { ImageConvert } from "@/components/tools/image-convert/ImageConvert";
 import { ImageCrop } from "@/components/tools/image-crop/ImageCrop";
 import { FaviconGenerator } from "@/components/tools/favicon/FaviconGenerator";
+import { IncomeTaxCalculator } from "@/components/tools/income-tax/IncomeTaxCalculator";
+import { HraCalculator } from "@/components/tools/hra/HraCalculator";
+import { MarkdownPreview } from "@/components/tools/markdown-preview/MarkdownPreview";
+import { XmlFormatter } from "@/components/tools/xml-formatter/XmlFormatter";
+import { SqlFormatter } from "@/components/tools/sql-formatter/SqlFormatter";
+import { ImagesToPdf } from "@/components/tools/images-to-pdf/ImagesToPdf";
 
 export function ToolInterface({ slug }: { slug: string }) {
   switch (slug) {
@@ -131,6 +137,10 @@ export function ToolInterface({ slug }: { slug: string }) {
       return <CtcCalculator />;
     case "in-hand-salary":
       return <InHandSalary />;
+    case "income-tax-calculator":
+      return <IncomeTaxCalculator />;
+    case "hra-calculator":
+      return <HraCalculator />;
     case "merge-pdf":
       return <PdfMerge />;
     case "split-pdf":
@@ -141,6 +151,8 @@ export function ToolInterface({ slug }: { slug: string }) {
       return <PdfRotate />;
     case "pdf-to-image":
       return <PdfToImage />;
+    case "images-to-pdf":
+      return <ImagesToPdf />;
     case "image-compress":
       return <ImageCompress />;
     case "image-resize":
@@ -151,6 +163,12 @@ export function ToolInterface({ slug }: { slug: string }) {
       return <ImageCrop />;
     case "favicon-generator":
       return <FaviconGenerator />;
+    case "markdown-preview":
+      return <MarkdownPreview />;
+    case "xml-formatter":
+      return <XmlFormatter />;
+    case "sql-formatter":
+      return <SqlFormatter />;
     default:
       return null;
   }

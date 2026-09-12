@@ -2039,6 +2039,87 @@ html:not(.dark) .tool-shell {
   color: var(--color-muted);
 }
 
+.markdown-preview h1,
+.markdown-preview h2,
+.markdown-preview h3 {
+  margin: 0.85rem 0 0.4rem;
+  font-weight: 600;
+  color: var(--color-ink);
+  line-height: 1.25;
+}
+
+.markdown-preview h1 {
+  font-size: 1.35rem;
+}
+
+.markdown-preview h2 {
+  font-size: 1.15rem;
+}
+
+.markdown-preview h3 {
+  font-size: 1.02rem;
+}
+
+.markdown-preview p,
+.markdown-preview ul,
+.markdown-preview ol,
+.markdown-preview pre,
+.markdown-preview blockquote,
+.markdown-preview table {
+  margin: 0.55rem 0;
+}
+
+.markdown-preview ul,
+.markdown-preview ol {
+  padding-left: 1.25rem;
+}
+
+.markdown-preview code {
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+  padding: 0.1em 0.35em;
+  border-radius: 0.3em;
+  background: color-mix(in srgb, var(--color-surface-muted) 80%, transparent);
+}
+
+.markdown-preview pre {
+  overflow-x: auto;
+  padding: 0.75rem 0.9rem;
+  border: 1px solid var(--color-border);
+  border-radius: 0.6rem;
+  background: color-mix(in srgb, var(--color-bg) 50%, var(--color-surface));
+}
+
+.markdown-preview pre code {
+  padding: 0;
+  background: none;
+}
+
+.markdown-preview table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.markdown-preview th,
+.markdown-preview td {
+  border: 1px solid var(--color-border);
+  padding: 0.35rem 0.55rem;
+  text-align: left;
+}
+
+.markdown-preview a {
+  color: var(--color-accent);
+  text-decoration: underline;
+  text-underline-offset: 0.12em;
+}
+
+.markdown-preview blockquote {
+  border-left: 3px solid color-mix(in srgb, var(--color-accent) 50%, transparent);
+  padding-left: 0.75rem;
+  color: var(--color-muted);
+}
+
 .tool-examples {
   display: grid;
   gap: 1rem;

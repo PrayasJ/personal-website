@@ -329,7 +329,7 @@ export const calculatorTools: Tool[] = [
     h1: "CTC Calculator",
     intro:
       "Annual CTC, basic percent, metro or other HRA, optional ₹15,000 PF wage cap. Employer PF is 12%. Gratuity provision is 4.81% of basic. Special allowance is the remainder. Not HR advice.",
-    related: ["in-hand-salary", "gratuity-calculator", "gst-calculator"],
+    related: ["in-hand-salary", "income-tax-calculator", "gst-calculator"],
     popular: true,
     localProcessing: true,
     faqs: [
@@ -371,14 +371,14 @@ export const calculatorTools: Tool[] = [
     h1: "In-hand salary",
     intro:
       "Start from annual CTC or monthly gross. Employee PF, professional tax, and new-regime income tax (₹75,000 standard deduction, ₹12 lakh rebate, 4% cess) come off. Surcharge above ₹50 lakh is not modelled. Not tax advice.",
-    related: ["ctc-calculator", "gratuity-calculator", "ppf-calculator"],
+    related: ["ctc-calculator", "income-tax-calculator", "hra-calculator"],
     popular: true,
     localProcessing: true,
     faqs: [
       {
         question: "Old regime?",
         answer:
-          "Not on this page. 80C, HRA exemption, and the old slabs are omitted so the numbers stay inspectable.",
+          "Not on this page. 80C, HRA exemption, and the old slabs are omitted so the numbers stay inspectable. Use the HRA calculator for old-regime exemption only.",
       },
       {
         question: "Is EPF a tax deduction here?",
@@ -397,6 +397,112 @@ export const calculatorTools: Tool[] = [
         title: "Tax",
         paragraphs: [
           "Slabs follow Budget 2025’s new regime. Income up to ₹12 lakh after standard deduction is rebated to zero. Just above that, tax is limited by marginal relief so you never pay more tax than the rupees over ₹12 lakh until the slab tax is smaller. Then 4% cess.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "income-tax-calculator",
+    name: "Income Tax Calculator",
+    description:
+      "New-regime income tax for India: slabs, §87A rebate, and 4% cess.",
+    category: "calculator",
+    keywords: [
+      "income tax calculator",
+      "new regime",
+      "87A",
+      "budget 2025",
+      "income tax india",
+    ],
+    path: "/calculators/income-tax-calculator",
+    title: "Income Tax Calculator India — New Regime FY 2025-26",
+    metaDescription:
+      "Free new-regime income tax calculator for India. Budget 2025 slabs, §87A rebate to ₹12 lakh, 4% cess. Runs in your browser. Not tax advice.",
+    h1: "Income Tax Calculator (New Regime)",
+    intro:
+      "Enter taxable income, or gross income and subtract the ₹75,000 standard deduction. See slab tax, §87A rebate, cess, and total. Surcharge above ₹50 lakh is not modelled. Not tax advice.",
+    related: ["in-hand-salary", "ctc-calculator", "hra-calculator"],
+    popular: true,
+    localProcessing: true,
+    faqs: [
+      {
+        question: "Is this old regime?",
+        answer:
+          "No. Only the new regime after Budget 2025. Old slabs, 80C, and HRA exemption are not on this page.",
+      },
+      {
+        question: "What is the ₹12 lakh rebate?",
+        answer:
+          "If taxable income is at most ₹12 lakh, §87A rebates income tax to zero. Just above that, marginal relief caps tax so you do not pay more tax than the rupees over ₹12 lakh until the slab tax is smaller.",
+      },
+      {
+        question: "Is this tax advice?",
+        answer: "No.",
+      },
+    ],
+    examples: [
+      {
+        title: "₹12 lakh taxable",
+        code: "taxable=1200000 → tax 0 after §87A",
+      },
+    ],
+    sections: [
+      {
+        title: "The slabs",
+        paragraphs: [
+          "0–4L nil, 4–8L 5%, 8–12L 10%, 12–16L 15%, 16–20L 20%, 20–24L 25%, above 24L 30%. Then 4% cess. The in-hand salary page uses the same helper; this page is only the tax line.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "hra-calculator",
+    name: "HRA Calculator",
+    description:
+      "Old-regime HRA exemption: least of actual HRA, % of basic, and rent − 10% basic.",
+    category: "calculator",
+    keywords: [
+      "hra calculator",
+      "hra exemption",
+      "section 10(13A)",
+      "house rent allowance",
+      "metro hra",
+    ],
+    path: "/calculators/hra-calculator",
+    title: "HRA Calculator India — Exemption under Section 10(13A)",
+    metaDescription:
+      "Calculate HRA exemption for India (old regime): min of actual HRA, 50%/40% of basic, rent minus 10% of basic. Browser only. Not tax advice.",
+    h1: "HRA Exemption Calculator",
+    intro:
+      "Annual basic, HRA received, and rent paid. Metro uses 50% of basic; other cities 40%. Exemption is the least of three figures. The new regime does not allow this. Not tax advice.",
+    related: ["income-tax-calculator", "ctc-calculator", "in-hand-salary"],
+    localProcessing: true,
+    faqs: [
+      {
+        question: "New regime?",
+        answer:
+          "HRA exemption under section 10(13A) applies to the old regime. Under the new regime this exemption is not available.",
+      },
+      {
+        question: "Monthly or annual?",
+        answer: "Enter annual figures (or multiply monthly × 12).",
+      },
+      {
+        question: "Is this tax advice?",
+        answer: "No.",
+      },
+    ],
+    examples: [
+      {
+        title: "Metro example",
+        code: "basic=480000, HRA=240000, rent=300000 → min of three",
+      },
+    ],
+    sections: [
+      {
+        title: "The three caps",
+        paragraphs: [
+          "Exemption is the minimum of: (1) HRA actually received, (2) 50% of basic in metro cities or 40% otherwise, (3) rent paid minus 10% of basic. Anything above that is taxable HRA.",
         ],
       },
     ],

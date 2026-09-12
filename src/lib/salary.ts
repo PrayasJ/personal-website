@@ -117,6 +117,97 @@ export function newRegimeTax(taxable: number): { tax: number; cess: number; tota
   };
 }
 
+export type IncomeTaxResult = {
+  input: number;
+  standardDeduction: number;
+  taxable: number;
+  slabTax: number;
+  afterRebate: number;
+  rebateApplied: boolean;
+  cess: number;
+  total: number;
+  effectiveRate: number;
+};
+
+/** New-regime income tax. Mode "taxable" uses the figure as-is; "gross" subtracts ₹75,000 standard deduction. */
+export function calculateIncomeTax(
+  amount: number,
+  mode: "taxable" | "gross",
+): IncomeTaxResult {
+  if (!(amount >= 0) || !Number.isFinite(amount)) {
+    throw new Error("Enter a non-negative income amount.");
+  }
+  const input = rupees(amount);
+  const standardDeduction = mode === "gross" ? STANDARD_DEDUCTION : 0;
+  const taxable = Math.max(0, input - standardDeduction);
+  const raw = slabTax(taxable);
+  const rebateApplied = taxable <= REBATE_CEILING;
+  let afterRebate = raw;
+  if (rebateApplied) {
+    afterRebate = 0;
+  } else {
+    afterRebate = Math.min(raw, taxable - REBATE_CEILING);
+  }
+  const cess = afterRebate * CESS;
+  const total = afterRebate + cess;
+  return {
+    input,
+    standardDeduction,
+    taxable: rupees(taxable),
+    slabTax: rupees(raw),
+    afterRebate: rupees(afterRebate),
+    rebateApplied,
+    cess: rupees(cess),
+    total: rupees(total),
+    effectiveRate: input > 0 ? (rupees(total) / input) * 100 : 0,
+  };
+}
+
+export type HraExemptionResult = {
+  basic: number;
+  hraReceived: number;
+  rentPaid: number;
+  metro: boolean;
+  actualHra: number;
+  percentOfBasic: number;
+  rentMinusTenPercent: number;
+  exemption: number;
+  taxableHra: number;
+};
+
+/** Old-regime HRA exemption under section 10(13A). New regime does not allow this. */
+export function calculateHraExemption(
+  basic: number,
+  hraReceived: number,
+  rentPaid: number,
+  metro: boolean,
+): HraExemptionResult {
+  if (!(basic > 0)) {
+    throw new Error("Basic salary must be positive.");
+  }
+  if (hraReceived < 0 || rentPaid < 0) {
+    throw new Error("HRA and rent cannot be negative.");
+  }
+  const actualHra = hraReceived;
+  const percentOfBasic = basic * (metro ? 0.5 : 0.4);
+  const rentMinusTenPercent = Math.max(0, rentPaid - basic * 0.1);
+  const exemption = Math.max(
+    0,
+    Math.min(actualHra, percentOfBasic, rentMinusTenPercent),
+  );
+  return {
+    basic: rupees(basic),
+    hraReceived: rupees(hraReceived),
+    rentPaid: rupees(rentPaid),
+    metro,
+    actualHra: rupees(actualHra),
+    percentOfBasic: rupees(percentOfBasic),
+    rentMinusTenPercent: rupees(rentMinusTenPercent),
+    exemption: rupees(exemption),
+    taxableHra: rupees(Math.max(0, hraReceived - exemption)),
+  };
+}
+
 export function calculateInHand(
   annualGross: number,
   annualBasic: number,

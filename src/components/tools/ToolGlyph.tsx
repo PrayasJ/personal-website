@@ -238,10 +238,19 @@ export function ToolGlyph({ slug }: { slug: string }) {
       );
     case "ctc-calculator":
     case "in-hand-salary":
+    case "income-tax-calculator":
       return (
         <Mark>
           <rect x="4" y="6" width="16" height="12" rx="2" />
           <path d="M8 10h8M8 14h5" />
+        </Mark>
+      );
+    case "hra-calculator":
+      return (
+        <Mark>
+          <path d="M4 11 12 5l8 6" />
+          <path d="M6 10v8h12v-8" />
+          <path d="M10 18v-4h4v4" />
         </Mark>
       );
     case "merge-pdf":
@@ -249,6 +258,7 @@ export function ToolGlyph({ slug }: { slug: string }) {
     case "compress-pdf":
     case "rotate-pdf":
     case "pdf-to-image":
+    case "images-to-pdf":
       return (
         <Mark>
           <path d="M7 4h7l4 4v12H7z" />
@@ -301,6 +311,28 @@ export function ToolGlyph({ slug }: { slug: string }) {
         <Mark>
           <path d="M7 15 12 5l5 10" />
           <path d="M9 15h6" />
+        </Mark>
+      );
+    case "markdown-preview":
+      return (
+        <Mark>
+          <path d="M5 7h14v10H5z" />
+          <path d="M7 14V9l2.5 3L12 9v5M14 14v-2.5M14 11.5 16.5 9 19 11.5V14" />
+        </Mark>
+      );
+    case "xml-formatter":
+      return (
+        <Mark>
+          <path d="M8 5c-2 0-3 1.2-3 3v2c0 1-1 1.5-2 1.5 1 0 2 .5 2 1.5v2c0 1.8 1 3 3 3" />
+          <path d="M16 5c2 0 3 1.2 3 3v2c0 1 1 1.5 2 1.5-1 0-2 .5-2 1.5v2c0 1.8-1 3-3 3" />
+        </Mark>
+      );
+    case "sql-formatter":
+      return (
+        <Mark>
+          <ellipse cx="12" cy="7" rx="7" ry="2.5" />
+          <path d="M5 7v5c0 1.4 3.1 2.5 7 2.5s7-1.1 7-2.5V7" />
+          <path d="M5 12v5c0 1.4 3.1 2.5 7 2.5s7-1.1 7-2.5v-5" />
         </Mark>
       );
     default:

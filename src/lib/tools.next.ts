@@ -236,4 +236,145 @@ export const nextDeveloperTools: Tool[] = [
       },
     ],
   },
+  {
+    slug: "markdown-preview",
+    name: "Markdown Preview",
+    description: "Preview markdown as HTML in your browser. Copy the HTML out.",
+    category: "developer",
+    keywords: [
+      "markdown preview",
+      "markdown to html",
+      "md preview",
+      "github flavored markdown",
+    ],
+    path: "/tools/markdown-preview",
+    title: "Markdown Preview Online — Markdown to HTML, No Upload",
+    metaDescription:
+      "Preview markdown and copy HTML in your browser. Tables, strikethrough, task lists. No upload, no account.",
+    h1: "Markdown Preview",
+    intro:
+      "Paste markdown on the left. The HTML preview updates in this tab. Copy the HTML when you need it. Not a full sanitizer for untrusted input.",
+    related: ["html-entities", "text-diff", "xml-formatter"],
+    popular: true,
+    localProcessing: true,
+    faqs: [
+      {
+        question: "Is the HTML sanitized?",
+        answer:
+          "No. Do not paste untrusted markdown. This page is for your own notes and READMEs.",
+      },
+      {
+        question: "Which flavour?",
+        answer:
+          "Showdown with tables, strikethrough, GFM code blocks, and task lists.",
+      },
+    ],
+    examples: [
+      {
+        title: "Heading",
+        code: "# Title\n\nParagraph with **bold**.",
+      },
+    ],
+    sections: [
+      {
+        title: "Why this page",
+        paragraphs: [
+          "I keep checking markdown before it hits a PR description. A local preview is enough; the text never needs a server.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "xml-formatter",
+    name: "XML Formatter",
+    description: "Pretty-print and minify XML in the browser with DOMParser.",
+    category: "developer",
+    keywords: [
+      "xml formatter",
+      "xml beautifier",
+      "pretty print xml",
+      "minify xml",
+    ],
+    path: "/tools/xml-formatter",
+    title: "XML Formatter Online — Beautify & Minify XML",
+    metaDescription:
+      "Format and minify XML in your browser with DOMParser. Catch parse errors locally. No upload.",
+    h1: "XML Formatter",
+    intro:
+      "Paste XML, format or minify it, copy the result. Parsing uses the browser DOMParser — nothing is uploaded.",
+    related: ["json-formatter", "html-entities", "markdown-preview"],
+    popular: true,
+    localProcessing: true,
+    faqs: [
+      {
+        question: "Does it validate against a schema?",
+        answer:
+          "No. It only checks that the document parses as XML. XSD and DTD validation are out of scope.",
+      },
+      {
+        question: "Is the XML uploaded?",
+        answer: "No. Format and minify stay in this tab.",
+      },
+    ],
+    examples: [
+      {
+        title: "Root with children",
+        code: "<root><item id=\"1\">ok</item></root>",
+      },
+    ],
+    sections: [
+      {
+        title: "How it works",
+        paragraphs: [
+          "DOMParser builds a document. On success, the tree is serialized with two-space indentation or compacted. Parser errors from the engine are shown as-is.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "sql-formatter",
+    name: "SQL Formatter",
+    description: "Pretty-print SQL for PostgreSQL, MySQL, SQLite, or standard SQL.",
+    category: "developer",
+    keywords: [
+      "sql formatter",
+      "format sql",
+      "pretty print sql",
+      "postgresql formatter",
+    ],
+    path: "/tools/sql-formatter",
+    title: "SQL Formatter Online — PostgreSQL, MySQL, SQLite",
+    metaDescription:
+      "Format SQL in your browser. PostgreSQL, MySQL, SQLite, or standard SQL. No upload, no account.",
+    h1: "SQL Formatter",
+    intro:
+      "Paste a query, pick a dialect, pretty-print. Formatting runs with sql-formatter in this tab — the query never leaves the page.",
+    related: ["json-formatter", "text-diff", "csv-json"],
+    popular: true,
+    localProcessing: true,
+    faqs: [
+      {
+        question: "Does it run the query?",
+        answer: "No. It only formats text. There is no database connection.",
+      },
+      {
+        question: "Which dialects?",
+        answer: "Standard SQL, PostgreSQL, MySQL, and SQLite.",
+      },
+    ],
+    examples: [
+      {
+        title: "Select with join",
+        code: "select o.id from orders o join fills f on f.order_id=o.id;",
+      },
+    ],
+    sections: [
+      {
+        title: "When to use this",
+        paragraphs: [
+          "OMS and API logs often dump one-line SQL. Formatting it locally is faster than pasting into a random site that might keep the query.",
+        ],
+      },
+    ],
+  },
 ];
