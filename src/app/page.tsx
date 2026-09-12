@@ -1,10 +1,5 @@
-import styles from './page.module.scss'
-import Human from './components/human/base/base'
+import { HomeView } from "@/components/portfolio/HomeView";
 
 export default function Home() {
-  return (
-    <div>
-      <Human />
-    </div>
-  )
+  return <HomeView />;
 }

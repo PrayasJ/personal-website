@@ -60,6 +60,14 @@ interface BlogInterface {
     filePath: string
 }
 
+export interface EducationInterface {
+    title: string
+    org: string
+    detail?: string
+    year?: string
+    url?: string
+}
+
 export const Months: { [key: number]: string } = {
     1: 'Jan',
     2: 'Feb',
@@ -83,13 +91,31 @@ DATA DEFINITIONS
 
 export const AboutData: AboutInterface = {
     name: 'Prayas Jain',
-    byline: 'Senior Fullstack Developer',
-    about: 'I build accessible, inclusive products & digital experiences for web and mobile.',
-    description: `In 2018, I embarked on my developer journey with a deep dive into the intricacies of the C programming language, where I initially recreated the classic game, Asteroids, using just a few lines of code.\n\n` +
-    `This endeavor ignited my passion for software development and led me on a path where I constantly seek to simplify and automate various aspects of my life. Since then, I've honed my skills and expanded my toolkit. I've delved into modern web and mobile app development, mastering technologies such as React and React Native to build intuitive user interfaces. In the realm of web application frameworks, I've become proficient in Django, a robust Python framework, as well as Next.js and Express, JavaScript frameworks that have enabled me to craft dynamic and responsive web applications.\n\n` + 
-    `Yet, despite my ongoing quest for perfection, I've learned to balance the pursuit of excellence with practicality, recognizing that completion is as vital as perfection. My journey as a developer is marked by a continuous commitment to mastering new skills and creating solutions that are both elegant and functional.`,
+    byline: 'Backend engineer',
+    about: 'Software developer at Nubra. I work on the order management system — Go, RPC, and the path an order takes after it leaves the client.',
+    description: `I started in 2018 with C, rebuilding Asteroids in a few hundred lines. That habit — make the machine do the thing, then make it do it reliably — is still how I work.\n\n` +
+    `These days I am a backend engineer at Nubra (Zanskar Research). I develop and maintain the OMS service on a live trading platform: Go, RPC, and the operational details that sit behind an order.\n\n` +
+    `Before that I spent years on product fullstack — React, React Native, Django, Next.js — at Apricot Planet and Imarticus. I still care about the interface. I just spend more time on the path behind it.`,
     resume: '/resume.pdf',
 }
+
+export const educationData: EducationInterface[] = [
+    {
+        title: 'Information Technology',
+        org: 'Undergraduate',
+        detail:
+            'IT undergraduate. During Google Summer of Code 2022 I was entering the final year of college.',
+        year: "Undergraduate",
+    },
+    {
+        title: 'Google Summer of Code',
+        org: 'Weecology / NumFOCUS',
+        detail:
+            'Student developer. Parallel computing for model fitting and prediction in R, including Windows support and performance work.',
+        year: '2022',
+        url: 'https://summerofcode.withgoogle.com/archive/2022/projects/qBazQsVJ',
+    },
+]
 
 export const socialData: SocialInterface = {
     github: {

@@ -26,13 +26,14 @@ interface BlogMarkdownInterface {
 import markDownHTML from "../../../../../loadedMarkdown.json"
 
 import { ReactElement, RefObject, useEffect, useRef, useState } from "react";
+import Link from "next/link";
 
 let markDownHTMLTS = markDownHTML as BlogMarkdownInterface
 
 export default function Base() {
   interface Section {
     title: string;
-    sectionRef: RefObject<HTMLDivElement>;
+    sectionRef: RefObject<HTMLDivElement | null>;
   }
 
   type SectionList = Record<string, Section>;
@@ -56,10 +57,10 @@ export default function Base() {
     },
   };
 
-  const observationContainerRef: RefObject<HTMLDivElement> =
+  const observationContainerRef: RefObject<HTMLDivElement | null> =
     useRef<HTMLDivElement>(null);
 
-  const scrollTo = (ref: RefObject<HTMLDivElement>) => {
+  const scrollTo = (ref: RefObject<HTMLDivElement | null>) => {
     if (ref.current) {
       ref.current.scrollIntoView({ behavior: "smooth" });
     }
@@ -156,6 +157,10 @@ export default function Base() {
               </div>
             </div>
           ))}
+          <Link href="/tools" className={styles.controller}>
+            <div className={styles.highlighter}></div>
+            <div className={styles.title_controller}>Tools</div>
+          </Link>
         </div>
 
         <div className={styles.social_section}>
@@ -191,6 +196,29 @@ export default function Base() {
         >
           {AboutData.description}
         </div>
+
+        <div className={styles.section_title}>Tools</div>
+        <div className={styles.tools_blurb} id="tools">
+          Free browser-based developer tools — JSON formatter first, with more
+          on the way. They run locally in your browser and do not require an
+          account.
+        </div>
+        <Link href="/tools" className={styles.tools_link}>
+          Open tools
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+            className={styles.resume_image}
+            aria-hidden="true"
+          >
+            <path
+              fillRule="evenodd"
+              d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z"
+              clipRule="evenodd"
+            ></path>
+          </svg>
+        </Link>
 
         <div className={styles.section_title}>Experience</div>
         <div

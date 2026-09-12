@@ -32,10 +32,10 @@ async function loadAllMarkdown() {
     };
   }
 
-  const outputPath = path.join(process.cwd(), 'ladedMarkdown.json')
-  fs.writeFile('loadedMarkdown.json', JSON.stringify(markdowns), (error) => {
-    if (error) throw error;
-  });
+  fs.writeFileSync(
+    path.join(process.cwd(), "loadedMarkdown.json"),
+    JSON.stringify(markdowns),
+  );
 }
 
 console.log("Loading the development content!")

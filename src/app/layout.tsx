@@ -1,60 +1,120 @@
-import './globals.scss'
-import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
-import { Analytics } from '@vercel/analytics/react';
+import type { Metadata, Viewport } from "next";
+import { Fraunces, IBM_Plex_Mono, Plus_Jakarta_Sans } from "next/font/google";
+import { Analytics } from "@vercel/analytics/react";
+import { Footer } from "@/components/layout/Footer";
+import { Header } from "@/components/layout/Header";
+import { ThemeScript } from "@/components/navigation/ThemeScript";
+import { TapeProvider } from "@/components/desk/TapeProvider";
+import { Ambient } from "@/components/fx/Ambient";
+import { CustomCursor } from "@/components/fx/CustomCursor";
+import { AdSenseScript } from "@/components/ads/AdSenseScript";
+import { SITE_URL } from "@/lib/site";
+import "./globals.css";
 
-const inter = Inter({ subsets: ['latin'] })
+const sans = Plus_Jakarta_Sans({
+  subsets: ["latin"],
+  variable: "--font-jakarta",
+  display: "swap",
+});
+
+const display = Fraunces({
+  subsets: ["latin"],
+  weight: ["500", "600", "700"],
+  variable: "--font-fraunces",
+  display: "swap",
+});
+
+const mono = IBM_Plex_Mono({
+  subsets: ["latin"],
+  weight: ["400", "500"],
+  variable: "--font-plex-mono",
+  display: "swap",
+});
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+  themeColor: "#050816",
+};
 
 export const metadata: Metadata = {
-  title: 'Prayas Jain',
-  description: 'Senior Software Developer With Experience in React, React-Native, Django, Node.js and other technologies.',
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: "Prayas Jain — Backend engineer",
+    template: "%s | Prayas Jain",
+  },
+  description:
+    "Backend engineer at Nubra. I work on order management systems in Go, and I keep a small set of free browser tools on this site.",
+  authors: [{ name: "Prayas Jain", url: SITE_URL }],
   openGraph: {
-    title: 'Prayas Jain',
-    description: 'Senior Full Stack Developer With Experience in React, React-Native, Django, Node.js and other technologies.',
-    url: 'https://www.prayas.dev/',
-    siteName: 'Prayas Jain - SDE',
+    title: "Prayas Jain — Backend engineer",
+    description:
+      "OMS, Go, RPC at Nubra. Portfolio, writing, and browser-based developer tools.",
+    url: "https://www.prayas.dev/",
+    siteName: "Prayas Jain",
     images: [
       {
-        url: 'https://www.prayas.dev/images/site-preview.png',
+        url: "https://www.prayas.dev/images/site-preview.png",
         width: 1726,
         height: 971,
       },
-      {
-        url: 'https://www.prayas.dev/images/site-preview-square.png',
-        width: 1019,
-        height: 1019,
-      }
     ],
-    type: 'website'
+    type: "website",
   },
   twitter: {
-    title: 'Prayas Jain',
-    description: 'Senior Full Stack Developer With Experience in React, React-Native, Django, Node.js and other technologies.',
+    title: "Prayas Jain — Backend engineer",
+    description:
+      "OMS, Go, RPC at Nubra. Portfolio, writing, and browser-based developer tools.",
+    card: "summary_large_image",
     images: [
       {
-        url: 'https://www.prayas.dev/images/site-preview.png',
+        url: "https://www.prayas.dev/images/site-preview.png",
         width: 1726,
         height: 971,
       },
-      {
-        url: 'https://www.prayas.dev/images/site-preview-square.png',
-        width: 1019,
-        height: 1019,
-      }
     ],
-    card: 'summary_large_image'
   },
-  keywords: ['react', 'react-native', 'django', 'python', 'nodejs', 'wordpress', 'nextjs', 'express', 'docker', 'SDE', 'fullstack', 'developer']
-}
+  keywords: [
+    "backend engineer",
+    "OMS",
+    "golang",
+    "trading systems",
+    "Nubra",
+    "Prayas Jain",
+  ],
+};
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className={inter.className} style={{margin: 0}}>{children}<Analytics /></body>
+    <html
+      lang="en"
+      className={`${sans.variable} ${display.variable} ${mono.variable}`}
+      suppressHydrationWarning
+    >
+      <body className={`${sans.className} antialiased`}>
+        <ThemeScript />
+        <CustomCursor />
+        <Ambient />
+        <TapeProvider>
+        <div id="site" className="flex min-h-dvh flex-col">
+          <a href="#main" className="skip-link">
+            Skip to content
+          </a>
+          <Header />
+          <main id="main" className="flex-1">
+            {children}
+          </main>
+          <Footer />
+        </div>
+        </TapeProvider>
+        <Analytics />
+        <AdSenseScript />
+      </body>
     </html>
-  )
+  );
 }
