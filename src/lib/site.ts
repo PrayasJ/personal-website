@@ -1,6 +1,6 @@
 export const SITE_NAME = "Prayas.dev";
 export const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ?? "https://prayas.dev";
+  process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ?? "https://www.prayas.dev";
 export const SITE_TAGLINE =
   "Backend engineer at Nubra. OMS, Go, RPC — plus a small set of free browser tools.";
 
