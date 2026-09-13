@@ -1,5 +1,5 @@
 import { categories } from "@/lib/site";
-import { getToolsByCategory } from "@/lib/tools";
+import { getToolsByCategory, toToolListItem } from "@/lib/tools";
 import { Container } from "@/components/layout/Container";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { ToolGrid } from "@/components/tools/ToolGrid";
@@ -24,13 +24,13 @@ export const metadata = pageMetadata({
 });
 
 export default function ToolsIndexPage() {
-  const photo = getToolsByCategory("photo");
-  const pdf = getToolsByCategory("pdf");
-  const calculators = getToolsByCategory("calculator");
-  const student = getToolsByCategory("student");
-  const qr = getToolsByCategory("qr");
-  const image = getToolsByCategory("image");
-  const developer = getToolsByCategory("developer");
+  const photo = getToolsByCategory("photo").map(toToolListItem);
+  const pdf = getToolsByCategory("pdf").map(toToolListItem);
+  const calculators = getToolsByCategory("calculator").map(toToolListItem);
+  const student = getToolsByCategory("student").map(toToolListItem);
+  const qr = getToolsByCategory("qr").map(toToolListItem);
+  const image = getToolsByCategory("image").map(toToolListItem);
+  const developer = getToolsByCategory("developer").map(toToolListItem);
 
   const all = [
     ...photo,

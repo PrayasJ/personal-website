@@ -1,8 +1,8 @@
-import { getRelatedTools } from "@/lib/tools";
+import { getRelatedTools, toToolListItem } from "@/lib/tools";
 import { ToolCard } from "@/components/tools/ToolCard";
 
 export function RelatedTools({ slug }: { slug: string }) {
-  const related = getRelatedTools(slug);
+  const related = getRelatedTools(slug).map(toToolListItem);
   if (related.length === 0) {
     return null;
   }

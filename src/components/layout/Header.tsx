@@ -1,12 +1,15 @@
 import Link from "next/link";
 import { AboutData } from "../../../data.config";
 import { navItems, profile } from "@/lib/site";
+import { getToolSearchIndex } from "@/lib/tools";
 import { LiveTape } from "@/components/desk/LiveTape";
 import { ThemeToggle } from "@/components/navigation/ThemeToggle";
 import { ToolSearch } from "@/components/navigation/ToolSearch";
 import { MobileNav } from "@/components/navigation/MobileNav";
 
 export function Header() {
+  const searchItems = getToolSearchIndex();
+
   return (
     <header className="sticky top-0 z-50 border-b border-border bg-bg/80 pt-[env(safe-area-inset-top)] backdrop-blur-md">
       <LiveTape />
@@ -32,7 +35,7 @@ export function Header() {
           </ul>
         </nav>
         <div className="ml-auto hidden w-56 md:block">
-          <ToolSearch />
+          <ToolSearch items={searchItems} />
         </div>
         <div className="ml-auto flex items-center gap-2 md:ml-0">
           <a
@@ -53,7 +56,7 @@ export function Header() {
             </a>
           ) : null}
           <ThemeToggle />
-          <MobileNav />
+          <MobileNav searchItems={searchItems} />
         </div>
       </div>
     </header>

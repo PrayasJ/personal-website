@@ -8,8 +8,13 @@ import { imageTools } from "@/lib/tools.image";
 import { photoTools } from "@/lib/tools.photo";
 import { studentTools, ageCalculatorTool } from "@/lib/tools.student";
 import { qrTools } from "@/lib/tools.qr";
+import {
+  matchToolListItem,
+  type ToolListItem,
+} from "@/lib/tool-list";
 
-export type { ToolCategory };
+export type { ToolCategory, ToolListItem };
+export { matchToolListItem };
 
 export type ToolFaq = {
   question: string;
@@ -314,40 +319,65 @@ export function getRelatedTools(slug: string): Tool[] {
     .filter((related): related is Tool => Boolean(related));
 }
 
+/** Slim card/search fields from a full tool record. */
+export function toToolListItem(tool: Tool): ToolListItem {
+  return {
+    slug: tool.slug,
+    name: tool.name,
+    description: tool.description,
+    path: tool.path,
+    category: tool.category,
+    keywords: tool.keywords,
+    popular: tool.popular,
+  };
+}
+
+export function getToolSearchIndex(): ToolListItem[] {
+  return tools.map(toToolListItem);
+}
+
 export function searchTools(query: string): Tool[] {
   const normalized = query.trim().toLowerCase();
   if (!normalized) {
     return [];
   }
-  const terms = normalized.split(/\s+/);
-  return tools.filter((tool) => {
-    const haystack = [
-      tool.name,
-      tool.description,
-      tool.category,
-      tool.h1,
-      ...tool.keywords,
-    ]
-      .join(" ")
-      .toLowerCase();
-    return terms.every((term) => haystack.includes(term));
-  });
+  return tools.filter((tool) => matchToolListItem(toToolListItem(tool), query));
 }
 
 export function getIndexableToolPaths(): string[] {
   return tools.map((tool) => tool.path);
 }
 
-/** Homepage project cards for every registered tool. Adding a tool is enough. */
-export function getToolProjects() {
-  return tools.map((tool) => ({
+type LiveToolProject = {
+  title: string;
+  description: string;
+  url: string;
+  year: number;
+  skills: string[];
+  links: { url: string; text: string }[];
+  live: true;
+  internal: true;
+};
+
+function toLiveProject(tool: Tool): LiveToolProject {
+  return {
     title: tool.name,
     description: tool.description,
     url: tool.path,
     year: 2026,
     skills: ["TypeScript", "Next.js", ...tool.keywords.slice(0, 3)],
     links: [{ url: tool.path, text: "Open tool" }],
-    live: true as const,
-    internal: true as const,
-  }));
+    live: true,
+    internal: true,
+  };
+}
+
+/** Homepage project cards — popular tools only to keep `/` RSC light. */
+export function getPopularToolProjects(limit = 8): LiveToolProject[] {
+  return getPopularTools(limit).map(toLiveProject);
+}
+
+/** Full registry as project cards (hubs / exports). Prefer getPopularToolProjects on `/`. */
+export function getToolProjects(): LiveToolProject[] {
+  return tools.map(toLiveProject);
 }

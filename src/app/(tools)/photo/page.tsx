@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { categories } from "@/lib/site";
-import { getToolsByCategory } from "@/lib/tools";
+import { getToolsByCategory, toToolListItem } from "@/lib/tools";
 import { Container } from "@/components/layout/Container";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { ToolGrid } from "@/components/tools/ToolGrid";
@@ -23,8 +23,8 @@ export const metadata = pageMetadata({
 });
 
 export default function PhotoToolsPage() {
-  const photo = getToolsByCategory("photo");
-  const image = getToolsByCategory("image");
+  const photo = getToolsByCategory("photo").map(toToolListItem);
+  const image = getToolsByCategory("image").map(toToolListItem);
 
   return (
     <>

@@ -6,8 +6,9 @@ import Link from "next/link";
 import { AboutData } from "../../../data.config";
 import { navItems, profile } from "@/lib/site";
 import { ToolSearch } from "@/components/navigation/ToolSearch";
+import type { ToolListItem } from "@/lib/tool-list";
 
-export function MobileNav() {
+export function MobileNav({ searchItems }: { searchItems: ToolListItem[] }) {
   const [open, setOpen] = useState(false);
   const mounted = useSyncExternalStore(
     () => () => {},
@@ -64,7 +65,7 @@ export function MobileNav() {
               </button>
             </div>
             <div className="mobile-sheet-body">
-              <ToolSearch variant="menu" onNavigate={close} />
+              <ToolSearch items={searchItems} variant="menu" onNavigate={close} />
               <nav aria-label="Mobile" className="mt-5">
                 <ul className="flex flex-col">
                   {navItems.map((item) => (

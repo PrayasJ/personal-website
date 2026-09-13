@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useSyncExternalStore } from "react";
-import { searchTools, type Tool } from "@/lib/tools";
+import { matchToolListItem, type ToolListItem } from "@/lib/tool-list";
 import { ToolCard } from "@/components/tools/ToolCard";
 
 function subscribe(onChange: () => void) {
@@ -17,7 +17,7 @@ export function ToolGrid({
   tools,
   hideEmpty = false,
 }: {
-  tools: Tool[];
+  tools: ToolListItem[];
   hideEmpty?: boolean;
 }) {
   const query = useSyncExternalStore(subscribe, getSearchQuery, () => "");
@@ -26,8 +26,7 @@ export function ToolGrid({
     if (!query.trim()) {
       return tools;
     }
-    const allowed = new Set(tools.map((tool) => tool.slug));
-    return searchTools(query).filter((tool) => allowed.has(tool.slug));
+    return tools.filter((tool) => matchToolListItem(tool, query));
   }, [query, tools]);
 
   if (visible.length === 0) {

@@ -2,14 +2,19 @@
 
 import { useEffect, useId, useMemo, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
-import { searchTools } from "@/lib/tools";
+import { matchToolListItem, type ToolListItem } from "@/lib/tool-list";
 
 type ToolSearchProps = {
+  items: ToolListItem[];
   variant?: "header" | "hero" | "menu";
   onNavigate?: () => void;
 };
 
-export function ToolSearch({ variant = "header", onNavigate }: ToolSearchProps) {
+export function ToolSearch({
+  items,
+  variant = "header",
+  onNavigate,
+}: ToolSearchProps) {
   const router = useRouter();
   const listId = useId();
   const inputId = useId();
@@ -18,7 +23,12 @@ export function ToolSearch({ variant = "header", onNavigate }: ToolSearchProps) 
   const [open, setOpen] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
 
-  const results = useMemo(() => searchTools(query).slice(0, 8), [query]);
+  const results = useMemo(() => {
+    if (!query.trim()) {
+      return [];
+    }
+    return items.filter((tool) => matchToolListItem(tool, query)).slice(0, 8);
+  }, [items, query]);
   const showList = open && query.trim().length > 0;
 
   useEffect(() => {
@@ -81,7 +91,9 @@ export function ToolSearch({ variant = "header", onNavigate }: ToolSearchProps) 
             }
             if (event.key === "ArrowDown") {
               event.preventDefault();
-              setActiveIndex((index) => Math.min(index + 1, Math.max(results.length - 1, 0)));
+              setActiveIndex((index) =>
+                Math.min(index + 1, Math.max(results.length - 1, 0)),
+              );
             } else if (event.key === "ArrowUp") {
               event.preventDefault();
               setActiveIndex((index) => Math.max(index - 1, 0));

@@ -1,5 +1,5 @@
 import { categories } from "@/lib/site";
-import { getToolsByCategory } from "@/lib/tools";
+import { getToolsByCategory, toToolListItem } from "@/lib/tools";
 import { Container } from "@/components/layout/Container";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { ToolGrid } from "@/components/tools/ToolGrid";
@@ -22,7 +22,7 @@ export const metadata = pageMetadata({
 });
 
 export default function QrToolsPage() {
-  const items = getToolsByCategory("qr");
+  const items = getToolsByCategory("qr").map(toToolListItem);
 
   return (
     <>

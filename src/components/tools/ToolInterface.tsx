@@ -1,71 +1,288 @@
-import { JsonFormatter } from "@/components/tools/json-formatter/JsonFormatter";
-import { UnixTimestamp } from "@/components/tools/unix-timestamp/UnixTimestamp";
-import { DeskGame } from "@/components/desk/DeskGame";
-import { JsonYaml } from "@/components/tools/json-yaml/JsonYaml";
-import { JwtDecoder } from "@/components/tools/jwt-decoder/JwtDecoder";
-import { Base64Tool } from "@/components/tools/base64/Base64Tool";
-import { UrlEncoder } from "@/components/tools/url-encoder/UrlEncoder";
-import { UuidGenerator } from "@/components/tools/uuid-generator/UuidGenerator";
-import { CronBuilder } from "@/components/tools/cron/CronBuilder";
-import { RegexTester } from "@/components/tools/regex-tester/RegexTester";
-import { JsonToGo } from "@/components/tools/json-to-go/JsonToGo";
-import { HashTool } from "@/components/tools/hash/HashTool";
-import { UrlInspector } from "@/components/tools/url-inspector/UrlInspector";
-import { HtmlEntities } from "@/components/tools/html-entities/HtmlEntities";
-import { TextDiff } from "@/components/tools/text-diff/TextDiff";
-import { CaseConverter } from "@/components/tools/case-converter/CaseConverter";
-import { NumberBase } from "@/components/tools/number-base/NumberBase";
-import { PasswordGenerator } from "@/components/tools/password-generator/PasswordGenerator";
-import { CsvJson } from "@/components/tools/csv-json/CsvJson";
-import { ColorConverter } from "@/components/tools/color-converter/ColorConverter";
-import { UnicodeInspector } from "@/components/tools/unicode/UnicodeInspector";
-import { HexUtf8 } from "@/components/tools/hex-utf8/HexUtf8";
-import { TextTools } from "@/components/tools/text-tools/TextTools";
-import { TimezoneConverter } from "@/components/tools/timezone/TimezoneConverter";
-import { JsonToTs } from "@/components/tools/json-to-ts/JsonToTs";
-import { GoDuration } from "@/components/tools/go-duration/GoDuration";
-import { ByteSize } from "@/components/tools/byte-size/ByteSize";
-import { QueryString } from "@/components/tools/query-string/QueryString";
-import { UlidGenerator } from "@/components/tools/ulid-generator/UlidGenerator";
-import { HttpStatus } from "@/components/tools/http-status/HttpStatus";
-import { EmiCalculator } from "@/components/tools/emi/EmiCalculator";
-import { SipCalculator } from "@/components/tools/sip/SipCalculator";
-import { FdCalculator } from "@/components/tools/fd/FdCalculator";
-import { GstCalculator } from "@/components/tools/gst/GstCalculator";
-import { PercentageCalculator } from "@/components/tools/percentage/PercentageCalculator";
-import { PpfCalculator } from "@/components/tools/ppf/PpfCalculator";
-import { RdCalculator } from "@/components/tools/rd/RdCalculator";
-import { GratuityCalculator } from "@/components/tools/gratuity/GratuityCalculator";
-import { CtcCalculator } from "@/components/tools/ctc/CtcCalculator";
-import { InHandSalary } from "@/components/tools/in-hand/InHandSalary";
-import { PdfMerge } from "@/components/tools/pdf-merge/PdfMerge";
-import { PdfSplit } from "@/components/tools/pdf-split/PdfSplit";
-import { PdfCompress } from "@/components/tools/pdf-compress/PdfCompress";
-import { PdfRotate } from "@/components/tools/pdf-rotate/PdfRotate";
-import { PdfToImage } from "@/components/tools/pdf-to-image/PdfToImage";
-import { ImageCompress } from "@/components/tools/image-compress/ImageCompress";
-import { ImageResize } from "@/components/tools/image-resize/ImageResize";
-import { ImageConvert } from "@/components/tools/image-convert/ImageConvert";
-import { ImageCrop } from "@/components/tools/image-crop/ImageCrop";
-import { FaviconGenerator } from "@/components/tools/favicon/FaviconGenerator";
-import { IncomeTaxCalculator } from "@/components/tools/income-tax/IncomeTaxCalculator";
-import { HraCalculator } from "@/components/tools/hra/HraCalculator";
-import { MarkdownPreview } from "@/components/tools/markdown-preview/MarkdownPreview";
-import { XmlFormatter } from "@/components/tools/xml-formatter/XmlFormatter";
-import { SqlFormatter } from "@/components/tools/sql-formatter/SqlFormatter";
-import { ImagesToPdf } from "@/components/tools/images-to-pdf/ImagesToPdf";
-import { TargetCompress } from "@/components/tools/target-compress/TargetCompress";
-import { PassportPhoto } from "@/components/tools/passport-photo/PassportPhoto";
-import { SignatureResizer } from "@/components/tools/signature-resizer/SignatureResizer";
-import { CgpaToPercentage } from "@/components/tools/cgpa/CgpaToPercentage";
-import { AttendanceCalculator } from "@/components/tools/attendance/AttendanceCalculator";
-import { AgeCalculator } from "@/components/tools/age/AgeCalculator";
-import { QrGenerator } from "@/components/tools/qr/QrGenerator";
-import { TargetPdfCompress } from "@/components/tools/target-pdf-compress/TargetPdfCompress";
-import { WhatsAppLinkGenerator } from "@/components/tools/whatsapp/WhatsAppLinkGenerator";
-import { RentReceipt } from "@/components/tools/rent-receipt/RentReceipt";
-import { NumberToWords } from "@/components/tools/number-to-words/NumberToWords";
-import { GstInvoice } from "@/components/tools/gst-invoice/GstInvoice";
+import dynamic from "next/dynamic";
+import type { ComponentType } from "react";
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function lazyNamed(loader: () => Promise<Record<string, ComponentType<any>>>, exportName: string) {
+  return dynamic(() =>
+    loader().then((mod) => {
+      const Comp = mod[exportName];
+      if (!Comp) {
+        throw new Error(`Missing export ${exportName}`);
+      }
+      return Comp;
+    }),
+  );
+}
+
+const JsonFormatter = lazyNamed(
+  () => import("@/components/tools/json-formatter/JsonFormatter"),
+  "JsonFormatter",
+);
+const DeskGame = lazyNamed(() => import("@/components/desk/DeskGame"), "DeskGame");
+const JsonYaml = lazyNamed(
+  () => import("@/components/tools/json-yaml/JsonYaml"),
+  "JsonYaml",
+);
+const JwtDecoder = lazyNamed(
+  () => import("@/components/tools/jwt-decoder/JwtDecoder"),
+  "JwtDecoder",
+);
+const Base64Tool = lazyNamed(
+  () => import("@/components/tools/base64/Base64Tool"),
+  "Base64Tool",
+);
+const UrlEncoder = lazyNamed(
+  () => import("@/components/tools/url-encoder/UrlEncoder"),
+  "UrlEncoder",
+);
+const UuidGenerator = lazyNamed(
+  () => import("@/components/tools/uuid-generator/UuidGenerator"),
+  "UuidGenerator",
+);
+const CronBuilder = lazyNamed(
+  () => import("@/components/tools/cron/CronBuilder"),
+  "CronBuilder",
+);
+const RegexTester = lazyNamed(
+  () => import("@/components/tools/regex-tester/RegexTester"),
+  "RegexTester",
+);
+const JsonToGo = lazyNamed(
+  () => import("@/components/tools/json-to-go/JsonToGo"),
+  "JsonToGo",
+);
+const HashTool = lazyNamed(
+  () => import("@/components/tools/hash/HashTool"),
+  "HashTool",
+);
+const UrlInspector = lazyNamed(
+  () => import("@/components/tools/url-inspector/UrlInspector"),
+  "UrlInspector",
+);
+const HtmlEntities = lazyNamed(
+  () => import("@/components/tools/html-entities/HtmlEntities"),
+  "HtmlEntities",
+);
+const TextDiff = lazyNamed(
+  () => import("@/components/tools/text-diff/TextDiff"),
+  "TextDiff",
+);
+const CaseConverter = lazyNamed(
+  () => import("@/components/tools/case-converter/CaseConverter"),
+  "CaseConverter",
+);
+const NumberBase = lazyNamed(
+  () => import("@/components/tools/number-base/NumberBase"),
+  "NumberBase",
+);
+const PasswordGenerator = lazyNamed(
+  () => import("@/components/tools/password-generator/PasswordGenerator"),
+  "PasswordGenerator",
+);
+const CsvJson = lazyNamed(
+  () => import("@/components/tools/csv-json/CsvJson"),
+  "CsvJson",
+);
+const ColorConverter = lazyNamed(
+  () => import("@/components/tools/color-converter/ColorConverter"),
+  "ColorConverter",
+);
+const UnicodeInspector = lazyNamed(
+  () => import("@/components/tools/unicode/UnicodeInspector"),
+  "UnicodeInspector",
+);
+const HexUtf8 = lazyNamed(
+  () => import("@/components/tools/hex-utf8/HexUtf8"),
+  "HexUtf8",
+);
+const TextTools = lazyNamed(
+  () => import("@/components/tools/text-tools/TextTools"),
+  "TextTools",
+);
+const TimezoneConverter = lazyNamed(
+  () => import("@/components/tools/timezone/TimezoneConverter"),
+  "TimezoneConverter",
+);
+const JsonToTs = lazyNamed(
+  () => import("@/components/tools/json-to-ts/JsonToTs"),
+  "JsonToTs",
+);
+const GoDuration = lazyNamed(
+  () => import("@/components/tools/go-duration/GoDuration"),
+  "GoDuration",
+);
+const ByteSize = lazyNamed(
+  () => import("@/components/tools/byte-size/ByteSize"),
+  "ByteSize",
+);
+const QueryString = lazyNamed(
+  () => import("@/components/tools/query-string/QueryString"),
+  "QueryString",
+);
+const UlidGenerator = lazyNamed(
+  () => import("@/components/tools/ulid-generator/UlidGenerator"),
+  "UlidGenerator",
+);
+const HttpStatus = lazyNamed(
+  () => import("@/components/tools/http-status/HttpStatus"),
+  "HttpStatus",
+);
+const EmiCalculator = lazyNamed(
+  () => import("@/components/tools/emi/EmiCalculator"),
+  "EmiCalculator",
+);
+const SipCalculator = lazyNamed(
+  () => import("@/components/tools/sip/SipCalculator"),
+  "SipCalculator",
+);
+const FdCalculator = lazyNamed(
+  () => import("@/components/tools/fd/FdCalculator"),
+  "FdCalculator",
+);
+const GstCalculator = lazyNamed(
+  () => import("@/components/tools/gst/GstCalculator"),
+  "GstCalculator",
+);
+const PercentageCalculator = lazyNamed(
+  () => import("@/components/tools/percentage/PercentageCalculator"),
+  "PercentageCalculator",
+);
+const PpfCalculator = lazyNamed(
+  () => import("@/components/tools/ppf/PpfCalculator"),
+  "PpfCalculator",
+);
+const RdCalculator = lazyNamed(
+  () => import("@/components/tools/rd/RdCalculator"),
+  "RdCalculator",
+);
+const GratuityCalculator = lazyNamed(
+  () => import("@/components/tools/gratuity/GratuityCalculator"),
+  "GratuityCalculator",
+);
+const CtcCalculator = lazyNamed(
+  () => import("@/components/tools/ctc/CtcCalculator"),
+  "CtcCalculator",
+);
+const InHandSalary = lazyNamed(
+  () => import("@/components/tools/in-hand/InHandSalary"),
+  "InHandSalary",
+);
+const PdfMerge = lazyNamed(
+  () => import("@/components/tools/pdf-merge/PdfMerge"),
+  "PdfMerge",
+);
+const PdfSplit = lazyNamed(
+  () => import("@/components/tools/pdf-split/PdfSplit"),
+  "PdfSplit",
+);
+const PdfCompress = lazyNamed(
+  () => import("@/components/tools/pdf-compress/PdfCompress"),
+  "PdfCompress",
+);
+const PdfRotate = lazyNamed(
+  () => import("@/components/tools/pdf-rotate/PdfRotate"),
+  "PdfRotate",
+);
+const PdfToImage = lazyNamed(
+  () => import("@/components/tools/pdf-to-image/PdfToImage"),
+  "PdfToImage",
+);
+const ImageCompress = lazyNamed(
+  () => import("@/components/tools/image-compress/ImageCompress"),
+  "ImageCompress",
+);
+const ImageResize = lazyNamed(
+  () => import("@/components/tools/image-resize/ImageResize"),
+  "ImageResize",
+);
+const ImageConvert = lazyNamed(
+  () => import("@/components/tools/image-convert/ImageConvert"),
+  "ImageConvert",
+);
+const ImageCrop = lazyNamed(
+  () => import("@/components/tools/image-crop/ImageCrop"),
+  "ImageCrop",
+);
+const FaviconGenerator = lazyNamed(
+  () => import("@/components/tools/favicon/FaviconGenerator"),
+  "FaviconGenerator",
+);
+const IncomeTaxCalculator = lazyNamed(
+  () => import("@/components/tools/income-tax/IncomeTaxCalculator"),
+  "IncomeTaxCalculator",
+);
+const HraCalculator = lazyNamed(
+  () => import("@/components/tools/hra/HraCalculator"),
+  "HraCalculator",
+);
+const MarkdownPreview = lazyNamed(
+  () => import("@/components/tools/markdown-preview/MarkdownPreview"),
+  "MarkdownPreview",
+);
+const XmlFormatter = lazyNamed(
+  () => import("@/components/tools/xml-formatter/XmlFormatter"),
+  "XmlFormatter",
+);
+const SqlFormatter = lazyNamed(
+  () => import("@/components/tools/sql-formatter/SqlFormatter"),
+  "SqlFormatter",
+);
+const ImagesToPdf = lazyNamed(
+  () => import("@/components/tools/images-to-pdf/ImagesToPdf"),
+  "ImagesToPdf",
+);
+const TargetCompress = lazyNamed(
+  () => import("@/components/tools/target-compress/TargetCompress"),
+  "TargetCompress",
+);
+const PassportPhoto = lazyNamed(
+  () => import("@/components/tools/passport-photo/PassportPhoto"),
+  "PassportPhoto",
+);
+const SignatureResizer = lazyNamed(
+  () => import("@/components/tools/signature-resizer/SignatureResizer"),
+  "SignatureResizer",
+);
+const CgpaToPercentage = lazyNamed(
+  () => import("@/components/tools/cgpa/CgpaToPercentage"),
+  "CgpaToPercentage",
+);
+const AttendanceCalculator = lazyNamed(
+  () => import("@/components/tools/attendance/AttendanceCalculator"),
+  "AttendanceCalculator",
+);
+const AgeCalculator = lazyNamed(
+  () => import("@/components/tools/age/AgeCalculator"),
+  "AgeCalculator",
+);
+const QrGenerator = lazyNamed(
+  () => import("@/components/tools/qr/QrGenerator"),
+  "QrGenerator",
+);
+const TargetPdfCompress = lazyNamed(
+  () => import("@/components/tools/target-pdf-compress/TargetPdfCompress"),
+  "TargetPdfCompress",
+);
+const WhatsAppLinkGenerator = lazyNamed(
+  () => import("@/components/tools/whatsapp/WhatsAppLinkGenerator"),
+  "WhatsAppLinkGenerator",
+);
+const RentReceipt = lazyNamed(
+  () => import("@/components/tools/rent-receipt/RentReceipt"),
+  "RentReceipt",
+);
+const NumberToWords = lazyNamed(
+  () => import("@/components/tools/number-to-words/NumberToWords"),
+  "NumberToWords",
+);
+const GstInvoice = lazyNamed(
+  () => import("@/components/tools/gst-invoice/GstInvoice"),
+  "GstInvoice",
+);
+const UnixTimestamp = lazyNamed(
+  () => import("@/components/tools/unix-timestamp/UnixTimestamp"),
+  "UnixTimestamp",
+);
 
 export function ToolInterface({ slug }: { slug: string }) {
   switch (slug) {

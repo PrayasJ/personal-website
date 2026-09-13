@@ -6,9 +6,7 @@ import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
 import { ThemeScript } from "@/components/navigation/ThemeScript";
 import { TapeProvider } from "@/components/desk/TapeProvider";
-import { Ambient } from "@/components/fx/Ambient";
-import { CustomCursor } from "@/components/fx/CustomCursor";
-import { AdSenseScript } from "@/components/ads/AdSenseScript";
+import { DeferredFx } from "@/components/fx/DeferredFx";
 import { SITE_URL, SITE_NAME } from "@/lib/site";
 import "./globals.css";
 
@@ -109,8 +107,7 @@ export default function RootLayout({
     >
       <body className={`${sans.className} antialiased`}>
         <ThemeScript />
-        <CustomCursor />
-        <Ambient />
+        <DeferredFx />
         <TapeProvider>
         <div id="site" className="flex min-h-dvh flex-col">
           <a href="#main" className="skip-link">
@@ -125,7 +122,6 @@ export default function RootLayout({
         </TapeProvider>
         <Analytics />
         <SpeedInsights />
-        <AdSenseScript />
       </body>
     </html>
   );

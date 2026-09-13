@@ -12,9 +12,13 @@ import {
   sortProjectData,
   type ExperienceInterface,
 } from "../../../data.config";
-import { getPopularTools, getToolProjects } from "@/lib/tools";
+import {
+  getPopularToolProjects,
+  getPopularTools,
+  toToolListItem,
+} from "@/lib/tools";
 import { WritingSection } from "@/components/portfolio/WritingSection";
-import { DeskGame } from "@/components/desk/DeskGame";
+import { HomeDesk } from "@/components/desk/HomeDesk";
 import { Reveal } from "@/components/fx/Reveal";
 import { ToolCard } from "@/components/tools/ToolCard";
 
@@ -48,8 +52,8 @@ const deskTags = ["Nubra", "OMS", "Go", "RPC"];
 export function HomeView() {
   const experience = sortExperienceData(experienceData);
   const archive = sortProjectData(ProjectData);
-  const liveTools = getToolProjects();
-  const tools = getPopularTools(4);
+  const liveTools = getPopularToolProjects(8);
+  const tools = getPopularTools(4).map(toToolListItem);
   const socials = Object.entries(socialData);
 
   return (
@@ -102,7 +106,7 @@ export function HomeView() {
         </Reveal>
         <Reveal delay={120}>
           <div id="desk" className="scroll-mt-28">
-            <DeskGame />
+            <HomeDesk />
           </div>
         </Reveal>
       </section>
@@ -219,7 +223,7 @@ export function HomeView() {
               <p className="mb-4 font-mono text-xs tracking-wide text-muted uppercase">
                 Live on this site
               </p>
-              <ul className="mb-10 grid gap-4 md:grid-cols-2">
+              <ul className="mb-4 grid gap-4 md:grid-cols-2">
                 {liveTools.map((project) => (
                   <li key={project.title} className="min-w-0">
                     <Link
@@ -236,6 +240,11 @@ export function HomeView() {
                   </li>
                 ))}
               </ul>
+              <p className="mb-10 text-sm text-muted">
+                <Link href="/tools" className="text-accent hover:underline">
+                  Browse all tools →
+                </Link>
+              </p>
             </>
           ) : null}
           <p className="mb-4 font-mono text-xs tracking-wide text-muted uppercase">
@@ -304,8 +313,8 @@ export function HomeView() {
           </SectionLabel>
           <p className="mb-8 max-w-2xl text-base leading-7 text-muted">
             Browser tools that stay on this machine. JSON, hashes, timestamps,
-            and the same toy tape that sits on the homepage. Adding a tool to
-            the registry also adds it to Projects.
+            and the same toy tape that sits on the homepage. Popular tools are
+            listed below — the full desk is on /tools.
           </p>
           {tools.length > 0 ? (
             <ul

@@ -3,7 +3,7 @@
 import type { CSSProperties, MouseEvent } from "react";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
-import type { Tool } from "@/lib/tools";
+import type { ToolListItem } from "@/lib/tool-list";
 import { ToolGlyph } from "@/components/tools/ToolGlyph";
 
 function onMove(event: MouseEvent<HTMLAnchorElement>) {
@@ -16,7 +16,7 @@ export function ToolCard({
   tool,
   index = 0,
 }: {
-  tool: Tool;
+  tool: ToolListItem;
   index?: number;
 }) {
   return (
