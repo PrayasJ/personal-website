@@ -7,15 +7,21 @@ export function Reveal({
   children,
   className,
   delay = 0,
+  /** Above-the-fold: visible immediately so LCP isn't gated on hydration. */
+  eager = false,
 }: {
   children: React.ReactNode;
   className?: string;
   delay?: number;
+  eager?: boolean;
 }) {
   const ref = useRef<HTMLDivElement>(null);
-  const [shown, setShown] = useState(false);
+  const [shown, setShown] = useState(eager);
 
   useEffect(() => {
+    if (eager) {
+      return;
+    }
     const node = ref.current;
     if (!node) {
       return;
@@ -31,13 +37,13 @@ export function Reveal({
     );
     observer.observe(node);
     return () => observer.disconnect();
-  }, []);
+  }, [eager]);
 
   return (
     <div
       ref={ref}
       className={cn("reveal", shown && "is-in", className)}
-      style={{ transitionDelay: `${delay}ms` }}
+      style={{ transitionDelay: eager ? undefined : `${delay}ms` }}
     >
       {children}
     </div>

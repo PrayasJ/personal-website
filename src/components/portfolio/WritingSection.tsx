@@ -11,15 +11,32 @@ type MarkdownEntry = {
 };
 
 type MarkdownMap = Record<string, MarkdownEntry>;
+type WritingIndex = Record<string, { summary: string }>;
 
-import markDownHTML from "../../../loadedMarkdown.json";
+import writingIndex from "../../../loadedMarkdown.index.json";
 
-const posts = markDownHTML as MarkdownMap;
+const summaries = writingIndex as WritingIndex;
 
 export function WritingSection() {
   const blogs = sortBlogs(BlogData);
   const [openTitle, setOpenTitle] = useState<string | null>(null);
-  const open = openTitle ? posts[openTitle] : null;
+  const [posts, setPosts] = useState<MarkdownMap | null>(null);
+  const [loadingPost, setLoadingPost] = useState(false);
+  const open = openTitle && posts ? posts[openTitle] : null;
+
+  async function openPost(title: string) {
+    setOpenTitle(title);
+    if (posts) {
+      return;
+    }
+    setLoadingPost(true);
+    try {
+      const mod = await import("../../../loadedMarkdown.json");
+      setPosts(mod.default as MarkdownMap);
+    } finally {
+      setLoadingPost(false);
+    }
+  }
 
   return (
     <section id="writing" className="scroll-mt-28 py-10 sm:py-16">
@@ -38,16 +55,16 @@ export function WritingSection() {
               <button
                 type="button"
                 className="list-row grid w-full gap-2 px-4 py-4 text-left sm:px-5 sm:py-5 md:grid-cols-[11rem_1fr] md:gap-8"
-                onClick={() => setOpenTitle(blog.title)}
+                onClick={() => void openPost(blog.title)}
               >
                 <span className="font-mono text-xs tracking-wide text-muted uppercase">
                   {blog.date}
                 </span>
                 <span>
                   <span className="block text-lg font-semibold text-ink">{blog.title}</span>
-                  {posts[blog.title]?.summary ? (
+                  {summaries[blog.title]?.summary ? (
                     <span className="mt-1 block text-sm leading-6 text-muted">
-                      {posts[blog.title].summary}…
+                      {summaries[blog.title].summary}…
                     </span>
                   ) : null}
                 </span>
@@ -58,7 +75,7 @@ export function WritingSection() {
       </Reveal>
 
       <Modal
-        open={Boolean(openTitle && open)}
+        open={Boolean(openTitle)}
         onClose={() => setOpenTitle(null)}
         title={openTitle ?? "Writing"}
       >
@@ -67,7 +84,11 @@ export function WritingSection() {
             className="blog-html"
             dangerouslySetInnerHTML={{ __html: open.html }}
           />
-        ) : null}
+        ) : loadingPost ? (
+          <p className="text-sm text-muted">Loading…</p>
+        ) : (
+          <p className="text-sm text-muted">Could not load this post.</p>
+        )}
       </Modal>
     </section>
   );

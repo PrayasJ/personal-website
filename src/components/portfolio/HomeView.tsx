@@ -17,10 +17,9 @@ import {
   getPopularTools,
   toToolListItem,
 } from "@/lib/tools";
-import { WritingSection } from "@/components/portfolio/WritingSection";
 import { HomeDesk } from "@/components/desk/HomeDesk";
+import { HomeWriting } from "@/components/portfolio/HomeWriting";
 import { Reveal } from "@/components/fx/Reveal";
-import { ToolCard } from "@/components/tools/ToolCard";
 
 function tenureParts(exp: ExperienceInterface): { start: string; end: string } {
   const start = `${exp.start.month ? `${Months[exp.start.month]} ` : ""}${exp.start.year}`;
@@ -59,7 +58,7 @@ export function HomeView() {
   return (
     <div className="mx-auto w-full max-w-6xl px-4 py-8 sm:px-6 sm:py-16">
       <section className="grid items-center gap-8 border-b border-border/70 pb-10 sm:gap-12 sm:pb-16 lg:grid-cols-[1.05fr_0.95fr]">
-        <Reveal>
+        <Reveal eager>
           <p className="tape mb-5 text-accent">index / prayas jain</p>
           <h1 className="font-display text-gradient text-[2.35rem] font-semibold leading-[1.05] sm:text-5xl lg:text-7xl lg:leading-[0.95]">
             {AboutData.name}
@@ -317,14 +316,22 @@ export function HomeView() {
             listed below — the full desk is on /tools.
           </p>
           {tools.length > 0 ? (
-            <ul
-              className={`tool-grid ${
-                tools.length === 3 ? "is-three" : ""
-              }`}
-            >
-              {tools.map((tool, index) => (
+            <ul className="grid gap-4 md:grid-cols-2">
+              {tools.map((tool) => (
                 <li key={tool.slug} className="min-w-0">
-                  <ToolCard tool={tool} index={index} />
+                  <Link
+                    href={tool.path}
+                    className="panel panel-hover flex h-full flex-col p-5"
+                  >
+                    <div className="flex items-start justify-between gap-3">
+                      <h2 className="text-base font-semibold text-ink">{tool.name}</h2>
+                      {tool.popular ? <span className="chip">popular</span> : null}
+                    </div>
+                    <p className="mt-2 flex-1 text-sm leading-6 text-muted">
+                      {tool.description}
+                    </p>
+                    <p className="mt-4 text-sm text-accent">Open {tool.name} →</p>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -332,7 +339,7 @@ export function HomeView() {
         </Reveal>
       </section>
 
-      <WritingSection />
+      <HomeWriting />
     </div>
   );
 }

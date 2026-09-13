@@ -14,20 +14,24 @@ const sans = Plus_Jakarta_Sans({
   subsets: ["latin"],
   variable: "--font-jakarta",
   display: "swap",
+  preload: true,
 });
 
 const display = Fraunces({
   subsets: ["latin"],
-  weight: ["500", "600", "700"],
+  // Headings use semibold; one weight avoids extra display files on /.
+  weight: ["600"],
   variable: "--font-fraunces",
   display: "swap",
+  preload: false,
 });
 
 const mono = IBM_Plex_Mono({
   subsets: ["latin"],
-  weight: ["400", "500"],
+  weight: ["400"],
   variable: "--font-plex-mono",
   display: "swap",
+  preload: false,
 });
 
 export const viewport: Viewport = {

@@ -21,20 +21,28 @@ function extractContent(html) {
 
 async function loadAllMarkdown() {
   let markdowns = {}
+  let index = {}
   for(let i = 0; i < BlogData.length; i++) {
     let blog = BlogData[i]
     const fullPath = path.join(process.cwd(), blog.filePath);
     const fileContents = fs.readFileSync(fullPath, 'utf8');
     const html = converter.makeHtml(fileContents)
+    const summary = extractContent(html)
     markdowns[blog.title] = {
       html: html,
-      summary: extractContent(html)
+      summary
     };
+    index[blog.title] = { summary };
   }
 
   fs.writeFileSync(
     path.join(process.cwd(), "loadedMarkdown.json"),
     JSON.stringify(markdowns),
+  );
+  // Slim index for homepage list — full HTML loads on demand.
+  fs.writeFileSync(
+    path.join(process.cwd(), "loadedMarkdown.index.json"),
+    JSON.stringify(index),
   );
 }
 
